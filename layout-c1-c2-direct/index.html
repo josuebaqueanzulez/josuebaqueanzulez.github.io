@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Layout optimizado C1 y C2</title>
+<style>
+html,body{margin:0;height:100%;font-family:Arial,sans-serif;background:#f4f7fb;color:#17365d}
+#status{display:flex;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:10px;text-align:center;padding:24px}
+small{color:#64748b}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+</head>
+<body>
+<div id="status"><strong>Cargando layout interactivo…</strong><small>Centros de Distribución C1 y C2</small></div>
+<script>
+(async()=>{
+ try{
+   const r=await fetch('../layout-c1-c2/index.html?payload=1',{cache:'no-store'});
+   if(!r.ok) throw new Error('No se pudo leer el archivo base');
+   const src=await r.text();
+   const m=src.match(/const b64='([^']+)'/s);
+   if(!m) throw new Error('No se encontró el contenido del layout');
+   const bin=atob(m[1]);
+   const bytes=new Uint8Array(bin.length);
+   for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+   let html;
+   if(window.pako){
+      const raw=window.pako.ungzip(bytes);
+      html=new TextDecoder('utf-8').decode(raw);
+   } else if('DecompressionStream' in window){
+      const ds=new DecompressionStream('gzip');
+      html=await new Response(new Blob([bytes]).stream().pipeThrough(ds)).text();
+   } else {
+      throw new Error('No hay un descompresor disponible');
+   }
+   document.open();
+   document.write(html);
+   document.close();
+ }catch(e){
+   document.getElementById('status').innerHTML='<strong>No se pudo cargar el layout</strong><small>'+e.message+'</small>';
+   console.error(e);
+ }
+})();
+</script>
+</body>
+</html>
