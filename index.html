@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa de Localización Estratégica</title>
+<style>
+html,body{margin:0;height:100%;font-family:Arial,sans-serif;background:#f7f7f7}.loading{display:flex;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:12px}.small{font-size:13px;color:#666}.error{padding:30px;font-family:Arial,sans-serif}
+</style>
+</head>
+<body>
+<div class="loading"><strong>Cargando mapa interactivo…</strong><div class="small">Localización estratégica</div></div>
+<script>
+(async()=>{
+ const files=['map/p01.txt','map/p02.txt','map/p03.txt','map/p04.txt','map/p05.txt','map/p06.txt','map/p07a.txt','map/p07b.txt','map/p07c.txt','map/p08a.txt','map/p08b.txt','map/p08c.txt'];
+ const parts=await Promise.all(files.map(async f=>{const r=await fetch(f);if(!r.ok)throw new Error('No se pudo cargar '+f);return r.text();}));
+ const b64=parts.join('').replace(/\s/g,'');
+ const bin=atob(b64),u8=new Uint8Array(bin.length);
+ for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);
+ if(!('DecompressionStream' in window))throw new Error('El navegador no soporta descompresión gzip');
+ const ds=new DecompressionStream('gzip');
+ const html=await new Response(new Blob([u8]).stream().pipeThrough(ds)).text();
+ document.open();document.write(html);document.close();
+})().catch(e=>{document.body.innerHTML='<div class="error"><h2>No se pudo cargar el mapa</h2><p>Recarga la página o prueba con un navegador actualizado.</p></div>';console.error(e);});
+</script>
+</body>
+</html>
