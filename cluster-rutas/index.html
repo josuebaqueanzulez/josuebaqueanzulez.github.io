@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cluster y ruteo de carga - 2 centros</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<style>
+html,body,#map{height:100%;margin:0}
+.panel{position:absolute;top:10px;left:55px;z-index:1000;background:rgba(255,255,255,.97);padding:12px;border-radius:8px;box-shadow:0 1px 7px rgba(0,0,0,.35);width:360px;max-height:88vh;overflow:auto;font-family:Arial,sans-serif;font-size:12px}
+.panel h2{font-size:15px;margin:0 0 7px}
+.panel h3{font-size:13px;margin:10px 0 5px}
+.btn{border:0;border-radius:5px;padding:7px 8px;margin:3px 2px;cursor:pointer;background:#1f4e78;color:white;font-size:11px}
+.btn.green{background:#287a4b}.btn.orange{background:#a75b12}.btn.gray{background:#666}.btn.red{background:#9b2424}
+.note{font-size:10px;line-height:1.3;color:#555;background:#f5f5f5;padding:7px;border-radius:5px;margin-top:7px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:5px 0}
+.stat div{background:#f7f7f7;padding:5px;border-radius:4px}
+#status{background:#eef6ff;padding:6px;border-radius:4px;min-height:28px;margin-top:5px}
+.legendBox{position:absolute;bottom:22px;left:12px;z-index:900;background:rgba(255,255,255,.95);padding:9px;border:1px solid #777;border-radius:6px;font:11px Arial}
+.route-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:5px}.route-table th,.route-table td{border:1px solid #ccc;padding:3px;text-align:right}.route-table th:first-child,.route-table td:first-child{text-align:left}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="panel">
+  <h2>Escenario ganador: 2 centros de distribución</h2>
+  <div class="stat">
+    <div><b>Costo logístico</b><br>$120,733.97/mes</div>
+    <div><b>Ahorro vs. 1 centro</b><br>$3,098.59/mes</div>
+    <div><b>Distancia pond.</b><br>19.09 km</div>
+    <div><b>Clientes</b><br>600</div>
+  </div>
+
+  <h3>Ruteo más realista</h3>
+  <button class="btn" onclick="loadTopRoutes(1,10)">C1: top 10</button>
+  <button class="btn" onclick="loadTopRoutes(1,25)">C1: top 25</button>
+  <button class="btn green" onclick="loadTopRoutes(2,10)">C2: top 10</button>
+  <button class="btn green" onclick="loadTopRoutes(2,25)">C2: top 25</button><br>
+  <button class="btn orange" onclick="loadTopRoutes(1,50)">C1: top 50</button>
+  <button class="btn orange" onclick="loadTopRoutes(2,50)">C2: top 50</button>
+  <button class="btn gray" onclick="clearRoutes()">Limpiar rutas</button>
+  <button class="btn gray" onclick="downloadCSV()">Descargar CSV rutas cargadas</button>
+  <div id="status">Haz clic en un cliente o usa los botones para consultar rutas.</div>
+
+  <h3>Perfiles de carga usados</h3>
+  <div style="line-height:1.45">
+    <b>Camión grande:</b> truck, 10 t, 9.5 m largo, 3.8 m alto, 2.5 m ancho.<br>
+    <b>Camión pequeño:</b> truck, 5 t, 6.5 m largo, 3.2 m alto, 2.3 m ancho.<br>
+    <b>Furgoneta:</b> auto.<br>
+    <b>Moto:</b> motorcycle.
+  </div>
+  <div class="note">
+    Las dimensiones de camión son supuestos operativos para mejorar el filtro vial; no corresponden a una ficha técnica contractual. 
+    Valhalla usa restricciones de acceso, altura, anchura y peso registradas en OpenStreetMap cuando están disponibles. 
+    Restricciones locales no mapeadas, tráfico real, obras y ventanas horarias requieren validación de campo.
+  </div>
+
+  <h3>Clusters</h3>
+  <table class="route-table">
+    <tr><th></th><th>C1</th><th>C2</th></tr>
+    <tr><td>Clientes</td><td>340</td><td>260</td></tr>
+    <tr><td>Demanda</td><td>58.9%</td><td>41.1%</td></tr>
+    <tr><td>Dist. pond.</td><td>19.7 km</td><td>18.2 km</td></tr>
+    <tr><td>P90</td><td>30.2 km</td><td>29.0 km</td></tr>
+  </table>
+</div>
+
+<div class="legendBox">
+<b>Leyenda</b><br>
+<span style="color:#2E86DE">●</span> Clientes Centro 1<br>
+<span style="color:#28B463">●</span> Clientes Centro 2<br>
+<span style="color:#C0392B">◆</span> Centro de distribución<br>
+<span style="color:#1f4e78">━</span> Ruta truck/auto consultada
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+<script src="data/rows-01.js"></script>
+<script src="data/rows-02.js"></script>
+<script src="data/rows-03.js"></script>
+<script src="data/rows-04.js"></script>
+<script src="data/rows-05.js"></script>
+<script src="data/rows-06.js"></script>
+<script>
+const V=["Camión Grande:1","Camión Pequeño:1","Camión Pequeño:1 | Camión Grande:1","Furgoneta:1","Furgoneta:1 | Camión Grande:1","Moto:1 | Camión Grande:1","Moto:1 | Camión Pequeño:1","Moto:1 | Furgoneta:1","Moto:1 | Furgoneta:1 | Camión Grande:1","Moto:2 | Camión Grande:1"];
+const P=[{"perfil":"truck","perfil_label":"Camión grande","perfil_opts":{"height":3.8,"width":2.5,"length":9.5,"weight":10.0,"axle_count":3,"use_tracks":0.0,"use_living_streets":0.0,"use_highways":0.8}},{"perfil":"truck","perfil_label":"Camión pequeño","perfil_opts":{"height":3.2,"width":2.3,"length":6.5,"weight":5.0,"axle_count":2,"use_tracks":0.0,"use_living_streets":0.0,"use_highways":0.7}},{"perfil":"auto","perfil_label":"Furgoneta","perfil_opts":{"use_tracks":0.0,"use_living_streets":0.1,"use_highways":0.6}}];
+const clients=window.__ROWS__.map(r=>({id:'CLI_'+String(r[0]).padStart(6,'0'),lat:r[1],lon:r[2],centro:r[3],demanda:r[4],volumen:r[5],entregas:r[6],kg_pedido:r[7],m3_pedido:r[8],dist_modelo:r[9],dist_total_modelo:r[10],tiempo_modelo:r[11],costo_mes:r[12],vehiculos:V[r[13]],perfil:P[r[14]].perfil,perfil_label:P[r[14]].perfil_label,perfil_opts:P[r[14]].perfil_opts,prioridad_rank:r[15]}));
+const centers = {"1": {"centro": 1, "lat": -2.1836104, "lon": -79.9870575, "clientes": 340, "demanda": 882960.21, "volumen": 16619.28571428572, "area": 3564.705372413498, "opex": 39871.49730262536}, "2": {"centro": 2, "lat": -2.2067001, "lon": -79.81751, "clientes": 260, "demanda": 615100.02, "volumen": 11579.01042857143, "area": 2483.478246955682, "opex": 28889.24900379889}};
+const hulls = {"1": [[-2.348481524846135, -79.91966425143835], [-2.348343364862919, -80.06790650173534], [-2.343824651711259, -80.08427514406355], [-2.3249497849904, -80.09149223565984], [-2.179507418999358, -80.09814719079816], [-2.078752391651875, -80.09744565131327], [-2.067862424694126, -80.09476221736466], [-2.051008948877828, -80.06758151363694], [-2.05211056116421, -79.92889074650566], [-2.060914006873224, -79.8991219958675], [-2.087003919202497, -79.85255544871393], [-2.137578226661186, -79.82384206854826], [-2.296866796177885, -79.84709428483218], [-2.306531538372633, -79.84891677877144], [-2.342089907650824, -79.86796551686487], [-2.348481524846135, -79.91966425143835]], "2": [[-2.347240884515011, -79.80542230575011], [-2.342394776975363, -79.85034043686035], [-2.336434398968143, -79.86282402606332], [-2.267977878420788, -79.93661871477171], [-2.052983844968721, -79.91868446610079], [-2.050084698014161, -79.9016497059685], [-2.052848457399798, -79.7802336484124], [-2.060003554286899, -79.70125029926163], [-2.316640755308155, -79.70082635578667], [-2.345681953411073, -79.70623912771858], [-2.346748704555911, -79.76032173937388], [-2.347240884515011, -79.80542230575011]]};
+const stats = {"1": {"clientes": 340, "demanda": 882960.21, "demanda_pct": 58.94023433223376, "volumen": 16619.285714285714, "entregas": 640.8571428571429, "dist_pond": 19.722089342603976, "p90": 30.15184015123933, "max": 63.02942697865374, "tiempo_pond": 23.695688044643624, "costo_trans": 30582.05608625317}, "2": {"clientes": 260, "demanda": 615100.02, "demanda_pct": 41.05976566776624, "volumen": 11579.010428571428, "entregas": 474.71428571428567, "dist_pond": 18.1864766640837, "p90": 29.019621052704768, "max": 37.86999164139953, "tiempo_pond": 23.75260894772024, "costo_trans": 21391.171423504667}};
+
+const map = L.map('map').setView([-2.18,-79.91],10);
+const street = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri'});
+const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri'});
+street.addTo(map);
+
+const c1Layer = L.markerClusterGroup({disableClusteringAtZoom:15});
+const c2Layer = L.markerClusterGroup({disableClusteringAtZoom:15});
+const hull1 = L.layerGroup(), hull2 = L.layerGroup();
+const centersLayer = L.layerGroup();
+const route1 = L.layerGroup(), route2 = L.layerGroup();
+const heat1 = L.heatLayer(clients.filter(x=>x.centro===1).map(x=>[x.lat,x.lon,x.demanda]),{radius:22,blur:16,minOpacity:.2});
+const heat2 = L.heatLayer(clients.filter(x=>x.centro===2).map(x=>[x.lat,x.lon,x.demanda]),{radius:22,blur:16,minOpacity:.2});
+
+const colors = {1:'#2E86DE',2:'#28B463'};
+const routeCache = {};
+const loadedRows = [];
+
+function money(v){return Number(v).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function num(v,d=2){return Number(v).toLocaleString('es-EC',{minimumFractionDigits:d,maximumFractionDigits:d});}
+
+if(hulls[1]?.length) L.polygon(hulls[1],{color:colors[1],weight:2,fillOpacity:.08}).addTo(hull1);
+if(hulls[2]?.length) L.polygon(hulls[2],{color:colors[2],weight:2,fillOpacity:.08}).addTo(hull2);
+
+for (const c of [1,2]){
+  const ctr=centers[c];
+  const icon=L.divIcon({className:'',html:`<div style="width:24px;height:24px;background:#C0392B;border:3px solid white;box-shadow:0 0 4px #555;transform:rotate(45deg)"></div>`,iconSize:[28,28],iconAnchor:[14,14]});
+  L.marker([ctr.lat,ctr.lon],{icon}).bindPopup(
+    `<b>Centro ${c}</b><br>Clientes: ${ctr.clientes}<br>Demanda: ${money(ctr.demanda)} kg/mes<br>Volumen: ${money(ctr.volumen)} m³/mes<br>Área cubierta: ${money(ctr.area)} m²<br>OPEX: $${money(ctr.opex)}/mes`
+  ).addTo(centersLayer);
+  [5,10,20,30].forEach(r=>L.circle([ctr.lat,ctr.lon],{radius:r*1000,color:colors[c],weight:1,dashArray:'5,5',fill:false}).addTo(centersLayer));
+}
+
+function markerForClient(x){
+  const m=L.circleMarker([x.lat,x.lon],{radius:4,color:colors[x.centro],weight:1,fillColor:colors[x.centro],fillOpacity:.7});
+  const btn=`<button onclick="loadClientRoute('${x.id}')" style="margin-top:6px;padding:5px 7px">Cargar ruta vial (${x.perfil_label})</button>`;
+  m.bindPopup(`<b>${x.id}</b><br>Centro ${x.centro}<br>Demanda: ${money(x.demanda)} kg/mes<br>Volumen: ${money(x.volumen)} m³/mes<br>Entregas: ${num(x.entregas)} /mes<br>Distancia modelo: ${num(x.dist_modelo)} km<br>Tiempo modelo: ${num(x.tiempo_modelo,1)} min<br>Costo mensual: $${money(x.costo_mes)}<br>Vehículos: ${x.vehiculos}<br>${btn}`,{maxWidth:310});
+  return m;
+}
+clients.forEach(x => (x.centro===1?c1Layer:c2Layer).addLayer(markerForClient(x)));
+
+c1Layer.addTo(map); c2Layer.addTo(map); hull1.addTo(map); hull2.addTo(map); centersLayer.addTo(map);
+
+L.control.layers(
+  {'Mapa vial':street,'Satélite':sat},
+  {
+    'Clientes C1':c1Layer,'Clientes C2':c2Layer,
+    'Área cluster C1':hull1,'Área cluster C2':hull2,
+    'Densidad demanda C1':heat1,'Densidad demanda C2':heat2,
+    'Centros y radios':centersLayer,
+    'Rutas consultadas C1':route1,'Rutas consultadas C2':route2
+  },
+  {collapsed:false}
+).addTo(map);
+
+map.fitBounds(L.latLngBounds(clients.map(x=>[x.lat,x.lon])));
+
+function decodePolyline6(str){
+  let index=0, lat=0, lon=0, coordinates=[];
+  while(index<str.length){
+    let b,shift=0,result=0;
+    do{b=str.charCodeAt(index++)-63;result|=(b&0x1f)<<shift;shift+=5;}while(b>=0x20);
+    let dlat=(result&1)?~(result>>1):(result>>1); lat+=dlat;
+    shift=0;result=0;
+    do{b=str.charCodeAt(index++)-63;result|=(b&0x1f)<<shift;shift+=5;}while(b>=0x20);
+    let dlon=(result&1)?~(result>>1):(result>>1); lon+=dlon;
+    coordinates.push([lat/1e6,lon/1e6]);
+  }
+  return coordinates;
+}
+
+function payloadFor(x){
+  const ctr=centers[x.centro];
+  const payload={
+    locations:[{lat:ctr.lat,lon:ctr.lon},{lat:x.lat,lon:x.lon}],
+    costing:x.perfil,
+    directions_options:{units:'kilometers',language:'es-ES'},
+    shape_format:'geojson'
+  };
+  if(x.perfil_opts && Object.keys(x.perfil_opts).length){
+    payload.costing_options={};
+    payload.costing_options[x.perfil]=x.perfil_opts;
+  }
+  return payload;
+}
+
+async function valhallaRoute(x){
+  if(routeCache[x.id]) return routeCache[x.id];
+  const url='https://valhalla1.openstreetmap.de/route';
+  let payload=payloadFor(x);
+  let resp;
+  try{
+    resp=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+  }catch(e){
+    payload={locations:payload.locations,costing:x.perfil,directions_options:{units:'kilometers',language:'es-ES'}};
+    resp=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!resp.ok) throw new Error('Valhalla HTTP '+resp.status);
+  }
+  const data=await resp.json();
+  if(!data.trip || !data.trip.legs || !data.trip.legs.length) throw new Error('Respuesta sin ruta');
+  const leg=data.trip.legs[0];
+  let coords=[];
+  if(leg.shape && typeof leg.shape==='object' && Array.isArray(leg.shape.coordinates)){
+    coords=leg.shape.coordinates.map(p=>[p[1],p[0]]);
+  }else if(typeof leg.shape==='string'){
+    coords=decodePolyline6(leg.shape);
+  }
+  const result={
+    coords,
+    distance:data.trip.summary?.length ?? leg.summary?.length,
+    timeMin:(data.trip.summary?.time ?? leg.summary?.time)/60,
+    costing:x.perfil
+  };
+  routeCache[x.id]=result;
+  return result;
+}
+
+async function loadClientRoute(id){
+  const x=clients.find(z=>z.id===id);
+  if(!x) return;
+  document.getElementById('status').innerHTML=`Consultando ${id} (${x.perfil_label})...`;
+  try{
+    const r=await valhallaRoute(x);
+    const layer=x.centro===1?route1:route2;
+    const poly=L.polyline(r.coords,{color:colors[x.centro],weight:x.perfil==='truck'?4:3,opacity:.8});
+    const diff=x.dist_modelo?((r.distance-x.dist_modelo)/x.dist_modelo*100):0;
+    poly.bindPopup(`<b>${id}</b><br>Perfil: ${x.perfil_label}<br>Valhalla: ${num(r.distance)} km / ${num(r.timeMin,1)} min<br>Modelo previo: ${num(x.dist_modelo)} km / ${num(x.tiempo_modelo,1)} min<br>Diferencia distancia: ${num(diff,1)}%`);
+    layer.addLayer(poly); layer.addTo(map);
+    loadedRows.push({id:x.id,centro:x.centro,perfil:x.perfil_label,distancia_valhalla_km:r.distance,tiempo_valhalla_min:r.timeMin,distancia_modelo_km:x.dist_modelo,tiempo_modelo_min:x.tiempo_modelo,costo_modelo_mes:x.costo_mes});
+    document.getElementById('status').innerHTML=`Ruta ${id}: ${num(r.distance)} km, ${num(r.timeMin,1)} min. Rutas cargadas: ${loadedRows.length}`;
+    map.fitBounds(poly.getBounds(),{padding:[20,20]});
+  }catch(e){
+    document.getElementById('status').innerHTML=`No se pudo cargar ${id}: ${e.message}. El servidor público puede estar limitado temporalmente.`;
+  }
+}
+
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+async function loadTopRoutes(center,n){
+  const arr=clients.filter(x=>x.centro===center).sort((a,b)=>b.costo_mes-a.costo_mes).slice(0,n);
+  document.getElementById('status').innerHTML=`Cargando ${n} rutas del Centro ${center}. Esto puede tardar...`;
+  let ok=0,fail=0;
+  for(const x of arr){
+    if(routeCache[x.id]) continue;
+    try{await loadClientRoute(x.id);ok++;}catch(e){fail++;}
+    await sleep(500);
+  }
+  document.getElementById('status').innerHTML=`Finalizado C${center}: ${ok} nuevas rutas cargadas${fail?`, ${fail} fallidas`:''}. Total registradas: ${loadedRows.length}`;
+}
+
+function clearRoutes(){
+  route1.clearLayers(); route2.clearLayers(); loadedRows.length=0;
+  document.getElementById('status').innerHTML='Rutas borradas del mapa.';
+}
+
+function downloadCSV(){
+  if(!loadedRows.length){alert('Primero carga una o más rutas.');return;}
+  const headers=Object.keys(loadedRows[0]);
+  const lines=[headers.join(',')].concat(loadedRows.map(r=>headers.map(h=>JSON.stringify(r[h]??'')).join(',')));
+  const blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='RUTAS_CARGA_VALIDACION_2_CENTROS.csv';
+  document.body.appendChild(a);a.click();a.remove();
+}
+window.loadClientRoute=loadClientRoute; window.loadTopRoutes=loadTopRoutes; window.clearRoutes=clearRoutes; window.downloadCSV=downloadCSV;
+</script>
+</body>
+</html>
