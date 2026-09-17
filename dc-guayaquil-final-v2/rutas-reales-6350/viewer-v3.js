@@ -109,9 +109,9 @@ async function init(){
     catalog=await readCatalog();routes=catalog.routes;routeById=new Map(routes.map(r=>[r.i,r]));
     if(!map){
       map=L.map('map').setView(catalog.dc,11);
-      const carto=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:20,attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);
+      const osm=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
       const esri=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'});
-      L.control.layers({'CARTO Positron':carto,'Esri Streets':esri}).addTo(map);L.control.scale().addTo(map);
+      L.control.layers({'OpenStreetMap':osm,'Esri Streets':esri}).addTo(map);L.control.scale().addTo(map);
       originalLine=L.featureGroup().addTo(map);liveLine=L.featureGroup().addTo(map);markers=L.featureGroup().addTo(map);
     }
     options('day',[...new Set(routes.map(r=>r.d))].sort((a,b)=>a-b).map(d=>[d,'Día '+d]),114);
