@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DC 1 · Durán / Las Brisas</title>
+<style>
+:root{--ink:#17212b;--muted:#687684;--navy:#17324d;--paper:#f5f7fa;--line:#b8c4d0;--rack:#465a6d;--recv:#dce9f8;--pick:#e7f1e9;--disp:#f7e8dc;--office:#edf4fa;--service:#f2f3f5;--battery:#f7ecec}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);font-family:Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 28px} header h1{margin:0;font-size:25px} header p{margin:5px 0 0;color:#d9e2ec}
+.wrap{max-width:1500px;margin:auto;padding:18px}
+.summary{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px}
+.metric{background:white;border:1px solid #dde4eb;border-radius:10px;padding:12px 14px} .metric small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase} .metric b{font-size:21px}
+.toolbar{display:flex;gap:8px;margin:10px 0} button{background:white;border:1px solid #bac7d3;border-radius:7px;padding:8px 13px;font-weight:700;cursor:pointer} button.active{background:#234a6d;color:white}
+.panel{background:white;border:1px solid #dce4ec;border-radius:12px;padding:14px}
+.view{display:none} .view.active{display:block} svg{width:100%;height:auto;background:white}
+.site{fill:#f8fafc;stroke:#aab5c0;stroke-width:1.5;stroke-dasharray:7 5}
+.building{fill:white;stroke:#202b35;stroke-width:3}
+.storage{fill:#fcfdfe;stroke:#9aa8b5;stroke-width:1.3}
+.rack{fill:var(--rack);stroke:#293c4d;stroke-width:1} .rackline{stroke:#8191a0;stroke-width:1}
+.recv{fill:var(--recv);stroke:#5f8ebd;stroke-width:1.3} .pick{fill:var(--pick);stroke:#709878;stroke-width:1.3} .disp{fill:var(--disp);stroke:#c1845c;stroke-width:1.3}
+.office{fill:var(--office);stroke:#6a94b6;stroke-width:1.2} .service{fill:var(--service);stroke:#929aa2;stroke-width:1.2} .battery{fill:var(--battery);stroke:#b47474;stroke-width:1.2}
+.apron{fill:#eef1f4;stroke:#aeb8c2;stroke-width:1.2} .dock{fill:#35495c;stroke:#1d2d3c;stroke-width:1.4} .guide{stroke:#9ca9b5;stroke-width:2;stroke-dasharray:5 5}
+.label{font-size:12px;font-weight:700;fill:#25384a} .tiny{font-size:10px;fill:#5d6c79} .title{font-size:16px;font-weight:800;fill:#17324d} .subtitle{font-size:11px;fill:#697987}
+.dim{stroke:#738391;stroke-width:1.1} .dimtext{font-size:10px;fill:#536270}
+.roof{stroke:#334a5f;stroke-width:8} .slab{stroke:#213343;stroke-width:6} .upright{stroke:#677888;stroke-width:5} .beam{stroke:#516476;stroke-width:5} .pallet{fill:#c99a69;stroke:#855c34;stroke-width:1}
+.clear{fill:#dceef7;fill-opacity:.58;stroke:#6199b6;stroke-width:1.5;stroke-dasharray:7 5}
+.note{margin-top:12px;background:#fff9e9;border-left:4px solid #c79a20;padding:10px 12px;border-radius:7px;font-size:12px;color:#5f4b16}
+.legend{display:flex;gap:15px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#4a5b69} .sw{display:inline-block;width:12px;height:12px;border:1px solid #999;margin-right:4px;vertical-align:-2px}
+@media(max-width:900px){.summary{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+<header><h1>DC 1 · Durán / Las Brisas</h1><p>Bloque 4 · layout conceptual simplificado y capacidad</p></header>
+<div class="wrap">
+<div class="summary">
+<div class="metric"><small>Área nave</small><b>4,519 m²</b></div>
+<div class="metric"><small>Dimensiones aprox.</small><b>76 × 59.5 m</b></div>
+<div class="metric"><small>Posiciones pallet</small><b>2,640</b></div>
+<div class="metric"><small>Ocupación objetivo</small><b>85%</b></div>
+<div class="metric"><small>Reserva operativa</small><b>396</b></div>
+<div class="metric"><small>Claro superior</small><b>1,40 m</b></div>
+</div>
+
+<div class="toolbar">
+<button class="tab active" data-target="top">Planta</button>
+<button class="tab" data-target="front">Vista frontal</button>
+</div>
+
+<div class="panel">
+<div id="top" class="view active">
+<svg viewBox="0 0 1400 900">
+<text x="70" y="52" class="title">PLANTA OPERATIVA · DC 1 · Durán / Las Brisas</text>
+<text x="70" y="72" class="subtitle">Servicios reducidos al mínimo; patio de maniobra colocado directamente frente a muelles de recepción y despacho.</text>
+
+<rect x="55" y="90" width="1290" height="745" rx="6" class="site"/>
+<rect x="145" y="125" width="1010" height="585" class="building"/>
+
+<!-- servicios compactos -->
+
+      <rect x="157" y="155" width="106" height="82" rx="5" class="office"/>
+      <text x="210.0" y="190" text-anchor="middle" class="label">OFICINA</text>
+      <text x="210.0" y="208" text-anchor="middle" class="tiny">2–3 puestos</text>
+
+      <rect x="157" y="249" width="106" height="56" rx="5" class="service"/>
+      <text x="210.0" y="282" text-anchor="middle" class="tiny">BAÑO / LIMPIEZA</text>
+
+      <rect x="157" y="317" width="106" height="56" rx="5" class="service"/>
+      <text x="210.0" y="350" text-anchor="middle" class="tiny">TABLERO / DATOS</text>
+
+      <rect x="157" y="385" width="106" height="56" rx="5" class="battery"/>
+      <text x="210.0" y="418" text-anchor="middle" class="tiny">CARGA MHE</text>
+    
+
+<!-- almacenamiento -->
+<rect x="293" y="155" width="852" height="345" class="storage"/>
+<text x="719.0" y="171" text-anchor="middle" class="label">ALMACENAMIENTO EN RACKS</text>
+
+        <g>
+          <rect x="313.0" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="348.2" y1="180" x2="348.2" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="395.4" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="430.6" y1="180" x2="430.6" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="477.8" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="513.0" y1="180" x2="513.0" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="560.2" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="595.4" y1="180" x2="595.4" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="642.6" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="677.8" y1="180" x2="677.8" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="725.0" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="760.2" y1="180" x2="760.2" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="807.4" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="842.6" y1="180" x2="842.6" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="889.8" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="925.0" y1="180" x2="925.0" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="972.2" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="1007.4" y1="180" x2="1007.4" y2="475" class="rackline"/>
+        </g>
+        <g>
+          <rect x="1054.6" y="180" width="70.4" height="295" rx="2" class="rack"/>
+          <line x1="1089.8" y1="180" x2="1089.8" y2="475" class="rackline"/>
+        </g>
+
+<!-- zonas operativas -->
+<rect x="293" y="518" width="224.75" height="145" rx="3" class="recv"/>
+<rect x="525.75" y="518" width="176.9" height="145" rx="3" class="pick"/>
+<rect x="710.65" y="518" width="434.35" height="145" rx="3" class="disp"/>
+<text x="405.375" y="582" text-anchor="middle" class="label">RECEPCIÓN</text>
+<text x="405.375" y="602" text-anchor="middle" class="tiny">staging / control</text>
+<text x="614.2" y="582" text-anchor="middle" class="label">PICKING</text>
+<text x="927.825" y="582" text-anchor="middle" class="label">DESPACHO</text>
+<text x="927.825" y="602" text-anchor="middle" class="tiny">consolidación / staging</text>
+
+<!-- maniobra directamente junto a recepción y despacho -->
+<rect x="283" y="710" width="872" height="120" rx="4" class="apron"/>
+<text x="719.0" y="737" text-anchor="middle" class="label">PATIO DE MANIOBRA Y POSICIONAMIENTO DE VEHÍCULOS</text>
+
+          <rect x="579.0" y="694" width="72" height="24" rx="2" class="dock"/>
+          <line x1="615.0" y1="718" x2="615.0" y2="810" class="guide"/>
+          <text x="615.0" y="824" text-anchor="middle" class="tiny">M1</text>
+        
+          <rect x="683.0" y="694" width="72" height="24" rx="2" class="dock"/>
+          <line x1="719.0" y1="718" x2="719.0" y2="810" class="guide"/>
+          <text x="719.0" y="824" text-anchor="middle" class="tiny">M2</text>
+        
+          <rect x="787.0" y="694" width="72" height="24" rx="2" class="dock"/>
+          <line x1="823.0" y1="718" x2="823.0" y2="810" class="guide"/>
+          <text x="823.0" y="824" text-anchor="middle" class="tiny">M3</text>
+        
+
+<!-- dimensiones simples -->
+<line x1="145" y1="107" x2="1155" y2="107" class="dim"/>
+<text x="650.0" y="101" text-anchor="middle" class="dimtext">Nave aprox. 76 m</text>
+<line x1="127" y1="125" x2="127" y2="710" class="dim"/>
+<text x="118" y="417.5" transform="rotate(-90 118 417.5)" text-anchor="middle" class="dimtext">59.5 m</text>
+</svg>
+<div class="legend">
+<span><i class="sw" style="background:#465a6d"></i>Racks</span>
+<span><i class="sw" style="background:#dce9f8"></i>Recepción</span>
+<span><i class="sw" style="background:#e7f1e9"></i>Picking</span>
+<span><i class="sw" style="background:#f7e8dc"></i>Despacho</span>
+<span><i class="sw" style="background:#eef1f4"></i>Maniobra</span>
+</div>
+<div class="note">El espacio exterior visible alrededor de la nave representa separación gráfica y reserva de implantación, no área construida desperdiciada. El patio de maniobra ahora queda directamente frente a los muelles para evitar recorridos innecesarios.</div>
+</div>
+
+<div id="front" class="view">
+<svg viewBox="0 0 1200 760">
+<text x="65" y="52" class="title">ELEVACIÓN FRONTAL · SISTEMA DE RACKS</text>
+<text x="65" y="72" class="subtitle">Altura de nave 12,00 m · sistema vertical 10,60 m · claro superior aproximado 1,40 m.</text>
+<line x1="130" y1="660" x2="1070" y2="660" class="slab"/>
+<line x1="130" y1="155" x2="1070" y2="155" class="roof"/>
+<rect x="280" y="163" width="660" height="47" class="clear"/>
+<text x="610" y="190" text-anchor="middle" class="label">1,40 m LIBRES BAJO CUBIERTA</text>
+<line x1="310" y1="214" x2="310" y2="660" class="upright"/><line x1="460" y1="214" x2="460" y2="660" class="upright"/><line x1="610" y1="214" x2="610" y2="660" class="upright"/><line x1="760" y1="214" x2="760" y2="660" class="upright"/><line x1="910" y1="214" x2="910" y2="660" class="upright"/>
+<line x1="310" y1="555" x2="910" y2="555" class="beam"/><rect x="325" y="500" width="115" height="48" rx="2" class="pallet"/><rect x="475" y="500" width="115" height="48" rx="2" class="pallet"/><rect x="625" y="500" width="115" height="48" rx="2" class="pallet"/><rect x="775" y="500" width="115" height="48" rx="2" class="pallet"/><line x1="310" y1="450" x2="910" y2="450" class="beam"/><rect x="325" y="395" width="115" height="48" rx="2" class="pallet"/><rect x="475" y="395" width="115" height="48" rx="2" class="pallet"/><rect x="625" y="395" width="115" height="48" rx="2" class="pallet"/><rect x="775" y="395" width="115" height="48" rx="2" class="pallet"/><line x1="310" y1="345" x2="910" y2="345" class="beam"/><rect x="325" y="290" width="115" height="48" rx="2" class="pallet"/><rect x="475" y="290" width="115" height="48" rx="2" class="pallet"/><rect x="625" y="290" width="115" height="48" rx="2" class="pallet"/><rect x="775" y="290" width="115" height="48" rx="2" class="pallet"/><line x1="310" y1="232" x2="910" y2="232" class="beam"/><rect x="325" y="177" width="115" height="48" rx="2" class="pallet"/><rect x="475" y="177" width="115" height="48" rx="2" class="pallet"/><rect x="625" y="177" width="115" height="48" rx="2" class="pallet"/><rect x="775" y="177" width="115" height="48" rx="2" class="pallet"/>
+<text x="610" y="698" text-anchor="middle" class="label">4 NIVELES DE ALMACENAMIENTO · ALTURA DE SISTEMA ≈ 10,60 m</text>
+
+<line x1="1035" y1="155" x2="1035" y2="660" class="dim"/>
+<text x="1055" y="407.5" transform="rotate(-90 1055 407.5)" text-anchor="middle" class="dimtext">12,00 m nave</text>
+<line x1="980" y1="214" x2="980" y2="660" class="dim"/>
+<text x="998" y="437.0" transform="rotate(-90 998 437.0)" text-anchor="middle" class="dimtext">10,60 m sistema</text>
+</svg>
+<div class="note">La franja superior de 1,40 m se mantiene libre para estructura de cubierta, iluminación y servicios generales. Es una representación conceptual, no un cálculo estructural.</div>
+</div>
+</div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');document.getElementById(b.dataset.target).classList.add('active');
+});
+</script></body></html>
