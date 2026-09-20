@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bloque 5 · Dashboard de Costeo Integral</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{
+  --navy:#0B1F33;--blue:#17365D;--blue2:#1F4E78;--paper:#f4f6f8;--card:#fff;
+  --text:#1f2937;--muted:#6b7280;--line:#dfe5eb;--soft:#eef4fa;--green:#2e7d32;
+  --orange:#c47b18;--red:#b54747;--purple:#6f5aa5
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--paper);color:var(--text)}
+header{background:linear-gradient(135deg,var(--navy),var(--blue2));color:#fff;padding:24px 30px 18px}
+header h1{margin:0;font-size:28px} header p{margin:6px 0 0;color:#dbe7f2}
+.wrap{max-width:1480px;margin:auto;padding:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.tab{border:1px solid #b8c4d0;background:white;color:#234;cursor:pointer;border-radius:8px;padding:9px 14px;font-weight:700}
+.tab.active{background:var(--navy);color:white}
+.view{display:none} .view.active{display:block}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px;box-shadow:0 2px 9px #00000008}
+.kpi small{display:block;text-transform:uppercase;color:var(--muted);font-size:10px;letter-spacing:.4px}
+.kpi b{display:block;font-size:22px;margin-top:5px;color:#13283c}
+.kpi em{display:block;font-size:11px;color:#7b8794;margin-top:4px;font-style:normal}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.card{background:white;border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:14px;box-shadow:0 2px 9px #00000008}
+.card h2{font-size:18px;margin:0 0 12px;color:#17365D}
+.card h3{font-size:15px;margin:0 0 8px;color:#234}
+.chartbox{height:320px} .chartbox.tall{height:390px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 8px;border-bottom:1px solid #e5e7eb;text-align:right}
+th:first-child,td:first-child{text-align:left} th{background:var(--soft);color:#17365D}
+.badge{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:700}
+.badge.base{background:#e8f1fb;color:#1F4E78} .badge.good{background:#e8f5e9;color:#2e7d32} .badge.warn{background:#fff3e0;color:#a65d00}
+.note{padding:11px 12px;border-left:4px solid var(--orange);background:#fff9ea;border-radius:7px;font-size:13px}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:stretch}
+.step{background:#f8fafc;border:1px solid #d9e2ea;border-radius:10px;padding:12px;text-align:center}
+.step b{display:block;color:#17365D} .step span{font-size:11px;color:var(--muted)}
+.arrow{font-size:20px;color:#8392a0;display:flex;align-items:center;justify-content:center}
+.metricline{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed #d8dee5}
+.metricline:last-child{border-bottom:0}
+.progress{height:10px;background:#edf1f5;border-radius:999px;overflow:hidden} .bar{height:100%;background:#315d83}
+.dcbox{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dc{border:1px solid #dfe5eb;border-radius:10px;padding:12px;background:#fafcfe}
+.dc h3{margin:0 0 8px}
+.scenarioCards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.scenario{border:1px solid #dfe5eb;border-radius:10px;padding:13px;background:#fff}
+.scenario b{font-size:20px;display:block;margin-top:4px}
+.footer{color:#7b8794;font-size:11px;text-align:right;padding:4px 0 10px}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}.grid3{grid-template-columns:1fr}}
+@media(max-width:800px){.grid2,.dcbox{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Bloque 5 · Costeo Integral y TCO</h1>
+  <p>Red de 2 centros de distribución · consolidación de transporte, almacén, inventario y CAPEX</p>
+</header>
+
+<div class="wrap">
+<div class="tabs">
+  <button class="tab active" data-v="resumen">Resumen</button>
+  <button class="tab" data-v="costos">Estructura de costos</button>
+  <button class="tab" data-v="centros">DC1 vs DC2</button>
+  <button class="tab" data-v="escenarios">Escenarios y sensibilidad</button>
+  <button class="tab" data-v="metodo">Metodología</button>
+</div>
+
+<section id="resumen" class="view active">
+<div class="kpis">
+  <div class="kpi"><small>TCO mensual</small><b>USD 355,533</b><em>Red completa</em></div>
+  <div class="kpi"><small>TCO anual</small><b>USD 4.27 M</b><em>Equivalente anual</em></div>
+  <div class="kpi"><small>Costo por m³</small><b>USD 12.61</b><em>28.198 m³/mes</em></div>
+  <div class="kpi"><small>Costo por kg</small><b>USD 0.237</b><em>1,50 M kg/mes</em></div>
+  <div class="kpi"><small>CAPEX inicial</small><b>USD 5.95 M</b><em>Terreno + activos</em></div>
+  <div class="kpi"><small>CAPEX eq. mensual</small><b>USD 63,424</b><em>CRF + costo oportunidad</em></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>Composición del TCO mensual</h2>
+    <div class="chartbox"><canvas id="donut"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Lectura ejecutiva</h2>
+    <div class="metricline"><span>Transporte outbound</span><b>48.9%</b></div>
+    <div class="progress"><div class="bar" style="width:48.9%"></div></div>
+    <div class="metricline"><span>CAPEX mensualizado</span><b>17.8%</b></div>
+    <div class="progress"><div class="bar" style="width:17.8%"></div></div>
+    <div class="metricline"><span>OPEX almacén</span><b>13.8%</b></div>
+    <div class="progress"><div class="bar" style="width:13.8%"></div></div>
+    <div class="metricline"><span>Inbound + inter-DC</span><b>11.2%</b></div>
+    <div class="progress"><div class="bar" style="width:11.2%"></div></div>
+    <br><div class="note">La estructura muestra que el costo operativo depende especialmente del transporte. Por eso, las mejoras posteriores de ruteo real y consolidación pueden tener un impacto importante sobre el TCO.</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Flujo económico del modelo</h2>
+  <div class="flow">
+    <div class="step"><b>Demanda</b><span>kg + m³ + frecuencia</span></div>
+    <div class="step"><b>Transporte</b><span>vehículo y costo integral</span></div>
+    <div class="step"><b>Almacén</b><span>personal + servicios + mantenimiento</span></div>
+    <div class="step"><b>Inventario</b><span>stock + carrying</span></div>
+    <div class="step"><b>CAPEX</b><span>mensualización económica</span></div>
+    <div class="step"><b>TCO</b><span>USD/mes y costos unitarios</span></div>
+  </div>
+</div>
+</section>
+
+<section id="costos" class="view">
+<div class="grid2">
+  <div class="card"><h2>Componentes mensuales</h2><div class="chartbox tall"><canvas id="bars"></canvas></div></div>
+  <div class="card">
+    <h2>Detalle de costos</h2>
+    <table><thead><tr><th>Componente</th><th>USD/mes</th><th>% TCO</th></tr></thead><tbody>
+    <tr><td>Transporte outbound</td><td>173,955</td><td>48.9%</td></tr><tr><td>OPEX almacén</td><td>48,942</td><td>13.8%</td></tr><tr><td>Carrying inventario</td><td>29,297</td><td>8.2%</td></tr><tr><td>Inbound</td><td>37,800</td><td>10.6%</td></tr><tr><td>Inter-DC</td><td>2,115</td><td>0.6%</td></tr><tr><td>CAPEX mensual equivalente</td><td>63,424</td><td>17.8%</td></tr>
+    <tr><td><b>Total</b></td><td><b>355,533</b></td><td><b>100,0%</b></td></tr>
+    </tbody></table>
+  </div>
+</div>
+<div class="card">
+  <h2>CAPEX inicial por centro</h2>
+  <div class="chartbox"><canvas id="capex"></canvas></div>
+</div>
+</section>
+
+<section id="centros" class="view">
+<div class="dcbox">
+  <div class="dc">
+    <h3>DC1 · Durán / Las Brisas</h3>
+    <div class="metricline"><span>Clientes</span><b>305</b></div>
+    <div class="metricline"><span>Volumen mensual</span><b>13,209 m³</b></div>
+    <div class="metricline"><span>TCO mensual</span><b>USD 169,559</b></div>
+    <div class="metricline"><span>USD/m³</span><b>12.84</b></div>
+    <div class="metricline"><span>USD/kg</span><b>0.235</b></div>
+  </div>
+  <div class="dc">
+    <h3>DC2 · Vía a la Costa</h3>
+    <div class="metricline"><span>Clientes</span><b>295</b></div>
+    <div class="metricline"><span>Volumen mensual</span><b>14,989 m³</b></div>
+    <div class="metricline"><span>TCO mensual</span><b>USD 185,975</b></div>
+    <div class="metricline"><span>USD/m³</span><b>12.41</b></div>
+    <div class="metricline"><span>USD/kg</span><b>0.240</b></div>
+  </div>
+</div>
+<div class="card"><h2>Comparación de TCO por centro</h2><div class="chartbox"><canvas id="dcCompare"></canvas></div></div>
+<div class="card"><h2>Composición del costo por centro</h2><div class="chartbox tall"><canvas id="stacked"></canvas></div></div>
+</section>
+
+<section id="escenarios" class="view">
+<div class="scenarioCards">
+  <div class="scenario"><span class="badge good">Conservador</span><b>USD 322,908</b><small>mes</small></div>
+  <div class="scenario"><span class="badge base">Base</span><b>USD 355,533</b><small>mes</small></div>
+  <div class="scenario"><span class="badge warn">Exigente</span><b>USD 422,917</b><small>mes</small></div>
+</div>
+<br>
+<div class="grid2">
+  <div class="card"><h2>Escenarios</h2><div class="chartbox"><canvas id="scenarioChart"></canvas></div></div>
+  <div class="card"><h2>Sensibilidad rápida</h2><div class="chartbox"><canvas id="sensitivity"></canvas></div></div>
+</div>
+<div class="note">La sensibilidad es orientativa y permite identificar qué variables merecen mayor control. No sustituye una simulación probabilística completa.</div>
+</section>
+
+<section id="metodo" class="view">
+<div class="grid2">
+<div class="card">
+  <h2>Reglas de costeo</h2>
+  <table>
+    <tr><th>Componente</th><th>Tratamiento</th></tr>
+    <tr><td>Transporte</td><td>Tarifa integral del Bloque 3; no se duplica combustible ni conductor.</td></tr>
+    <tr><td>Terreno</td><td>Costo de oportunidad mensual usando tasa de descuento.</td></tr>
+    <tr><td>Construcción y equipos</td><td>Equivalente mensual mediante recuperación de capital.</td></tr>
+    <tr><td>Inventario</td><td>Inventario medio + stock de seguridad + carrying rate.</td></tr>
+    <tr><td>Inbound</td><td>Base mensual con factor de fragmentación para 2 DC.</td></tr>
+    <tr><td>Inter-DC</td><td>3% del volumen con tarifa de transferencia.</td></tr>
+  </table>
+</div>
+<div class="card">
+  <h2>Supuestos críticos</h2>
+  <p>Los valores de terreno, construcción, equipos, personal y servicios corresponden a supuestos de prefactibilidad del ejercicio. El modelo sirve para comparar y estructurar el TCO, no como presupuesto contractual.</p>
+  <p>El transporte todavía usa la lógica del Bloque 3 y deberá actualizarse cuando el Colab maestro incorpore rutas viales reales y consolidación.</p>
+  <div class="note">Para la entrega final conviene mantener esta distinción entre cálculo académico, referencia de mercado y cotización real.</div>
+</div>
+</div>
+</section>
+
+<div class="footer">Proyecto DC Guayaquil · Bloque 5 · Costeo Integral</div>
+</div>
+
+<script>
+const C={"Transporte outbound":173955.20773048117,"OPEX almacén":48942.061444140054,"Carrying inventario":29297.192629230234,"Inbound":37800.0,"Inter-DC":2114.8722107142858,"CAPEX mensual equivalente":63424.110197256916};
+const dcC={"DC1":[83743.51211924036,23797.196578378003,13724.083496355908,17707.16951373247,990.698432142857,29595.872464168693],"DC2":[90211.69561124081,25144.86486576205,15573.109132874326,20092.830486267525,1124.1737785714286,33828.23773308822]};
+const SC={"Conservador":322907.7540891721,"Base":355533.4442118226,"Exigente":422916.64800266724};
+const SENS={"Transporte -10%":338137.9234387745,"Transporte +10%":372928.9649848707,"Demanda -10%":348012.2373578281,"Demanda +10%":363054.650?};
+const labels=Object.keys(C), data=Object.values(C);
+const common={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}};
+
+new Chart(document.getElementById('donut'),{type:'doughnut',data:{labels,datasets:[{data}]},options:common});
+new Chart(document.getElementById('bars'),{type:'bar',data:{labels,datasets:[{label:'USD/mes',data}]},options:{...common,indexAxis:'y',plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('capex'),{type:'bar',data:{labels:['DC1','DC2'],datasets:[{label:'CAPEX inicial USD',data:[2776467.619,3173517.077]}]},options:common});
+new Chart(document.getElementById('dcCompare'),{type:'bar',data:{labels:['DC1','DC2'],datasets:[{label:'TCO mensual',data:[169558.53260401828,185974.91160780436]}]},options:common});
+
+const compLabels=["Transporte outbound","OPEX almacén","Carrying inventario","Inbound","Inter-DC","CAPEX mensual equivalente"];
+new Chart(document.getElementById('stacked'),{
+ type:'bar',
+ data:{labels:['DC1','DC2'],datasets:compLabels.map((n,i)=>({label:n,data:[dcC.DC1[i],dcC.DC2[i]]}))},
+ options:{...common,scales:{x:{stacked:true},y:{stacked:true}}}
+});
+new Chart(document.getElementById('scenarioChart'),{type:'bar',data:{labels:Object.keys(SC),datasets:[{label:'USD/mes',data:Object.values(SC)}]},options:common});
+new Chart(document.getElementById('sensitivity'),{type:'bar',data:{labels:['Transporte -10%','Transporte +10%','Demanda -10%','Demanda +10%','CAPEX -10%','CAPEX +10%'],datasets:[{label:'TCO resultante',data:[338137.9234387745,372928.9649848707,348012.2373578281,363054.650? ,349191.0331920969,361875.8552315483]}]},options:{...common,indexAxis:'y'}});
+
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.v).classList.add('active');
+});
+</script>
+</body></html>
