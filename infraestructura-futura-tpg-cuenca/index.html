@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visor prospectivo TPG–Cuenca</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+<header>
+  <div><h1>Visor prospectivo de infraestructura logística TPG → Cuenca</h1><p>Infraestructura actual · proyectos en construcción · escenarios futuros · conceptos logísticos</p></div>
+  <div class="head-actions"><a href="../intermodal-guayaquil-cuenca/">← Visor actual</a><span class="badge">Horizonte 2026–2045</span><span class="badge">Prospectivo · no cronograma oficial</span></div>
+</header>
+<div class="layout">
+<aside class="left">
+  <section>
+    <h2>1. Horizonte de análisis</h2>
+    <input id="year" type="range" min="0" max="3" step="1" value="0">
+    <div class="years"><span>2026</span><span>2030</span><span>2035</span><span>2045</span></div>
+    <div id="yearText" class="year-card"><b>2026</b><span>Red actual + obras iniciadas</span></div>
+    <div class="note">Los años 2030, 2035 y 2045 son horizontes académicos del visor; no representan fechas oficiales de terminación o puesta en servicio.</div>
+  </section>
+  <section>
+    <h2>2. Capas</h2>
+    <label class="check"><input class="layer" data-layer="current" type="checkbox" checked> Infraestructura actual</label>
+    <label class="check"><input class="layer" data-layer="quinto" type="checkbox" checked> Quinto Puente / Viaducto Sur</label>
+    <label class="check"><input class="layer" data-layer="barge" type="checkbox" checked> Barcaza TPG–Durán</label>
+    <label class="check"><input class="layer" data-layer="rail" type="checkbox" checked> Ferrocarril histórico / futuro</label>
+    <label class="check"><input class="layer" data-layer="balao" type="checkbox" checked> Balao · largo plazo</label>
+    <label class="check"><input class="layer" data-layer="nodes" type="checkbox" checked> Nodos logísticos</label>
+  </section>
+  <section>
+    <h2>3. Comparar escenario futuro</h2>
+    <label>Escenario</label>
+    <select id="scenario">
+      <option value="current">Ruta actual TPG → Cuenca</option>
+      <option value="quinto">Quinto Puente → E25 → Cuenca</option>
+      <option value="barge">Barcaza TPG → Durán + carretera</option>
+      <option value="rail">Ferrocarril Durán → Bucay + conexión a Cuenca</option>
+      <option value="balao">Barcaza TPG → Balao + carretera</option>
+    </select>
+    <button id="compareBtn">Comparar con ruta actual</button>
+  </section>
+  <section>
+    <h2>4. Convención</h2>
+    <div class="legend"><div><i class="solid"></i>Existente / operativo</div><div><i class="construction"></i>En construcción</div><div><i class="planned"></i>Planificado / anunciado</div><div><i class="concept"></i>Concepto académico</div><div><i class="historic"></i>Infraestructura histórica / suspendida</div></div>
+  </section>
+</aside>
+
+<main class="mapbox"><div id="map"></div><div id="mapStatus" class="mapstatus">Cargando escenarios prospectivos…</div></main>
+
+<aside class="right">
+  <section>
+    <h2>Proyecto seleccionado</h2>
+    <div id="projectCard" class="project-card"></div>
+  </section>
+  <section>
+    <h2>Comparación</h2>
+    <div class="compare-grid">
+      <div class="compare-card base"><span>ACTUAL</span><b>TPG → Molleturo → Cuenca</b><small>Referencia operativa</small></div>
+      <div class="compare-card future"><span id="futureTag">FUTURO</span><b id="futureName">Selecciona un escenario</b><small id="futureState">—</small></div>
+    </div>
+    <table class="comparison"><tbody>
+      <tr><th>Terrestre</th><td id="cRoad">≈200 km*</td><td id="fRoad">—</td></tr>
+      <tr><th>Fluvial / ferroviario</th><td>—</td><td id="fAlt">—</td></tr>
+      <tr><th>Transbordos</th><td>0</td><td id="fTransfers">—</td></tr>
+      <tr><th>Tiempo</th><td>4,5–5,5 h*</td><td id="fTime">—</td></tr>
+      <tr><th>Madurez</th><td>Operativo</td><td id="fMaturity">—</td></tr>
+      <tr><th>Efecto principal</th><td>Base</td><td id="fEffect">—</td></tr>
+    </tbody></table>
+    <div class="note">* Valores de comparación académica. Deben sustituirse por mediciones definitivas cuando se cierre el modelo de costos/tiempos.</div>
+  </section>
+  <section>
+    <h2>Proyectos</h2>
+    <div class="mini project-q" data-project="quinto"><b>Quinto Puente / Viaducto Sur</b><span>Fase 1A en construcción desde julio de 2026; corredor completo de referencia ≈44 km.</span></div>
+    <div class="mini project-b" data-project="barge"><b>Barcaza TPG–Durán</b><span>Concepto intermodal para evitar el traslado urbano del contenedor por Guayaquil.</span></div>
+    <div class="mini project-r" data-project="rail"><b>Ferrocarril Durán–Bucay</b><span>Corredor histórico ≈88 km, servicio suspendido; extensión logística a Cuenca es conceptual.</span></div>
+    <div class="mini project-a" data-project="balao"><b>Balao</b><span>Alternativa conceptual de largo plazo y baja madurez.</span></div>
+  </section>
+  <section>
+    <h2>Fuentes y cautelas</h2>
+    <div class="source"><b>MTOP / fichas de inversión</b><span>Viaducto Sur: tramos referenciales, puente sobre río Guayas y conexiones E25/E40.</span></div>
+    <div class="source"><b>Primicias · 23/07/2026 y 27/08/2026</b><span>Inicio de Fase 1A y avance inicial del Quinto Puente.</span></div>
+    <div class="source"><b>Municipio de Guayaquil · estudio de canal</b><span>Las Esclusas conectan Estero Cobina con río Guayas; dimensiones históricas 22 m × 122 m y 4,2 m de profundidad mínima.</span></div>
+    <div class="source"><b>Tren Ecuador</b><span>Durán–Bucay ≈88 km; servicio suspendido. Uso aquí como antecedente de corredor ferroviario.</span></div>
+    <div class="warn"><b>Advertencia:</b> las líneas conceptuales no representan proyectos oficiales ni trazados de ingeniería aprobados salvo cuando se indique expresamente.</div>
+  </section>
+</aside>
+</div></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
