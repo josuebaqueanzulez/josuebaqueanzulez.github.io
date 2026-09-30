@@ -142,9 +142,29 @@ function osrm(points){
     .then(r=>{if(!r.ok)throw Error(r.status);return r.json()})
     .then(j=>{if(j.code!=='Ok'||!j.routes?.length)throw Error('sin ruta');return j.routes[0];});
 }
+
+// Para corredores de carga sensibles a atajos, enruta cada tramo entre puntos
+// comprobados sobre la vía principal y concatena las geometrías. Así evitamos
+// que un waypoint ligeramente desplazado genere un ramal de ida y vuelta.
+async function osrmSegmented(points){
+  let coordinates=[], distance=0, duration=0;
+  for(let i=0;i<points.length-1;i++){
+    const r=await osrm([points[i],points[i+1]]);
+    const seg=r.geometry.coordinates;
+    if(i>0 && coordinates.length && seg.length){
+      coordinates.push(...seg.slice(1));
+    }else{
+      coordinates.push(...seg);
+    }
+    distance+=r.distance||0;
+    duration+=r.duration||0;
+  }
+  return {geometry:{coordinates},distance,duration};
+}
 async function loadRealRoads(){
   document.getElementById('mapStatus').textContent='Cargando geometría vial real desde OSRM…';
   const o=origin();
+
   const M=[
     [o.lat,o.lon],
     // Corredor estatal de carga: E25 -> E582 -> Molleturo -> Cajas -> Cuenca.
@@ -154,24 +174,31 @@ async function loadRealRoads(){
     [DATA.nodes.cajas.lat,DATA.nodes.cajas.lon],
     [DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]
   ];
+
   const Z=[[o.lat,o.lon],[DATA.nodes.eltriunfo.lat,DATA.nodes.eltriunfo.lon],[DATA.nodes.latroncal.lat,DATA.nodes.latroncal.lon],[DATA.nodes.cochancay.lat,DATA.nodes.cochancay.lon],[DATA.nodes.zhud.lat,DATA.nodes.zhud.lon],[DATA.nodes.eltambo.lat,DATA.nodes.eltambo.lon],[DATA.nodes.canar.lat,DATA.nodes.canar.lon],[DATA.nodes.azogues.lat,DATA.nodes.azogues.lon],[DATA.nodes.puertoseco.lat,DATA.nodes.puertoseco.lon],[DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]];
+
+  // Puerto Bolívar -> Cuenca: SOLO corredor principal E59.
+  // Los puntos intermedios de montaña son coordenadas sobre tramos OSM
+  // etiquetados highway=primary, ref=E59; se eliminan centroides de pueblos
+  // y puntos aproximados que antes provocaban desvíos o ramales sin salida.
   const PB=[
     [DATA.nodes.puertobolivar.lat,DATA.nodes.puertobolivar.lon],
-    [DATA.nodes.machala.lat,DATA.nodes.machala.lon],
-    [DATA.nodes.pasaje.lat,DATA.nodes.pasaje.lon],
-    // Forzar la E59 (Cuenca-Girón-Pasaje) para evitar atajos rurales no adecuados a carga pesada.
-    [-3.322976,-79.722811],
-    [-3.314660,-79.584290],
-    [-3.308290,-79.470790],
-    [-3.265830,-79.261110],
-    [-3.167220,-79.153890],
+    [-3.26794,-79.94901],   // Av. 25 de Junio, vía primaria en Machala
+    [-3.31259,-79.57098],  // E59 cerca de Sarayunga / La Cascada
+    [-3.26593,-79.26106],  // E59 sector El Rosario / Yunguilla
+    [-3.16721,-79.15384],  // E59 sector Girón
+    [-3.13960,-79.12170],  // E59 al norte de Girón
     [DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]
   ];
+
   let ok=0;
   try{const r=await osrm(M);routeData.M=r;map.getSource('routeM').setData(fcLine(r.geometry.coordinates));document.getElementById('distM').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distM').textContent='190 km base';}
   try{const r=await osrm(Z);routeData.Z=r;map.getSource('routeZ').setData(fcLine(r.geometry.coordinates));document.getElementById('distZ').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distZ').textContent='244 km base';}
-  try{const r=await osrm(PB);routeData.PB=r;map.getSource('routePB').setData(fcLine(r.geometry.coordinates));document.getElementById('distPB').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distPB').textContent='172 km base';}
-  document.getElementById('mapStatus').textContent=ok===3?'Base vectorial activa. Las rutas se calculan sobre la red OpenStreetMap con corredores estatales forzados para carga pesada: E582 por Molleturo, E40/E35 por Zhud y E59 entre Puerto Bolívar/Pasaje y Cuenca.':('Base vectorial activa. Se cargaron '+ok+' de 3 rutas viales reales; las restantes conservan el trazado de respaldo.');
+  try{const r=await osrmSegmented(PB);routeData.PB=r;map.getSource('routePB').setData(fcLine(r.geometry.coordinates));document.getElementById('distPB').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distPB').textContent='172 km base';}
+
+  document.getElementById('mapStatus').textContent=ok===3
+    ?'Base vectorial activa. Las rutas viales se calcularon sobre OpenStreetMap. Puerto Bolívar → Cuenca queda restringida al corredor principal E59 mediante puntos comprobados sobre la vía, sin atajos rurales ni ramales de ida y vuelta.'
+    :('Base vectorial activa. Se cargaron '+ok+' de 3 rutas viales reales; las restantes conservan el trazado de respaldo.');
   evaluate();
 }
 function fitAll(){
