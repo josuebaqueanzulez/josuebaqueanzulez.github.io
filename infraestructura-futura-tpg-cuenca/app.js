@@ -12,15 +12,15 @@ const routeStyle={
   current:{color:'#596a76',dash:null,width:5.5,opacity:.88},
   quinto:{color:'#d98216',dash:[2.2,1.4],width:6.5,opacity:.9},
   quintoRoad:{color:'#1f5f99',dash:null,width:5.5,opacity:.76},
-  barge:{color:'#7357a6',dash:[1,1.5],width:6,opacity:.8},
+  barge:{color:'#7357a6',dash:[1,1.5],width:6,opacity:.84},
   duranRoad:{color:'#2c879b',dash:null,width:5.5,opacity:.75},
   railHistoric:{color:'#8a6544',dash:[4,2],width:5.5,opacity:.8},
   railRoad:{color:'#438f88',dash:null,width:5.2,opacity:.72},
   balaoWater:{color:'#7357a6',dash:[1,2],width:5,opacity:.55},
   balaoRoad:{color:'#2c879b',dash:null,width:5,opacity:.62}
 };
-const roadIds=['current','quintoRoad','duranRoad','railRoad','balaoRoad'];
 const roadMetrics={};
+const loadState={roads:false,hydro:false,hydroFeatures:0};
 
 const map=new maplibregl.Map({
   container:'map',
@@ -33,6 +33,7 @@ map.addControl(new maplibregl.NavigationControl(),'top-left');
 map.addControl(new maplibregl.ScaleControl({maxWidth:120,unit:'metric'}));
 
 function lineFC(coords,props={}){return {type:'FeatureCollection',features:[{type:'Feature',properties:props,geometry:{type:'LineString',coordinates:coords}}]}}
+function emptyFC(){return {type:'FeatureCollection',features:[]}}
 function pointFC(){return {type:'FeatureCollection',features:Object.entries(D.nodes).map(([id,n])=>({type:'Feature',properties:{id,name:n.name,kind:n.kind},geometry:{type:'Point',coordinates:n.coord}}))}}
 function addRouteSource(id,coords,name){map.addSource(id,{type:'geojson',data:lineFC(coords,{id,name})})}
 function addRouteLayers(id){
@@ -47,9 +48,7 @@ function setRouteEmphasis(id,on){
   if(map.getLayer(id)){map.setPaintProperty(id,'line-width',on?s.width+2.3:s.width);map.setPaintProperty(id,'line-opacity',on?1:s.opacity)}
   if(map.getLayer(id+'-casing'))map.setPaintProperty(id+'-casing','line-width',on?s.width+6.2:s.width+3.8);
 }
-function applyGroupVisibility(){
-  Object.entries(groupRoutes).forEach(([g,ids])=>ids.forEach(id=>setRouteVisibility(id,groupState[g])));
-}
+function applyGroupVisibility(){Object.entries(groupRoutes).forEach(([g,ids])=>ids.forEach(id=>setRouteVisibility(id,groupState[g])))}
 
 function osrm(points){
   const coords=points.map(p=>p[1]+','+p[0]).join(';');
@@ -62,13 +61,14 @@ function durationText(sec){
   const h=Math.floor(sec/3600),m=Math.round((sec-h*3600)/60);
   return h+' h '+String(m).padStart(2,'0')+' min';
 }
-function roadText(id){
-  const m=roadMetrics[id];
-  return m?((m.distance/1000).toFixed(1)+' km'):'Por calcular';
-}
-function roadTime(id){
-  const m=roadMetrics[id];
-  return m?durationText(m.duration):'Por calcular';
+function roadText(id){const m=roadMetrics[id];return m?((m.distance/1000).toFixed(1)+' km'):'Por calcular'}
+function roadTime(id){const m=roadMetrics[id];return m?durationText(m.duration):'Por calcular'}
+
+function updateMapStatus(){
+  const parts=[];
+  parts.push(loadState.roads?'red vial real cargada':'cargando red vial');
+  parts.push(loadState.hydro?('hidrografía real cargada ('+loadState.hydroFeatures+' segmentos OSM)'):'cargando hidrografía real');
+  document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los tramos conceptuales se mantienen diferenciados de la infraestructura existente.';
 }
 
 async function loadRoad(id,points){
@@ -77,13 +77,10 @@ async function loadRoad(id,points){
     roadMetrics[id]={distance:r.distance,duration:r.duration};
     map.getSource(id).setData(lineFC(r.geometry.coordinates,{id,name:D.routes[id].name}));
     return true;
-  }catch(e){
-    console.warn('No se pudo cargar '+id,e);
-    return false;
-  }
+  }catch(e){console.warn('No se pudo cargar '+id,e);return false}
 }
 async function loadRealRoads(){
-  document.getElementById('mapStatus').textContent='Calculando carreteras existentes sobre la red OpenStreetMap…';
+  updateMapStatus();
   const specs={
     current:D.controls.current,
     quintoRoad:D.controls.quintoRoad,
@@ -93,11 +90,67 @@ async function loadRealRoads(){
   };
   let ok=0;
   for(const [id,pts] of Object.entries(specs)) if(await loadRoad(id,pts)) ok++;
+  loadState.roads=ok===5;
   updateBaseMetrics();
   compareScenario(document.getElementById('scenario').value);
-  document.getElementById('mapStatus').textContent=ok===5
-    ?'Red vial real cargada: ruta actual y todos los tramos terrestres de los escenarios siguen carreteras existentes. Los trazados naranja/morado/marrón identifican únicamente proyectos, conceptos o infraestructura histórica.'
-    :'Se cargaron '+ok+' de 5 tramos viales reales. Los demás mantienen un trazado de respaldo hasta que el servicio de ruteo responda.';
+  if(ok!==5) document.getElementById('mapStatus').textContent='Se cargaron '+ok+' de 5 tramos viales reales. La hidrografía se carga por separado desde OpenStreetMap.';
+  else updateMapStatus();
+}
+
+function overpassFeatureCollection(elements){
+  const features=[];
+  for(const e of elements||[]){
+    if(e.type!=='way'||!Array.isArray(e.geometry)||e.geometry.length<2)continue;
+    const name=(e.tags&&e.tags.name)||'Cuerpo de agua';
+    const coords=e.geometry.map(p=>[p.lon,p.lat]);
+    // El Río Guayas puede devolver segmentos muy largos. Conservamos solo la franja
+    // entre Las Esclusas y Durán para que la capa represente el corredor del proyecto.
+    if(/guayas/i.test(name)){
+      const clipped=coords.filter(c=>c[1]>=-2.30&&c[1]<=-2.13&&c[0]>=-79.89&&c[0]<=-79.81);
+      if(clipped.length<2)continue;
+      features.push({type:'Feature',properties:{id:'barge',name:'RÍO GUAYAS · CORREDOR FLUVIAL'},geometry:{type:'LineString',coordinates:clipped}});
+    }else{
+      features.push({type:'Feature',properties:{id:'barge',name:name.toUpperCase()},geometry:{type:'LineString',coordinates:coords}});
+    }
+  }
+  return {type:'FeatureCollection',features};
+}
+
+async function fetchOverpassHydro(){
+  const q=`[out:json][timeout:25];(
+    way["waterway"]["name"~"Estero Santa Ana|Estero del Muerto|Estero Cobina|Canal Guayas-Salado|Río Guayas|Rio Guayas",i](-2.31,-79.96,-2.13,-79.81);
+    way(35416928);
+  );out geom;`;
+  const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
+  let lastErr;
+  for(const ep of endpoints){
+    try{
+      const r=await fetch(ep+'?data='+encodeURIComponent(q));
+      if(!r.ok)throw Error('HTTP '+r.status);
+      const j=await r.json();
+      const fc=overpassFeatureCollection(j.elements);
+      if(!fc.features.length)throw Error('sin geometría hidrográfica');
+      return fc;
+    }catch(e){lastErr=e}
+  }
+  throw lastErr||Error('Overpass no disponible');
+}
+
+async function loadHydroCorridor(){
+  try{
+    const fc=await fetchOverpassHydro();
+    map.getSource('barge').setData(fc);
+    loadState.hydro=true;
+    loadState.hydroFeatures=fc.features.length;
+    updateMapStatus();
+  }catch(e){
+    console.warn('No se pudo cargar la hidrografía real',e);
+    // No dibujamos una línea recta de respaldo: es preferible omitir el corredor
+    // antes que mostrar un trazado que atraviese tierra.
+    map.getSource('barge').setData(emptyFC());
+    loadState.hydro=false;
+    document.getElementById('mapStatus').textContent='La red vial cargó, pero el servicio hidrográfico no respondió. Se oculta TPG–Durán para no mostrar una línea falsa sobre tierra.';
+  }
 }
 
 function updateBaseMetrics(){
@@ -117,7 +170,7 @@ function compareScenario(key){
   let c;
   if(key==='current') c={name:'Ruta actual TPG → Cuenca',road:roadText('current'),alt:'—',transfers:'0',time:roadTime('current'),maturity:'Operativo',effect:'Referencia base'};
   if(key==='quinto') c={name:'Quinto Puente + E25/E582 → Cuenca',road:roadText('quintoRoad')+' después del enlace E25',alt:'Quinto Puente / Viaducto Sur · corredor de proyecto',transfers:'0',time:'Tramo futuro por modelar + '+roadTime('quintoRoad'),maturity:'Parcialmente en obra / corredor completo no operativo',effect:'Evitar parte del recorrido urbano de carga'};
-  if(key==='barge') c={name:'Barcaza TPG → Durán + carretera',road:roadText('duranRoad'),alt:'TPG–Durán · tramo acuático conceptual',transfers:'1',time:'Tramo fluvial por modelar + '+roadTime('duranRoad'),maturity:'Conceptual',effect:'Eliminar traslado terrestre del contenedor por Guayaquil'};
+  if(key==='barge') c={name:'Barcaza TPG → Durán + carretera',road:roadText('duranRoad'),alt:'Estero Santa Ana / del Muerto / Cobina / Río Guayas · hidrografía real de referencia',transfers:'1',time:'Tramo fluvial por modelar + '+roadTime('duranRoad'),maturity:'Conceptual; trazado hídrico real, navegabilidad por validar',effect:'Eliminar traslado terrestre del contenedor por Guayaquil'};
   if(key==='rail') c={name:'Durán → Bucay + carretera a Cuenca',road:roadText('railRoad'),alt:'Ferrocarril histórico Durán–Bucay ≈88 km',transfers:'1',time:'Tramo ferroviario por modelar + '+roadTime('railRoad'),maturity:'Ferrocarril histórico/suspendido',effect:'Diversificación modal hasta Bucay'};
   if(key==='balao') c={name:'TPG → Balao + carretera',road:roadText('balaoRoad'),alt:'TPG–Balao · tramo acuático conceptual',transfers:'1',time:'Tramo acuático por modelar + '+roadTime('balaoRoad'),maturity:'Conceptual',effect:'Nodo de transferencia alternativo fuera de Guayaquil'};
   document.getElementById('futureName').textContent=c.name;
@@ -133,7 +186,10 @@ function compareScenario(key){
 }
 
 map.on('load',()=>{
-  Object.entries(D.routes).forEach(([id,r])=>addRouteSource(id,r.coords,r.name));
+  Object.entries(D.routes).forEach(([id,r])=>{
+    if(id==='barge') map.addSource(id,{type:'geojson',data:emptyFC()});
+    else addRouteSource(id,r.coords,r.name);
+  });
   Object.keys(D.routes).forEach(addRouteLayers);
   map.addSource('nodes',{type:'geojson',data:pointFC()});
   map.addLayer({id:'nodes',type:'circle',source:'nodes',paint:{'circle-radius':['match',['get','kind'],'port',7,'hub',7,'city',7,'project',6,'water',6,'rail',5,'road',4.5,4.5],'circle-color':['match',['get','kind'],'port','#174b70','hub','#7357a6','city','#102f4a','project','#d98216','water','#2c879b','rail','#8a6544','road','#647b89','#6f7f8a'],'circle-stroke-color':'#fff','circle-stroke-width':1.8}});
@@ -142,6 +198,7 @@ map.on('load',()=>{
   compareScenario('current');
   map.fitBounds([[-80.08,-3.03],[-78.84,-2.02]],{padding:35,duration:500});
   loadRealRoads();
+  loadHydroCorridor();
 
   Object.keys(D.routes).forEach(id=>{
     map.on('click',id,e=>{
