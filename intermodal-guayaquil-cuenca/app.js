@@ -20,18 +20,8 @@ function fcLine(coords, props={}){return {type:'FeatureCollection',features:[{ty
 function fcPoints(items){return {type:'FeatureCollection',features:items.map(x=>({type:'Feature',properties:{name:x.name,kind:x.kind||'buoy'},geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}
 function origin(){return DATA.nodes[E.terminal.value]}
 
-// Respaldo corregido: Guayaquil -> E25 -> Puerto Inca -> E582 -> Molleturo -> Cajas -> Cuenca.
-// Antes se obligaba a pasar por Naranjal y generaba el desvío que se veía en el visor.
 function fallbackM(){
-  const o=origin();
-  return [
-    [o.lon,o.lat],
-    [-79.84,-2.31],[-79.76,-2.38],[-79.68,-2.46],[-79.60,-2.52],
-    [-79.55158,-2.55984],[-79.50267,-2.58328],
-    [DATA.nodes.molleturo.lon,DATA.nodes.molleturo.lat],
-    [DATA.nodes.cajas.lon,DATA.nodes.cajas.lat],
-    [DATA.nodes.cuenca.lon,DATA.nodes.cuenca.lat]
-  ];
+  const a=DATA.fallback.mol_contecon.map(x=>x.slice()); a[0]=[origin().lon,origin().lat]; return a;
 }
 function fallbackZ(){
   const a=DATA.fallback.zhud_contecon.map(x=>x.slice()); a[0]=[origin().lon,origin().lat]; return a;
@@ -148,17 +138,16 @@ map.on('load',()=>{
 
 function osrm(points){
   const coords=points.map(p=>p[1]+','+p[0]).join(';');
-  return fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson&steps=false')
+  return fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson&steps=false&alternatives=false&continue_straight=true')
     .then(r=>{if(!r.ok)throw Error(r.status);return r.json()})
     .then(j=>{if(j.code!=='Ok'||!j.routes?.length)throw Error('sin ruta');return j.routes[0];});
 }
 async function loadRealRoads(){
   document.getElementById('mapStatus').textContent='Cargando geometría vial real desde OSRM…';
   const o=origin();
-  // E582 inicia en Puerto Inca. Se usan dos puntos sobre la propia E582 antes de Molleturo
-  // para impedir que el ruteador baje a Naranjal y luego regrese hacia el norte.
   const M=[
     [o.lat,o.lon],
+    // Corredor estatal de carga: E25 -> E582 -> Molleturo -> Cajas -> Cuenca.
     [-2.55984,-79.55158],
     [-2.58328,-79.50267],
     [DATA.nodes.molleturo.lat,DATA.nodes.molleturo.lon],
@@ -166,12 +155,23 @@ async function loadRealRoads(){
     [DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]
   ];
   const Z=[[o.lat,o.lon],[DATA.nodes.eltriunfo.lat,DATA.nodes.eltriunfo.lon],[DATA.nodes.latroncal.lat,DATA.nodes.latroncal.lon],[DATA.nodes.cochancay.lat,DATA.nodes.cochancay.lon],[DATA.nodes.zhud.lat,DATA.nodes.zhud.lon],[DATA.nodes.eltambo.lat,DATA.nodes.eltambo.lon],[DATA.nodes.canar.lat,DATA.nodes.canar.lon],[DATA.nodes.azogues.lat,DATA.nodes.azogues.lon],[DATA.nodes.puertoseco.lat,DATA.nodes.puertoseco.lon],[DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]];
-  const PB=[[DATA.nodes.puertobolivar.lat,DATA.nodes.puertobolivar.lon],[DATA.nodes.machala.lat,DATA.nodes.machala.lon],[DATA.nodes.pasaje.lat,DATA.nodes.pasaje.lon],[DATA.nodes.giron.lat,DATA.nodes.giron.lon],[DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]];
+  const PB=[
+    [DATA.nodes.puertobolivar.lat,DATA.nodes.puertobolivar.lon],
+    [DATA.nodes.machala.lat,DATA.nodes.machala.lon],
+    [DATA.nodes.pasaje.lat,DATA.nodes.pasaje.lon],
+    // Forzar la E59 (Cuenca-Girón-Pasaje) para evitar atajos rurales no adecuados a carga pesada.
+    [-3.322976,-79.722811],
+    [-3.314660,-79.584290],
+    [-3.308290,-79.470790],
+    [-3.265830,-79.261110],
+    [-3.167220,-79.153890],
+    [DATA.nodes.cuenca.lat,DATA.nodes.cuenca.lon]
+  ];
   let ok=0;
   try{const r=await osrm(M);routeData.M=r;map.getSource('routeM').setData(fcLine(r.geometry.coordinates));document.getElementById('distM').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distM').textContent='190 km base';}
   try{const r=await osrm(Z);routeData.Z=r;map.getSource('routeZ').setData(fcLine(r.geometry.coordinates));document.getElementById('distZ').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distZ').textContent='244 km base';}
   try{const r=await osrm(PB);routeData.PB=r;map.getSource('routePB').setData(fcLine(r.geometry.coordinates));document.getElementById('distPB').textContent=(r.distance/1000).toFixed(1)+' km';ok++;}catch(e){document.getElementById('distPB').textContent='172 km base';}
-  document.getElementById('mapStatus').textContent=ok===3?'Base vectorial activa. Las 3 rutas viales fueron calculadas sobre la red OpenStreetMap mediante OSRM. Molleturo se fuerza por Puerto Inca → E582, evitando el desvío incorrecto por Naranjal.':('Base vectorial activa. Se cargaron '+ok+' de 3 rutas viales reales; las restantes conservan el trazado de respaldo.');
+  document.getElementById('mapStatus').textContent=ok===3?'Base vectorial activa. Las rutas se calculan sobre la red OpenStreetMap con corredores estatales forzados para carga pesada: E582 por Molleturo, E40/E35 por Zhud y E59 entre Puerto Bolívar/Pasaje y Cuenca.':('Base vectorial activa. Se cargaron '+ok+' de 3 rutas viales reales; las restantes conservan el trazado de respaldo.');
   evaluate();
 }
 function fitAll(){
