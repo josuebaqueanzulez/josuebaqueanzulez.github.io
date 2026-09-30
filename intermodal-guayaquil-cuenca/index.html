@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visor intermodal Guayaquil–Cuenca</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+<header>
+ <div><h1>Visor intermodal Guayaquil → Cuenca</h1><p>Base vectorial OpenFreeMap + rutas OSRM · trazados reforzados</p></div>
+ <div class="badges"><div class="badge">sin tiles OSM estándar</div><div class="badge">Contecon / TPG</div><div class="badge">rutas reales cuando OSRM conecta</div><div class="badge">navegación WGS‑84</div></div>
+</header>
+<div class="layout">
+<aside class="left">
+ <div class="section">
+  <h2>1. Configuración</h2>
+  <label>Terminal de origen</label>
+  <select id="terminal"><option value="contecon">Contecon / Puerto Marítimo</option><option value="tpg">TPG / Isla Trinitaria</option></select>
+  <label>Escenario rápido</label>
+  <select id="preset">
+   <option value="normal">Operación normal</option><option value="gate">Congestión terrestre afuera del puerto</option><option value="mol">Molleturo afectado</option><option value="both">Molleturo + Zhud degradados</option><option value="peak">Pico de capacidad del gate</option><option value="jit">Carga JIT / repuesto crítico</option><option value="terminalfail">Falla interna del terminal</option><option value="docs">Retención documental / SENAE</option>
+  </select>
+  <label>Perfil de carga</label>
+  <select id="cargo"><option value="0">Estándar · +USD 0/h</option><option value="100">Sensible · +USD 100/h</option><option value="250">Crítica · +USD 250/h</option><option value="500">JIT / emergencia · +USD 500/h</option></select>
+ </div>
+ <div class="section">
+  <h2>2. Demoras observadas</h2>
+  <label>Acceso terrestre / gate GYE</label><div class="range"><input id="gate" type="range" min="0" max="16" step=".5" value="0"><div class="rv"><span id="gatev">0</span> h</div></div>
+  <label>Molleturo</label><div class="range"><input id="mol" type="range" min="0" max="24" step=".5" value="0"><div class="rv"><span id="molv">0</span> h</div></div>
+  <label>Zhud</label><div class="range"><input id="zhud" type="range" min="0" max="16" step=".5" value="0"><div class="rv"><span id="zhudv">0</span> h</div></div>
+  <label>Feeder / slot marítimo</label><div class="range"><input id="feed" type="range" min="0" max="12" step=".5" value="0"><div class="rv"><span id="feedv">0</span> h</div></div>
+ </div>
+ <div class="section">
+  <h2>3. Disponibilidad</h2>
+  <div class="two">
+   <label class="check"><input id="terminalok" type="checkbox" checked> Terminal interno</label><label class="check"><input id="docsok" type="checkbox" checked> Carga liberada</label>
+   <label class="check"><input id="molok" type="checkbox" checked> Molleturo</label><label class="check"><input id="zhudok" type="checkbox" checked> Zhud</label>
+   <label class="check"><input id="feedok" type="checkbox" checked> Feeder / PB</label><label class="check"><input id="transferok" type="checkbox" checked> Transferencia interna</label>
+  </div>
+ </div>
+ <div class="section">
+  <h2>4. Capacidad gate</h2>
+  <label>Demanda camiones/h</label><div class="range"><input id="demand" type="range" min="20" max="70" step="1" value="34"><div class="rv"><span id="demandv">34</span>/h</div></div>
+  <div class="note">Supuesto base: 40 camiones/h de capacidad y 85 % de utilización objetivo.</div>
+ </div>
+ <div class="section">
+  <h2>5. Capas</h2>
+  <div class="two">
+   <label class="check"><input class="layer" data-layer="routeM" type="checkbox" checked> Molleturo</label><label class="check"><input class="layer" data-layer="routeZ" type="checkbox" checked> Zhud</label>
+   <label class="check"><input class="layer" data-layer="routeSea" type="checkbox" checked> Feeder</label><label class="check"><input class="layer" data-layer="routePB" type="checkbox" checked> PB → Cuenca</label>
+   <label class="check"><input class="layer" data-layer="nodes" type="checkbox" checked> Nodos</label><label class="check"><input class="layer" data-layer="buoys" type="checkbox"> Ayudas náuticas</label>
+  </div>
+ </div>
+</aside>
+
+<main class="mapbox">
+ <div id="map"></div>
+ <div id="mapStatus" class="mapstatus">Iniciando base vectorial y rutas reales…</div>
+</main>
+
+<aside class="right">
+ <div class="section"><h2>Semáforo integral</h2><div id="decision" class="status green"><b>VERDE · Molleturo</b><small>La ruta directa conserva el menor costo generalizado.</small></div><div id="capacity" class="status green"><b>CAPACIDAD · normal</b><small>El gate está dentro del objetivo.</small></div>
+  <div class="metricgrid"><div class="metric"><span>Costo 1 h</span><strong id="hourCost">USD 60</strong></div><div class="metric"><span>Share feeder</span><strong id="share">0 %</strong></div><div class="metric"><span>Cont./turno</span><strong id="shift">0</strong></div><div class="metric"><span>Mar Contecon</span><strong>102.0 MN</strong></div></div>
+ </div>
+ <div class="section"><h2>Rutas</h2>
+  <div class="routecard"><div class="top"><span>🟢 Molleturo</span><span id="costM">USD 469.50</span></div><div class="facts"><span>Distancia <b id="distM">cargando…</b></span><span>Fuente <b id="srcM">OSRM</b></span><span>Uso <b>normal</b></span><span id="delayM">Demora 0 h</span></div></div>
+  <div class="routecard"><div class="top"><span>🟡 Zhud + PSA</span><span id="costZ">USD 596.60</span></div><div class="facts"><span>Distancia <b id="distZ">cargando…</b></span><span>Fuente <b id="srcZ">OSRM</b></span><span>Uso <b>contingencia</b></span><span id="delayZ">Demora 0 h</span></div></div>
+  <div class="routecard"><div class="top"><span>🔴 Puerto Bolívar + PSA</span><span id="costPB">USD 1,060.30</span></div><div class="facts"><span>Mar <b>102.0 MN</b></span><span>Carretera <b id="distPB">cargando…</b></span><span>Uso <b>intermodal</b></span><span id="delayPB">Feeder 0 h</span></div></div>
+  <div class="warn"><b>Navegación:</b> el corredor marítimo utiliza posiciones WGS‑84 de ayudas y referencias INOCAR. Representa el corredor navegable académico; no sustituye derrota aprobada, practicaje, ENC, marea, calado ni avisos vigentes.</div>
+ </div>
+ <div class="section"><h2>Leyenda</h2><div class="legend"><div><span class="sw" style="background:#16845b"></span>Molleturo</div><div><span class="sw" style="background:#d49a13"></span>Zhud + Puerto Seco</div><div><span class="sw" style="background:#7457a6"></span>Feeder Guayaquil → Puerto Bolívar</div><div><span class="sw" style="background:#c44747"></span>Puerto Bolívar → Cuenca</div></div></div>
+ <div class="section"><h2>Fuentes</h2>
+  <div class="source"><b>OpenFreeMap + OpenMapTiles + OpenStreetMap</b><span>Base vectorial. Atribución visible dentro del mapa.</span></div>
+  <div class="source"><b>OSRM / OpenStreetMap</b><span>Geometría de rutas viales calculada sobre la red OSM.</span></div>
+  <div class="source"><b>INOCAR</b><span>Ayudas y referencias WGS‑84 para Estero Salado, Golfo de Guayaquil y acceso a Puerto Bolívar.</span></div>
+  <div class="source"><b>SENAE</b><span>Puerto Seco del Austro: Javier Loyola / Chuquipata.</span></div>
+ </div>
+</aside>
+</div></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body></html>
