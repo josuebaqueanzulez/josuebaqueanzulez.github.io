@@ -9,15 +9,18 @@ const groupRoutes={
   balao:['balaoWater','balaoRoad']
 };
 const routeStyle={
-  current:{color:'#596a76',dash:null,width:5.5,opacity:.88},
-  quinto:{color:'#d98216',dash:[2.2,1.4],width:6.5,opacity:.9},
-  quintoRoad:{color:'#1f5f99',dash:null,width:5.5,opacity:.76},
-  barge:{color:'#7357a6',dash:null,width:6.5,opacity:.92},
-  duranRoad:{color:'#2c879b',dash:null,width:5.5,opacity:.75},
-  railHistoric:{color:'#8a6544',dash:[4,2],width:5.5,opacity:.8},
-  railRoad:{color:'#438f88',dash:null,width:5.2,opacity:.72},
-  balaoWater:{color:'#7357a6',dash:[1,2],width:5,opacity:.55},
-  balaoRoad:{color:'#2c879b',dash:null,width:5,opacity:.62}
+  // line-offset separa visualmente corredores que comparten la misma carretera.
+  // Cada escenario conserva su propia geometría/layer: apagar uno no borra ni tapa
+  // los tramos que pertenecen a otro escenario todavía activo.
+  current:{color:'#596a76',dash:null,width:5.5,opacity:.88,offset:-14},
+  quinto:{color:'#d98216',dash:[2.2,1.4],width:6.5,opacity:.9,offset:-8},
+  quintoRoad:{color:'#1f5f99',dash:null,width:5.5,opacity:.80,offset:-8},
+  barge:{color:'#7357a6',dash:null,width:6.5,opacity:.92,offset:0},
+  duranRoad:{color:'#2c879b',dash:null,width:5.5,opacity:.80,offset:0},
+  railHistoric:{color:'#8a6544',dash:[4,2],width:5.5,opacity:.82,offset:8},
+  railRoad:{color:'#438f88',dash:null,width:5.2,opacity:.78,offset:8},
+  balaoWater:{color:'#7357a6',dash:[1,2],width:5,opacity:.62,offset:14},
+  balaoRoad:{color:'#2c879b',dash:null,width:5,opacity:.72,offset:14}
 };
 const roadMetrics={};
 const loadState={roads:false,hydro:false,hydroFeatures:0};
@@ -38,9 +41,41 @@ function pointFC(){return {type:'FeatureCollection',features:Object.entries(D.no
 function addRouteSource(id,coords,name){map.addSource(id,{type:'geojson',data:lineFC(coords,{id,name})})}
 function addRouteLayers(id){
   const s=routeStyle[id],casing=id+'-casing',label=id+'-label';
-  map.addLayer({id:casing,type:'line',source:id,layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#fff','line-width':s.width+3.8,'line-opacity':Math.min(1,s.opacity+.1)}});
-  map.addLayer({id:id,type:'line',source:id,layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':s.color,'line-width':s.width,'line-opacity':s.opacity,'line-dasharray':s.dash||[1,0]}});
-  map.addLayer({id:label,type:'symbol',source:id,layout:{'symbol-placement':'line-center','text-field':['get','name'],'text-size':10.5,'text-letter-spacing':.03,'text-keep-upright':true,'text-optional':true},paint:{'text-color':'#17374e','text-halo-color':'#fff','text-halo-width':2,'text-opacity':.9}});
+  const offset=Number.isFinite(s.offset)?s.offset:0;
+  map.addLayer({
+    id:casing,type:'line',source:id,
+    layout:{'line-cap':'round','line-join':'round'},
+    paint:{
+      'line-color':'#fff',
+      'line-width':s.width+4.2,
+      'line-opacity':Math.min(1,s.opacity+.1),
+      'line-offset':offset
+    }
+  });
+  map.addLayer({
+    id:id,type:'line',source:id,
+    layout:{'line-cap':'round','line-join':'round'},
+    paint:{
+      'line-color':s.color,
+      'line-width':s.width,
+      'line-opacity':s.opacity,
+      'line-dasharray':s.dash||[1,0],
+      'line-offset':offset
+    }
+  });
+  map.addLayer({
+    id:label,type:'symbol',source:id,
+    layout:{
+      'symbol-placement':'line',
+      'symbol-spacing':520,
+      'text-field':['get','name'],
+      'text-size':10,
+      'text-letter-spacing':.03,
+      'text-keep-upright':true,
+      'text-optional':true
+    },
+    paint:{'text-color':'#17374e','text-halo-color':'#fff','text-halo-width':2,'text-opacity':.9}
+  });
 }
 function setRouteVisibility(id,show){[id,id+'-casing',id+'-label'].forEach(x=>{if(map.getLayer(x))map.setLayoutProperty(x,'visibility',show?'visible':'none')})}
 function setRouteEmphasis(id,on){
@@ -68,7 +103,7 @@ function updateMapStatus(){
   const parts=[];
   parts.push(loadState.roads?'red vial real cargada':'cargando red vial');
   parts.push(loadState.hydro?('hidrografía OSM verificada ('+loadState.hydroFeatures+' segmentos de referencia)'):'verificando hidrografía OSM');
-  document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los tramos conceptuales se mantienen diferenciados de la infraestructura existente.';
+  document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los corredores compartidos se muestran en paralelo para que cada escenario permanezca visible e independiente.';
 }
 
 async function loadRoad(id,points){
