@@ -12,7 +12,7 @@ const routeStyle={
   current:{color:'#596a76',dash:null,width:5.5,opacity:.88},
   quinto:{color:'#d98216',dash:[2.2,1.4],width:6.5,opacity:.9},
   quintoRoad:{color:'#1f5f99',dash:null,width:5.5,opacity:.76},
-  barge:{color:'#7357a6',dash:[1,1.5],width:6,opacity:.84},
+  barge:{color:'#7357a6',dash:null,width:6.5,opacity:.92},
   duranRoad:{color:'#2c879b',dash:null,width:5.5,opacity:.75},
   railHistoric:{color:'#8a6544',dash:[4,2],width:5.5,opacity:.8},
   railRoad:{color:'#438f88',dash:null,width:5.2,opacity:.72},
@@ -67,7 +67,7 @@ function roadTime(id){const m=roadMetrics[id];return m?durationText(m.duration):
 function updateMapStatus(){
   const parts=[];
   parts.push(loadState.roads?'red vial real cargada':'cargando red vial');
-  parts.push(loadState.hydro?('hidrografía real cargada ('+loadState.hydroFeatures+' segmentos OSM)'):'cargando hidrografía real');
+  parts.push(loadState.hydro?('hidrografía OSM verificada ('+loadState.hydroFeatures+' segmentos de referencia)'):'verificando hidrografía OSM');
   document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los tramos conceptuales se mantienen diferenciados de la infraestructura existente.';
 }
 
@@ -137,19 +137,21 @@ async function fetchOverpassHydro(){
 }
 
 async function loadHydroCorridor(){
+  // La ruta visible es UN solo LineString curado. Overpass se usa únicamente
+  // para comprobar que existen ejes hídricos de referencia en el área.
+  // Antes se dibujaban todos los ways devueltos por Overpass como si fueran
+  // una sola ruta: eso generaba ramales hacia Tres Bocas, segmentos aislados
+  // en el Guayas y una falsa apariencia de discontinuidad.
+  map.getSource('barge').setData(lineFC(D.routes.barge.coords,{id:'barge',name:D.routes.barge.name}));
   try{
     const fc=await fetchOverpassHydro();
-    map.getSource('barge').setData(fc);
     loadState.hydro=true;
     loadState.hydroFeatures=fc.features.length;
     updateMapStatus();
   }catch(e){
-    console.warn('No se pudo cargar la hidrografía real',e);
-    // No dibujamos una línea recta de respaldo: es preferible omitir el corredor
-    // antes que mostrar un trazado que atraviese tierra.
-    map.getSource('barge').setData(emptyFC());
+    console.warn('No se pudo verificar la hidrografía OSM',e);
     loadState.hydro=false;
-    document.getElementById('mapStatus').textContent='La red vial cargó, pero el servicio hidrográfico no respondió. Se oculta TPG–Durán para no mostrar una línea falsa sobre tierra.';
+    document.getElementById('mapStatus').textContent='Red vial cargada. El corredor TPG–Durán permanece visible como trazado conceptual continuo; la comprobación hidrográfica OSM no respondió.';
   }
 }
 
@@ -170,7 +172,7 @@ function compareScenario(key){
   let c;
   if(key==='current') c={name:'Ruta actual TPG → Cuenca',road:roadText('current'),alt:'—',transfers:'0',time:roadTime('current'),maturity:'Operativo',effect:'Referencia base'};
   if(key==='quinto') c={name:'Quinto Puente + E25/E582 → Cuenca',road:roadText('quintoRoad')+' después del enlace E25',alt:'Quinto Puente / Viaducto Sur · corredor de proyecto',transfers:'0',time:'Tramo futuro por modelar + '+roadTime('quintoRoad'),maturity:'Parcialmente en obra / corredor completo no operativo',effect:'Evitar parte del recorrido urbano de carga'};
-  if(key==='barge') c={name:'Barcaza TPG → Durán + carretera',road:roadText('duranRoad'),alt:'Estero Santa Ana / del Muerto / Cobina / Río Guayas · hidrografía real de referencia',transfers:'1',time:'Tramo fluvial por modelar + '+roadTime('duranRoad'),maturity:'Conceptual; trazado hídrico real, navegabilidad por validar',effect:'Eliminar traslado terrestre del contenedor por Guayaquil'};
+  if(key==='barge') c={name:'Barcaza TPG → Durán + carretera',road:roadText('duranRoad'),alt:'Corredor continuo TPG → Las Esclusas/Cobina → Durán · OSM como referencia hidrográfica',transfers:'1',time:'Tramo fluvial por modelar + '+roadTime('duranRoad'),maturity:'Conceptual; corredor visual continuo, navegabilidad por validar',effect:'Eliminar traslado terrestre del contenedor por Guayaquil'};
   if(key==='rail') c={name:'Durán → Bucay + carretera a Cuenca',road:roadText('railRoad'),alt:'Ferrocarril histórico Durán–Bucay ≈88 km',transfers:'1',time:'Tramo ferroviario por modelar + '+roadTime('railRoad'),maturity:'Ferrocarril histórico/suspendido',effect:'Diversificación modal hasta Bucay'};
   if(key==='balao') c={name:'TPG → Balao + carretera',road:roadText('balaoRoad'),alt:'TPG–Balao · tramo acuático conceptual',transfers:'1',time:'Tramo acuático por modelar + '+roadTime('balaoRoad'),maturity:'Conceptual',effect:'Nodo de transferencia alternativo fuera de Guayaquil'};
   document.getElementById('futureName').textContent=c.name;
@@ -187,8 +189,7 @@ function compareScenario(key){
 
 map.on('load',()=>{
   Object.entries(D.routes).forEach(([id,r])=>{
-    if(id==='barge') map.addSource(id,{type:'geojson',data:emptyFC()});
-    else addRouteSource(id,r.coords,r.name);
+    addRouteSource(id,r.coords,r.name);
   });
   Object.keys(D.routes).forEach(addRouteLayers);
   map.addSource('nodes',{type:'geojson',data:pointFC()});
