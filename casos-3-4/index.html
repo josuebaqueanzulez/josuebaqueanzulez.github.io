@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Modelo interactivo de precio y riesgo | Casos 3 y 4</title>
+<style>
+:root{
+  --ink:#17202a;--muted:#667085;--paper:#f5f7fa;--card:#ffffff;--line:#dfe5ec;
+  --navy:#173b57;--teal:#2b6670;--gold:#a66c2c;--soft-teal:#edf5f5;--soft-gold:#fbf5ec;
+  --danger:#9a3d35;--soft-danger:#fff0ee;--good:#2f6b4f;--soft-good:#edf6f1;
+  --shadow:0 12px 30px rgba(22,34,48,.08);--radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f8fafc 0%,#f2f5f8 100%);line-height:1.5}
+button,input,select{font:inherit}
+a{color:#245d75}
+.shell{max-width:1240px;margin:auto;padding:0 22px 48px}
+.hero{padding:38px 0 22px;display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:stretch}
+.hero-main{background:linear-gradient(135deg,#173b57,#255a67 68%,#2b6670);color:#fff;border-radius:26px;padding:34px 36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero-main:after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.06)}
+.kicker{letter-spacing:.13em;text-transform:uppercase;font-size:12px;font-weight:700;opacity:.82}
+h1{font-size:clamp(30px,4vw,52px);line-height:1.02;margin:10px 0 14px;max-width:760px}
+.hero-main p{font-size:16px;max-width:780px;margin:0;color:#e9f2f4}
+.hero-side{display:grid;grid-template-rows:1fr 1fr;gap:16px}
+.hero-stat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow)}
+.hero-stat .label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.hero-stat .value{font-size:30px;font-weight:800;margin:8px 0 4px;color:var(--navy)}
+.hero-stat .small{font-size:13px;color:var(--muted)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(248,250,252,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(223,229,236,.9);margin:0 -22px 24px;padding:10px 22px;display:flex;gap:8px;overflow:auto}
+.nav button{border:0;background:transparent;color:#425466;padding:10px 14px;border-radius:12px;white-space:nowrap;cursor:pointer;font-weight:650}
+.nav button.active{background:#fff;box-shadow:0 3px 12px rgba(22,34,48,.08);color:var(--navy)}
+.section{display:none;animation:fade .22s ease}.section.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:none}}
+.section-title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin:26px 0 16px}.section-title h2{font-size:28px;margin:0;color:var(--navy)}.section-title p{margin:4px 0 0;color:var(--muted);max-width:760px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 8px 22px rgba(22,34,48,.045)}
+.card h3{margin:0 0 6px;font-size:18px;color:var(--navy)}.card p{color:var(--muted);margin:0}
+.kpi{padding:18px}.kpi .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.kpi .num{font-size:26px;font-weight:800;margin-top:6px}.kpi .note{font-size:12px;color:var(--muted);margin-top:4px}
+.good{background:var(--soft-good);border-color:#cfe2d7}.warn{background:var(--soft-gold);border-color:#ead9be}.risk{background:var(--soft-danger);border-color:#ecd0cb}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;margin-top:14px}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px;font-weight:700}.field .input-wrap{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;background:#fbfcfd;overflow:hidden}.field span.prefix{padding:10px 0 10px 12px;color:#7a8796;font-size:13px}.field input,.field select{width:100%;border:0;outline:0;background:transparent;padding:10px 12px;color:var(--ink)}
+.subtle{font-size:12px;color:var(--muted);margin-top:8px}.pill{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:#eef3f6;color:#415363;font-size:12px;font-weight:700}
+.step-list{display:grid;gap:9px;margin-top:14px}.step{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:11px 12px;border:1px solid var(--line);border-radius:12px}.step b{display:flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:var(--soft-teal);color:var(--teal)}.step small{color:var(--muted);display:block}.step strong{font-size:14px}.step .amount{font-variant-numeric:tabular-nums;font-weight:800;color:var(--navy)}
+.chart{width:100%;height:295px;margin-top:8px}.axis-text{fill:#758292;font-size:11px}.bar-label{fill:#22313f;font-size:11px;font-weight:700}.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
+.callout{border-left:4px solid var(--teal);background:var(--soft-teal);padding:15px 16px;border-radius:0 12px 12px 0;color:#334a51}.callout strong{color:var(--navy)}
+.compare{overflow:auto}.compare table,.heat table,.risk-table table,.source-table table{border-collapse:collapse;width:100%;min-width:720px}.compare th,.compare td,.heat th,.heat td,.risk-table th,.risk-table td,.source-table th,.source-table td{border-bottom:1px solid var(--line);padding:11px 10px;text-align:left;vertical-align:top;font-size:13px}.compare th,.heat th,.risk-table th,.source-table th{color:#4b5968;font-size:11px;text-transform:uppercase;letter-spacing:.06em;background:#f8fafb}.compare td.num,.heat td.num{text-align:right;font-variant-numeric:tabular-nums}.best{background:#eef7f4!important}.heat td{text-align:center;font-weight:700}.heat td:first-child{background:#f8fafb;text-align:right}.heat-cell{border-radius:8px;padding:8px}
+.chain{display:grid;grid-template-columns:1fr 42px 1fr 42px 1fr 42px 1fr;gap:6px;align-items:stretch;margin-top:16px}.node{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;min-height:118px;cursor:pointer;transition:.15s}.node:hover,.node.active{transform:translateY(-2px);border-color:#88a8b1;box-shadow:0 7px 18px rgba(22,34,48,.08)}.node strong{display:block;color:var(--navy);margin-bottom:4px}.node small{color:var(--muted)}.arrow{display:flex;align-items:center;justify-content:center;color:#84919e;font-size:26px}.node.risk-owner{border-color:#d6a596;background:#fff7f5}.node.paid{box-shadow:inset 0 -4px 0 #86aeb5}.node-detail{margin-top:14px;padding:16px;border:1px dashed #bcc7d1;border-radius:14px;background:#fbfcfd}.node-detail b{color:var(--navy)}
+.timeline{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0 2px}.tag{padding:7px 10px;border-radius:999px;background:#eef3f6;font-size:12px;font-weight:700}.tag.cmr{background:#fff0ee;color:#873f38}.tag.sea{background:#eef5f9;color:#24546e}.tag.road{background:#f4f2ea;color:#675c33}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 13px;cursor:pointer;font-weight:700;color:#425466}.btn:hover{background:#f7fafb}.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.source-table a{text-decoration:none;font-weight:700}.source-table a:hover{text-decoration:underline}.footer{margin-top:26px;color:var(--muted);font-size:12px;text-align:center}.divider{height:1px;background:var(--line);margin:18px 0}
+.print-only{display:none}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-side{grid-template-columns:1fr 1fr;grid-template-rows:auto}.g4,.g3,.g2{grid-template-columns:1fr 1fr}.chain{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:26px}.controls{grid-template-columns:1fr}.section-title{align-items:start;flex-direction:column}}
+@media(max-width:590px){.shell{padding:0 14px 36px}.nav{margin:0 -14px;padding:10px 14px}.hero-main{padding:26px}.hero-side,.g4,.g3,.g2{grid-template-columns:1fr}.kpi .num{font-size:24px}}
+@media print{body{background:#fff}.nav,.toolbar,.controls,.hero-side{display:none!important}.shell{max-width:none;padding:0}.hero{display:block}.hero-main{box-shadow:none;border-radius:0}.section{display:block!important;page-break-before:always}.section:first-of-type{page-break-before:auto}.card{box-shadow:none}.print-only{display:block}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <div class="hero-main">
+      <div class="kicker">Transporte internacional · precio, seguro y responsabilidad</div>
+      <h1>Modelo interactivo de precio y riesgo</h1>
+      <p>Dos decisiones conectadas por una misma pregunta: cuánto cuesta proteger una operación y qué parte del valor sigue expuesta cuando el riesgo cambia de tramo, modo o régimen jurídico.</p>
+    </div>
+    <div class="hero-side">
+      <div class="hero-stat"><div class="label">Caso 3 · precio final base</div><div class="value" id="heroC3">USD 31.755,58</div><div class="small">CIF simplificado + beneficio</div></div>
+      <div class="hero-stat"><div class="label">Caso 4 · brecha CMR</div><div class="value" id="heroC4">EUR 6.706,32</div><div class="small">Con EUR 1,19274 por DEG</div></div>
+    </div>
+  </div>
+
+  <div class="nav" id="nav">
+    <button class="active" data-tab="resumen">Resumen</button>
+    <button data-tab="caso3">Caso 3 · Cacao</button>
+    <button data-tab="caso4">Caso 4 · CMR</button>
+    <button data-tab="tramos">Riesgo por tramos</button>
+    <button data-tab="fuentes">Fuentes</button>
+  </div>
+
+  <section class="section active" id="resumen">
+    <div class="section-title"><div><h2>Lectura ejecutiva</h2><p>Los resultados base se recalculan automáticamente cuando se modifican las variables en cada caso.</p></div><div class="toolbar"><button class="btn" onclick="window.print()">Imprimir / PDF</button><button class="btn primary" onclick="resetAll()">Restablecer valores</button></div></div>
+    <div class="grid g4">
+      <div class="card kpi"><div class="label">FOB base</div><div class="num" id="kFOB">USD 25.265,00</div><div class="note">Producción + costos previos al embarque</div></div>
+      <div class="card kpi"><div class="label">CIF técnico 110 %</div><div class="num" id="kCIF110">USD 28.270,49</div><div class="note">CFR ÷ [1 − tasa × factor]</div></div>
+      <div class="card kpi risk"><div class="label">Brecha CMR</div><div class="num" id="kGap">EUR 6.706,32</div><div class="note" id="kGapPct">17,42 % del valor comercial</div></div>
+      <div class="card kpi warn"><div class="label">Prima ilustrativa</div><div class="num" id="kPremium">EUR 192,50</div><div class="note" id="kRatio">Brecha / prima: 34,84×</div></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3>Qué mueve más el precio del cacao</h3><p>En el escenario base, una variación del flete marítimo tiene un efecto prácticamente uno a uno sobre el precio final. El seguro cambia menos el total porque la tasa utilizada es reducida.</p><div class="chart" id="summaryChart3"></div></div>
+      <div class="card"><h3>Dónde aparece la exposición CMR</h3><p>La brecha surge cuando el valor comercial por kilogramo supera el límite equivalente de 8,33 DEG/kg convertido a euros.</p><div class="chart" id="summaryChart4"></div></div>
+    </div>
+    <div class="callout" style="margin-top:16px"><strong>Idea central.</strong> Incoterm, contrato de transporte, régimen de responsabilidad y seguro no son la misma cosa. El pago del transporte puede continuar después de transferirse el riesgo, y un límite legal de responsabilidad no equivale a asegurar el valor comercial completo.</div>
+  </section>
+
+  <section class="section" id="caso3">
+    <div class="section-title"><div><h2>Caso 3 · El cacao de Doña Rosa</h2><p>Construcción del precio por escalones y comparación entre cálculo simplificado, margen incorporado y cobertura del 110 %.</p></div><span class="pill">Manta → Guayaquil → Rotterdam</span></div>
+    <div class="grid g2">
+      <div class="card"><h3>Variables de la operación</h3><p>Modifica cualquier entrada para probar escenarios.</p>
+        <div class="controls">
+          <div class="field"><label>Costo de producción</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Prod" type="number" value="24000" min="0" step="100"></div></div>
+          <div class="field"><label>Embalaje</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Pack" type="number" value="600" min="0" step="25"></div></div>
+          <div class="field"><label>Transporte Manta–Guayaquil</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Land" type="number" value="450" min="0" step="25"></div></div>
+          <div class="field"><label>THC origen</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Thc" type="number" value="130" min="0" step="5"></div></div>
+          <div class="field"><label>Despacho exportación</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Custom" type="number" value="85" min="0" step="5"></div></div>
+          <div class="field"><label>Flete Guayaquil–Rotterdam</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Freight" type="number" value="2850" min="0" step="50"></div></div>
+          <div class="field"><label>Tasa de seguro</label><div class="input-wrap"><input id="c3Rate" type="number" value="0.5" min="0" step="0.05"><span class="prefix" style="padding-right:12px">%</span></div></div>
+          <div class="field"><label>Beneficio deseado</label><div class="input-wrap"><span class="prefix">USD</span><input id="c3Margin" type="number" value="3500" min="0" step="100"></div></div>
+          <div class="field"><label>Factor asegurado</label><div class="input-wrap"><input id="c3Factor" type="number" value="110" min="100" step="5"><span class="prefix" style="padding-right:12px">%</span></div></div>
+        </div>
+        <div class="subtle">El factor de 110 % se usa para separar el precio CIF de la suma asegurada.</div>
+      </div>
+      <div class="card"><h3>Escalonamiento del precio</h3><div class="step-list" id="c3Steps"></div></div>
+    </div>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card kpi"><div class="label">Final base</div><div class="num" id="c3Final">—</div><div class="note">Margen añadido después del CIF simplificado</div></div>
+      <div class="card kpi"><div class="label">Margen desde FOB</div><div class="num" id="c3FinalMargin">—</div><div class="note" id="c3DiffMargin">—</div></div>
+      <div class="card kpi good"><div class="label">Valor asegurado</div><div class="num" id="c3Insured">—</div><div class="note">110 % del CIF técnico</div></div>
+      <div class="card kpi warn"><div class="label">110 % + margen desde FOB</div><div class="num" id="c3Final110Margin">—</div><div class="note" id="c3Diff110Margin">—</div></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3>Comparación de escenarios</h3><div class="chart" id="c3ScenarioChart"></div><div class="legend"><span><i style="background:#89aab2"></i>Precio final</span><span><i style="background:#b58a51"></i>Cobertura más amplia</span></div></div>
+      <div class="card"><h3>Sensibilidad flete × seguro</h3><p>La matriz usa el beneficio actual y el factor asegurado seleccionado.</p><div class="heat" id="c3Heat" style="margin-top:12px;overflow:auto"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><h3>Lectura contractual</h3><div class="compare"><table><thead><tr><th>Escenario</th><th>Entrega / riesgo</th><th>Transporte principal</th><th>Seguro</th><th>Lectura para contenedor</th></tr></thead><tbody>
+      <tr><td>FOB</td><td>A bordo del buque</td><td>Comprador</td><td>No obligatorio</td><td>Puede dejar un intervalo entre entrega física en terminal y carga a bordo.</td></tr>
+      <tr><td>CFR</td><td>A bordo del buque</td><td>Vendedor</td><td>No obligatorio</td><td>Pagar hasta destino no significa conservar el riesgo hasta destino.</td></tr>
+      <tr><td>CIF</td><td>A bordo del buque</td><td>Vendedor</td><td>Vendedor contrata cobertura</td><td>El seguro añadido no cambia el punto de transferencia del riesgo.</td></tr>
+      <tr class="best"><td>FCA / CPT / CIP</td><td>Entrega al porteador en el punto acordado</td><td>Según término elegido</td><td>CIP incorpora seguro</td><td>Puede ajustarse mejor a una operación contenedorizada entregada en terminal.</td></tr>
+    </tbody></table></div></div>
+  </section>
+
+  <section class="section" id="caso4">
+    <div class="section-title"><div><h2>Caso 4 · La llamada desde Milán</h2><p>Cuantificación del límite CMR, brecha frente al valor comercial y costo ilustrativo de asegurar el tramo.</p></div><span class="pill">Valencia → Milán · CMR</span></div>
+    <div class="grid g2">
+      <div class="card"><h3>Variables del reclamo</h3><p>El cálculo base utiliza el cambio FMI empleado en el análisis.</p>
+        <div class="controls">
+          <div class="field"><label>Peso bruto dañado</label><div class="input-wrap"><input id="c4Weight" type="number" value="3200" min="1" step="100"><span class="prefix" style="padding-right:12px">kg</span></div></div>
+          <div class="field"><label>Valor comercial</label><div class="input-wrap"><span class="prefix">EUR</span><input id="c4Value" type="number" value="38500" min="0" step="500"></div></div>
+          <div class="field"><label>Límite CMR</label><div class="input-wrap"><input id="c4Limit" type="number" value="8.33" min="0" step="0.01"><span class="prefix" style="padding-right:12px">DEG/kg</span></div></div>
+          <div class="field"><label>Tipo de cambio FMI</label><div class="input-wrap"><input id="c4Fx" type="number" value="1.19274" min="0" step="0.00001"><span class="prefix" style="padding-right:12px">EUR/DEG</span></div></div>
+          <div class="field"><label>Tasa de seguro ilustrativa</label><div class="input-wrap"><input id="c4Rate" type="number" value="0.5" min="0" step="0.05"><span class="prefix" style="padding-right:12px">%</span></div></div>
+        </div>
+      </div>
+      <div class="card"><h3>Resultado del reclamo</h3><div class="step-list" id="c4Steps"></div></div>
+    </div>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card kpi"><div class="label">Valor comercial / kg</div><div class="num" id="c4ValueKg">—</div><div class="note">Valor real de la mercancía</div></div>
+      <div class="card kpi"><div class="label">Umbral CMR / kg</div><div class="num" id="c4LimitKg">—</div><div class="note">Sobre este valor aparece brecha por límite</div></div>
+      <div class="card kpi risk"><div class="label">Brecha no cubierta</div><div class="num" id="c4Gap">—</div><div class="note" id="c4GapPct">—</div></div>
+      <div class="card kpi warn"><div class="label">Prima ilustrativa</div><div class="num" id="c4Premium">—</div><div class="note" id="c4Ratio">—</div></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3>Valor comercial vs. responsabilidad CMR</h3><div class="chart" id="c4BarChart"></div></div>
+      <div class="card"><h3>Punto de desprotección</h3><p>La curva permanece en cero hasta que el valor por kilogramo supera el umbral CMR.</p><div class="chart" id="c4SensitivityChart"></div></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3>Mecanismos dentro del CMR</h3><div class="compare"><table><thead><tr><th>Mecanismo</th><th>Efecto</th></tr></thead><tbody>
+        <tr><td>Art. 24 · declaración de valor</td><td>El valor declarado puede sustituir el límite ordinario, previo recargo acordado.</td></tr>
+        <tr><td>Art. 26 · interés especial</td><td>Permite reclamar daño adicional probado hasta el interés declarado.</td></tr>
+        <tr><td>Art. 29 · dolo o conducta equivalente</td><td>Puede hacer perder al porteador el beneficio de exclusiones o límites.</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><h3>Qué ocurre si interviene un tercero</h3><p>Que otro vehículo origine el accidente no produce una exoneración automática. La responsabilidad debe analizarse junto con las circunstancias que el porteador pudo evitar y las consecuencias que pudo impedir.</p><div class="divider"></div><p><strong>Reservas y plazos:</strong> daño aparente al recibir; daño no aparente por escrito dentro de siete días; retraso dentro de veintiún días; prescripción ordinaria de un año, con supuestos ampliados a tres años.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="tramos">
+    <div class="section-title"><div><h2>Riesgo por tramo</h2><p>Separación visual entre quién paga, quién soporta el riesgo comercial, el documento de transporte, el régimen aplicable y la cobertura.</p></div></div>
+    <div class="card"><h3>Caso 3 · cadena contenedorizada</h3><div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap"><label style="font-size:12px;color:var(--muted);font-weight:700">Incoterm:</label><select id="incoterm" style="padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:#fff"><option>FOB</option><option>CFR</option><option>CIF</option><option>FCA</option><option>CPT</option><option>CIP</option></select><span class="pill" id="incotermHint">Riesgo: a bordo</span></div><div class="chain" id="chain3"></div><div class="node-detail" id="detail3">Selecciona un punto de la cadena para ver su lectura.</div></div>
+    <div class="card" style="margin-top:16px"><h3>Caso 4 · cadena completa</h3><div class="timeline"><span class="tag road">Montecristi · carretera nacional</span><span>→</span><span class="tag sea">Guayaquil–Valencia · marítimo</span><span>→</span><span class="tag cmr">Valencia–Milán · carretera internacional CMR</span></div><div class="chain" id="chain4"></div><div class="node-detail" id="detail4">Selecciona un punto de la cadena para ver su lectura.</div></div>
+    <div class="card" style="margin-top:16px"><h3>Cuadro comparativo</h3><div class="risk-table"><table><thead><tr><th>Caso</th><th>Tramo</th><th>Modo</th><th>Documento</th><th>Quién paga</th><th>Quién asume riesgo comercial</th><th>Régimen / límite</th><th>Seguro</th></tr></thead><tbody>
+      <tr><td>Caso 3</td><td>Manta → terminal Guayaquil</td><td>Carretera</td><td>Contrato / guía terrestre</td><td>Vendedor</td><td>Vendedor hasta entrega pactada</td><td>Normativa terrestre nacional · límite no determinado</td><td>No obligatorio por FOB/CFR</td></tr>
+      <tr><td>Caso 3</td><td>Terminal → carga a bordo</td><td>Terminal</td><td>Recibo terminal / B/L posterior</td><td>Vendedor</td><td>Vendedor bajo FOB/CFR/CIF hasta quedar a bordo</td><td>Incoterms + reglas terminales · Incoterm no fija indemnización</td><td>CIF obliga a contratar seguro</td></tr>
+      <tr><td>Caso 3</td><td>Guayaquil → Rotterdam</td><td>Marítimo</td><td>Bill of Lading</td><td>FOB: comprador · CFR/CIF: vendedor</td><td>Comprador desde a bordo en FOB/CFR/CIF</td><td>Régimen marítimo + B/L</td><td>CIF: vendedor contrata cobertura</td></tr>
+      <tr><td>Caso 4</td><td>Montecristi → Guayaquil</td><td>Carretera nacional</td><td>Guía / contrato</td><td>No definido</td><td>No definido</td><td>Normativa / contrato nacional · límite no determinado</td><td>No consta</td></tr>
+      <tr><td>Caso 4</td><td>Guayaquil → Valencia</td><td>Marítimo</td><td>B/L</td><td>No definido</td><td>No definido</td><td>Régimen marítimo + B/L · límite no determinado</td><td>No consta</td></tr>
+      <tr><td>Caso 4</td><td>Valencia → Milán</td><td>Carretera internacional</td><td>Carta de porte CMR</td><td>No definido</td><td>La compraventa no está definida; frente al porteador opera responsabilidad CMR</td><td>CMR + Protocolo 1978 · 8,33 DEG/kg</td><td>No contratado en el caso</td></tr>
+    </tbody></table></div></div>
+  </section>
+
+  <section class="section" id="fuentes">
+    <div class="section-title"><div><h2>Fuentes y supuestos</h2><p>Referencias normativas, datos del caso y valores externos empleados en los cálculos.</p></div></div>
+    <div class="card source-table"><table><thead><tr><th>Tema</th><th>Dato o regla</th><th>Aplicación</th><th>Fuente</th><th>Enlace</th><th>Nota</th></tr></thead><tbody>
+      <tr><td>Caso 3</td><td>24.000; 600; 450; 130; 85; 2.850; 0,5 %; 3.500</td><td>Entradas del modelo</td><td><em>Nueve Historias del Transporte Multimodal</em></td><td>Material académico</td><td>Base de los cálculos.</td></tr>
+      <tr><td>CIF · seguro</td><td>Cobertura mínima y suma asegurada de al menos 110 % del precio contractual</td><td>Cálculo técnico</td><td>ICC · Incoterms® 2020</td><td><a href="https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/" target="_blank" rel="noopener">Abrir</a></td><td>La tasa de prima continúa siendo un supuesto del caso.</td></tr>
+      <tr><td>Carga contenedorizada</td><td>FCA puede ajustarse mejor que FOB cuando la entrega ocurre al porteador en terminal</td><td>Punto físico de entrega</td><td>ICC · Checklist Incoterms® 2020</td><td><a href="https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf" target="_blank" rel="noopener">Abrir</a></td><td>CPT/CIP son alternativas si el vendedor paga el transporte.</td></tr>
+      <tr><td>Servicios terminales</td><td>Tarifario de servicios de contenedores 2026</td><td>Contraste del THC</td><td>Contecon Guayaquil</td><td><a href="https://www.cgsa.com.ec/wp-content/uploads/Tarifario-2026.pdf" target="_blank" rel="noopener">Abrir</a></td><td>No es comparable 1:1 con el THC académico.</td></tr>
+      <tr><td>Caso 4</td><td>3.200 kg; EUR 38.500; 8,33 DEG/kg; 1,19 EUR/DEG</td><td>Entradas del reclamo</td><td><em>Nueve Historias del Transporte Multimodal</em></td><td>Material académico</td><td>Base de los cálculos.</td></tr>
+      <tr><td>CMR</td><td>8,33 DEG/kg de peso bruto</td><td>Límite ordinario</td><td>UNECE · Protocolo CMR 1978</td><td><a href="https://unece.org/DAM/trans/conventn/CMR_prot.pdf" target="_blank" rel="noopener">Abrir</a></td><td>Puede modificarse por declaración de valor, interés especial o pérdida del límite.</td></tr>
+      <tr><td>Responsabilidad CMR</td><td>Arts. 17, 24, 26, 29, 30 y 32</td><td>Responsabilidad, valor, reservas y prescripción</td><td>UNECE · CMR 1956</td><td><a href="https://unece.org/DAM/trans/conventn/cmr_e.pdf" target="_blank" rel="noopener">Abrir</a></td><td>La intervención de un tercero no implica exoneración automática.</td></tr>
+      <tr><td>Comentario CMR</td><td>Interpretación de causales de exoneración</td><td>Accidente causado por tercero</td><td>UNECE · Commentary 2006</td><td><a href="https://unece.org/fileadmin/DAM/trans/doc/2006/sc1cmr/commentary.pdf" target="_blank" rel="noopener">Abrir</a></td><td>La exoneración requiere análisis de inevitabilidad y prevención de consecuencias.</td></tr>
+      <tr><td>DEG/EUR</td><td>1,19274 EUR/DEG</td><td>Recálculo del reclamo</td><td>Fondo Monetario Internacional</td><td><a href="https://www.imf.org/external/np/fin/ert/GUI/Pages/Report.aspx" target="_blank" rel="noopener">Abrir</a></td><td>Valor de referencia empleado en el modelo.</td></tr>
+      <tr><td>Seguro ilustrativo</td><td>Valor comercial × 0,5 %</td><td>Comparación prima / brecha</td><td>Tasa ilustrativa</td><td>—</td><td>Una póliza real depende de suma asegurada, deducibles, exclusiones y causa del daño.</td></tr>
+    </tbody></table></div>
+    <div class="callout" style="margin-top:16px"><strong>Alcance.</strong> El simulador sirve para análisis académico y comparación de escenarios. Los costos comerciales, coberturas y tipos de cambio deben validarse al momento de cotizar o reclamar.</div>
+  </section>
+
+  <div class="footer">Modelo interactivo · Casos 3 y 4 · Josué Alexander Baque Anzulez</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const money=(v,c='USD')=>new Intl.NumberFormat('es-EC',{style:'currency',currency:c,minimumFractionDigits:2,maximumFractionDigits:2}).format(v);
+const num=(v,d=2)=>new Intl.NumberFormat('es-EC',{minimumFractionDigits:d,maximumFractionDigits:d}).format(v);
+const pct=v=>new Intl.NumberFormat('es-EC',{style:'percent',minimumFractionDigits:2,maximumFractionDigits:2}).format(v);
+const val=id=>parseFloat($(id).value)||0;
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+function svgBars(el,items,currency='USD'){
+  const W=620,H=270,pad={l:58,r:18,t:20,b:54}, plotW=W-pad.l-pad.r, plotH=H-pad.t-pad.b;
+  const max=Math.max(...items.map(x=>x.v),1)*1.12, bw=plotW/items.length*.58, gap=plotW/items.length;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" role="img">`;
+  for(let i=0;i<=4;i++){const y=pad.t+plotH-(plotH*i/4);const value=max*i/4;s+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${y}" y2="${y}" stroke="#e7ebef"/><text x="${pad.l-8}" y="${y+4}" text-anchor="end" class="axis-text">${Math.round(value/1000)}k</text>`}
+  items.forEach((it,i)=>{const x=pad.l+i*gap+(gap-bw)/2,h=it.v/max*plotH,y=pad.t+plotH-h,fill=it.color||'#789aa4';s+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="7" fill="${fill}"><title>${esc(it.label)}: ${money(it.v,currency)}</title></rect><text x="${x+bw/2}" y="${Math.max(13,y-6)}" text-anchor="middle" class="bar-label">${new Intl.NumberFormat('es-EC',{notation:'compact',maximumFractionDigits:1}).format(it.v)}</text><text x="${x+bw/2}" y="${H-28}" text-anchor="middle" class="axis-text">${esc(it.short||it.label)}</text>`});
+  s+=`</svg>`;el.innerHTML=s;
+}
+function svgLine(el,points,threshold){
+  const W=620,H=270,p={l:56,r:18,t:18,b:48},pw=W-p.l-p.r,ph=H-p.t-p.b;const maxX=Math.max(...points.map(x=>x.x)),minX=Math.min(...points.map(x=>x.x)),maxY=Math.max(...points.map(x=>x.y),1)*1.1;
+  const X=x=>p.l+(x-minX)/(maxX-minX)*pw, Y=y=>p.t+ph-y/maxY*ph;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%">`;
+  for(let i=0;i<=4;i++){const y=p.t+ph-(ph*i/4);s+=`<line x1="${p.l}" x2="${W-p.r}" y1="${y}" y2="${y}" stroke="#e7ebef"/><text x="${p.l-8}" y="${y+4}" text-anchor="end" class="axis-text">${Math.round(maxY*i/4/1000)}k</text>`}
+  const tx=X(threshold);s+=`<line x1="${tx}" x2="${tx}" y1="${p.t}" y2="${p.t+ph}" stroke="#a66c2c" stroke-dasharray="5 5"/><text x="${Math.min(tx+7,W-150)}" y="${p.t+13}" class="axis-text">Umbral ${num(threshold,2)} €/kg</text>`;
+  const d=points.map((pt,i)=>`${i?'L':'M'}${X(pt.x)},${Y(pt.y)}`).join(' ');s+=`<path d="${d}" fill="none" stroke="#2b6670" stroke-width="3"/>`;points.forEach(pt=>s+=`<circle cx="${X(pt.x)}" cy="${Y(pt.y)}" r="4" fill="#173b57"><title>${num(pt.x,2)} €/kg → ${money(pt.y,'EUR')}</title></circle>`);
+  [minX,(minX+maxX)/2,maxX].forEach(x=>s+=`<text x="${X(x)}" y="${H-22}" text-anchor="middle" class="axis-text">${num(x,1)}</text>`);s+=`</svg>`;el.innerHTML=s;
+}
+function stepHTML(n,title,sub,amount){return `<div class="step"><b>${n}</b><div><strong>${title}</strong><small>${sub}</small></div><div class="amount">${amount}</div></div>`}
+
+function calc3(){
+  const prod=val('c3Prod'),pack=val('c3Pack'),land=val('c3Land'),thc=val('c3Thc'),custom=val('c3Custom'),freight=val('c3Freight'),rate=val('c3Rate')/100,margin=val('c3Margin'),factor=val('c3Factor')/100;
+  const fob=prod+pack+land+thc+custom,cfr=fob+freight,premSimple=cfr*rate,cifSimple=cfr+premSimple,final=cifSimple+margin;
+  const fobM=fob+margin,cfrM=fobM+freight,premM=cfrM*rate,finalM=cfrM+premM;
+  const denom=1-rate*factor;const cif110=denom>0?cfr/denom:0,insured=cif110*factor,prem110=insured*rate,final110=cif110+margin;
+  const cif110M=denom>0?cfrM/denom:0,insuredM=cif110M*factor,prem110M=insuredM*rate;
+  $('c3Steps').innerHTML=stepHTML(1,'FOB','Costos hasta el punto FOB',money(fob))+stepHTML(2,'CFR','FOB + flete marítimo',money(cfr))+stepHTML(3,'Prima simplificada','CFR × tasa',money(premSimple))+stepHTML(4,'CIF simplificado','CFR + prima',money(cifSimple))+stepHTML(5,'Precio final','CIF + beneficio',money(final));
+  $('c3Final').textContent=money(final);$('c3FinalMargin').textContent=money(finalM);$('c3DiffMargin').textContent=`${money(finalM-final)} frente al método base`;$('c3Insured').textContent=money(insured);$('c3Final110Margin').textContent=money(cif110M);$('c3Diff110Margin').textContent=`Prima técnica: ${money(prem110M)}`;
+  $('heroC3').textContent=money(final);$('kFOB').textContent=money(fob);$('kCIF110').textContent=money(cif110);
+  svgBars($('c3ScenarioChart'),[
+    {label:'Final base',short:'Base',v:final,color:'#8fa9b0'},
+    {label:'Margen desde FOB',short:'Margen FOB',v:finalM,color:'#6f969e'},
+    {label:'110% + margen al final',short:'110%',v:final110,color:'#b8a06f'},
+    {label:'110% + margen desde FOB',short:'110% + margen',v:cif110M,color:'#a66c2c'}
+  ]);
+  svgBars($('summaryChart3'),[
+    {label:'Flete - USD 1.350',short:'Flete -1.350',v:final-1350,color:'#9cb5bb'},
+    {label:'Base',short:'Base',v:final,color:'#2b6670'},
+    {label:'Flete + USD 1.650',short:'Flete +1.650',v:final+1650,color:'#173b57'}
+  ]);
+  buildHeat(prod,pack,land,thc,custom,margin,factor);
+  return {fob,cfr,cif110,final};
+}
+function buildHeat(prod,pack,land,thc,custom,margin,factor){
+  const freights=[2000,2500,2850,3250,3750],rates=[.0025,.005,.0075,.01,.0125];let vals=[];
+  freights.forEach(f=>rates.forEach(r=>{const cfr=prod+pack+land+thc+custom+f;vals.push(cfr/(1-r*factor)+margin)}));const min=Math.min(...vals),max=Math.max(...vals);
+  let h='<table><thead><tr><th>Flete \\ tasa</th>'+rates.map(r=>`<th>${num(r*100,2)}%</th>`).join('')+'</tr></thead><tbody>';let k=0;
+  freights.forEach(f=>{h+=`<tr><td>${money(f)}</td>`;rates.forEach(r=>{const v=vals[k++],t=(v-min)/(max-min||1),bg=`rgba(166,108,44,${0.08+t*.35})`;h+=`<td><div class="heat-cell" style="background:${bg}">${money(v)}</div></td>`});h+='</tr>'});h+='</tbody></table>';$('c3Heat').innerHTML=h;
+}
+
+function calc4(){
+  const weight=val('c4Weight'),value=val('c4Value'),limit=val('c4Limit'),fx=val('c4Fx'),rate=val('c4Rate')/100;
+  const deg=weight*limit,ind=deg*fx,valueKg=value/weight,limitKg=limit*fx,gap=Math.max(0,value-ind),gapPct=value?gap/value:0,premium=value*rate,ratio=premium?gap/premium:0;
+  $('c4Steps').innerHTML=stepHTML(1,'Límite en DEG','Peso × límite CMR',`${num(deg,0)} DEG`)+stepHTML(2,'Indemnización máxima','DEG × EUR/DEG',money(ind,'EUR'))+stepHTML(3,'Brecha de valor','Valor comercial − indemnización',money(gap,'EUR'))+stepHTML(4,'Prima ilustrativa','Valor comercial × tasa',money(premium,'EUR'));
+  $('c4ValueKg').textContent=`EUR ${num(valueKg,2)}`;$('c4LimitKg').textContent=`EUR ${num(limitKg,2)}`;$('c4Gap').textContent=money(gap,'EUR');$('c4GapPct').textContent=`${pct(gapPct)} del valor comercial`;$('c4Premium').textContent=money(premium,'EUR');$('c4Ratio').textContent=`Brecha / prima: ${num(ratio,2)}×`;
+  $('heroC4').textContent=money(gap,'EUR');$('kGap').textContent=money(gap,'EUR');$('kGapPct').textContent=`${pct(gapPct)} del valor comercial`;$('kPremium').textContent=money(premium,'EUR');$('kRatio').textContent=`Brecha / prima: ${num(ratio,2)}×`;
+  svgBars($('c4BarChart'),[
+    {label:'Valor comercial',short:'Valor',v:value,color:'#173b57'},
+    {label:'Indemnización CMR',short:'CMR',v:Math.min(value,ind),color:'#7d99a1'},
+    {label:'Brecha',short:'Brecha',v:gap,color:'#a66c2c'}
+  ],'EUR');
+  const xs=[5,7.5,9,9.5,limitKg,10,12.03125,15,20,25].sort((a,b)=>a-b);const points=xs.map(x=>({x,y:Math.max(0,x*weight-ind)}));svgLine($('c4SensitivityChart'),points,limitKg);svgLine($('summaryChart4'),points,limitKg);
+  return {ind,gap,premium};
+}
+
+const incoterms={
+  FOB:{risk:2,pay:1,hint:'Riesgo: a bordo',note:'El vendedor asume el riesgo hasta que la mercancía queda a bordo. El transporte principal lo contrata el comprador.'},
+  CFR:{risk:2,pay:3,hint:'Riesgo: a bordo · vendedor paga hasta Rotterdam',note:'El riesgo pasa a bordo en Guayaquil, aunque el vendedor pague el flete hasta Rotterdam.'},
+  CIF:{risk:2,pay:3,hint:'Riesgo: a bordo · seguro contratado por vendedor',note:'El punto de riesgo sigue siendo a bordo; CIF añade la obligación de contratar seguro.'},
+  FCA:{risk:1,pay:1,hint:'Riesgo: entrega al porteador',note:'Puede alinear mejor la transferencia del riesgo con la entrega física del contenedor en terminal.'},
+  CPT:{risk:1,pay:3,hint:'Riesgo: entrega al porteador · vendedor paga transporte',note:'El vendedor paga el transporte principal, pero el riesgo pasa al entregar al primer porteador en el punto acordado.'},
+  CIP:{risk:1,pay:3,hint:'Riesgo: entrega al porteador · vendedor paga y asegura',note:'Combina pago del transporte y seguro con un punto de entrega más natural para carga contenedorizada.'}
+};
+const chain3Nodes=[
+  {title:'Finca · Manta',sub:'Pre-carriage terrestre',detail:'Inicio físico de la operación. El vendedor controla la carga y organiza el traslado hacia Guayaquil.'},
+  {title:'Terminal · Guayaquil',sub:'Entrega / manipulación',detail:'Punto crítico en carga contenedorizada. La mercancía puede quedar bajo control de terminal antes de estar a bordo.'},
+  {title:'A bordo del buque',sub:'Punto FOB / CFR / CIF',detail:'En FOB, CFR y CIF este es el punto jurídico de entrega y transferencia del riesgo.'},
+  {title:'Rotterdam',sub:'Destino pagado en CFR / CIF',detail:'El vendedor puede pagar hasta destino sin mantener el riesgo hasta destino.'}
+];
+const chain4Nodes=[
+  {title:'Montecristi',sub:'Carretera nacional',detail:'Tramo nacional. El CMR no debe trasladarse automáticamente a esta parte del viaje.'},
+  {title:'Guayaquil',sub:'Puerto / embarque',detail:'Interfaz portuaria y marítima. La responsabilidad se analiza bajo documentos y régimen propios del tramo.'},
+  {title:'Valencia',sub:'Inicio del tramo CMR',detail:'Desde aquí comienza el transporte internacional por carretera protegido por la carta de porte CMR.'},
+  {title:'Milán',sub:'Entrega final',detail:'La avería debe documentarse y reservarse de acuerdo con el estado aparente o no aparente del daño.'}
+];
+function renderChain(container,nodes,detailId,opts={}){const el=$(container);el.innerHTML='';nodes.forEach((n,i)=>{const d=document.createElement('div');d.className='node';if(opts.risk===i)d.classList.add('risk-owner');if(opts.pay>=i)d.classList.add('paid');d.innerHTML=`<strong>${n.title}</strong><small>${n.sub}</small>`;d.onclick=()=>{[...el.querySelectorAll('.node')].forEach(x=>x.classList.remove('active'));d.classList.add('active');$(detailId).innerHTML=`<b>${n.title}.</b> ${n.detail}${opts.note?`<br><span style="color:#667085">${opts.note}</span>`:''}`};el.appendChild(d);if(i<nodes.length-1){const a=document.createElement('div');a.className='arrow';a.textContent='→';el.appendChild(a)}})}
+function updateIncoterm(){const inc=$('incoterm').value,o=incoterms[inc];$('incotermHint').textContent=o.hint;renderChain('chain3',chain3Nodes,'detail3',o);$('detail3').innerHTML=`<b>${inc}.</b> ${o.note}`}
+function renderChain4(){renderChain('chain4',chain4Nodes,'detail4',{});}
+
+function resetAll(){const defaults={c3Prod:24000,c3Pack:600,c3Land:450,c3Thc:130,c3Custom:85,c3Freight:2850,c3Rate:.5,c3Margin:3500,c3Factor:110,c4Weight:3200,c4Value:38500,c4Limit:8.33,c4Fx:1.19274,c4Rate:.5};Object.entries(defaults).forEach(([k,v])=>$(k).value=v);$('incoterm').value='FOB';calc3();calc4();updateIncoterm()}
+
+[...document.querySelectorAll('.nav button')].forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));$(b.dataset.tab).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}));
+['c3Prod','c3Pack','c3Land','c3Thc','c3Custom','c3Freight','c3Rate','c3Margin','c3Factor'].forEach(id=>$(id).addEventListener('input',calc3));
+['c4Weight','c4Value','c4Limit','c4Fx','c4Rate'].forEach(id=>$(id).addEventListener('input',calc4));$('incoterm').addEventListener('change',updateIncoterm);
+calc3();calc4();updateIncoterm();renderChain4();
+</script>
+</body>
+</html>
