@@ -23,7 +23,8 @@ const routeStyle={
   balaoRoad:{color:'#2c879b',dash:null,width:5,opacity:.72,offset:14}
 };
 const roadMetrics={};
-const loadState={roads:false,hydro:false,hydroFeatures:0};
+const loadState={roads:false,roadsLoaded:0,roadsFailed:[],hydro:false,hydroFeatures:0};
+const REAL_ROADS=new Set(['current','quintoRoad','duranRoad','railRoad','balaoRoad']);
 
 const map=new maplibregl.Map({
   container:'map',
@@ -38,7 +39,7 @@ map.addControl(new maplibregl.ScaleControl({maxWidth:120,unit:'metric'}));
 function lineFC(coords,props={}){return {type:'FeatureCollection',features:[{type:'Feature',properties:props,geometry:{type:'LineString',coordinates:coords}}]}}
 function emptyFC(){return {type:'FeatureCollection',features:[]}}
 function pointFC(){return {type:'FeatureCollection',features:Object.entries(D.nodes).map(([id,n])=>({type:'Feature',properties:{id,name:n.name,kind:n.kind},geometry:{type:'Point',coordinates:n.coord}}))}}
-function addRouteSource(id,coords,name){map.addSource(id,{type:'geojson',data:lineFC(coords,{id,name})})}
+function addRouteSource(id,coords,name){map.addSource(id,{type:'geojson',data:REAL_ROADS.has(id)?emptyFC():lineFC(coords,{id,name})})}
 function addRouteLayers(id){
   const s=routeStyle[id],casing=id+'-casing',label=id+'-label';
   const offset=Number.isFinite(s.offset)?s.offset:0;
@@ -93,15 +94,15 @@ function osrm(points){
 }
 function durationText(sec){
   if(!Number.isFinite(sec))return '—';
-  const h=Math.floor(sec/3600),m=Math.round((sec-h*3600)/60);
+  const totalMinutes=Math.round(sec/60),h=Math.floor(totalMinutes/60),m=totalMinutes%60;
   return h+' h '+String(m).padStart(2,'0')+' min';
 }
-function roadText(id){const m=roadMetrics[id];return m?((m.distance/1000).toFixed(1)+' km'):'Por calcular'}
-function roadTime(id){const m=roadMetrics[id];return m?durationText(m.duration):'Por calcular'}
+function roadText(id){const m=roadMetrics[id];return m?((m.distance/1000).toFixed(1)+' km'):(loadState.roadsFailed.includes(id)?'No disponible':'Calculando…')}
+function roadTime(id){const m=roadMetrics[id];return m?durationText(m.duration):(loadState.roadsFailed.includes(id)?'No disponible':'Calculando…')}
 
 function updateMapStatus(){
   const parts=[];
-  parts.push(loadState.roads?'red vial real cargada':'cargando red vial');
+  parts.push(loadState.roads?'red vial real cargada':(loadState.roadsFailed.length?`${loadState.roadsLoaded}/5 rutas viales verificadas; ${loadState.roadsFailed.length} no disponibles`:'cargando red vial'));
   parts.push(loadState.hydro?('hidrografía OSM verificada ('+loadState.hydroFeatures+' segmentos de referencia)'):'verificando hidrografía OSM');
   document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los corredores compartidos se muestran en paralelo para que cada escenario permanezca visible e independiente.';
 }
@@ -109,10 +110,20 @@ function updateMapStatus(){
 async function loadRoad(id,points){
   try{
     const r=await osrm(points);
+    if(!r.geometry || r.geometry.type!=='LineString' || !Array.isArray(r.geometry.coordinates) || r.geometry.coordinates.length<2 || !Number.isFinite(r.distance) || !Number.isFinite(r.duration)) throw Error('Respuesta de ruta incompleta');
+    // OSRM puede ajustar un punto fuera de carretera a una vía lejana: no dibujar ese resultado como correcto.
+    const snap=r.waypoints||[];
+    if(snap.length!==points.length || snap.some(w=>!Number.isFinite(w.distance) || w.distance>8000)) throw Error('Un punto está demasiado lejos de la red vial (más de 8 km)');
     roadMetrics[id]={distance:r.distance,duration:r.duration};
     map.getSource(id).setData(lineFC(r.geometry.coordinates,{id,name:D.routes[id].name}));
     return true;
-  }catch(e){console.warn('No se pudo cargar '+id,e);return false}
+  }catch(e){
+    delete roadMetrics[id];
+    map.getSource(id).setData(emptyFC()); // Nunca usar una línea recta aproximada como si fuera una vía existente.
+    loadState.roadsFailed.push(id);
+    console.warn('No se pudo verificar la ruta vial '+id,e);
+    return false;
+  }
 }
 async function loadRealRoads(){
   updateMapStatus();
@@ -124,12 +135,16 @@ async function loadRealRoads(){
     balaoRoad:D.controls.balaoRoad
   };
   let ok=0;
-  for(const [id,pts] of Object.entries(specs)) if(await loadRoad(id,pts)) ok++;
+  loadState.roadsFailed=[];
+  for(const [id,pts] of Object.entries(specs)) {
+    if(await loadRoad(id,pts)) ok++;
+    loadState.roadsLoaded=ok;
+    updateMapStatus();
+  }
   loadState.roads=ok===5;
   updateBaseMetrics();
   compareScenario(document.getElementById('scenario').value);
-  if(ok!==5) document.getElementById('mapStatus').textContent='Se cargaron '+ok+' de 5 tramos viales reales. La hidrografía se carga por separado desde OpenStreetMap.';
-  else updateMapStatus();
+  updateMapStatus();
 }
 
 function overpassFeatureCollection(elements){
@@ -186,15 +201,13 @@ async function loadHydroCorridor(){
   }catch(e){
     console.warn('No se pudo verificar la hidrografía OSM',e);
     loadState.hydro=false;
-    document.getElementById('mapStatus').textContent='Red vial cargada. El corredor TPG–Durán permanece visible como trazado conceptual continuo; la comprobación hidrográfica OSM no respondió.';
+    updateMapStatus();
   }
 }
 
 function updateBaseMetrics(){
-  if(roadMetrics.current){
-    document.getElementById('cRoad').textContent=roadText('current');
-    document.getElementById('cTime').textContent=roadTime('current');
-  }
+  document.getElementById('cRoad').textContent=roadText('current');
+  document.getElementById('cTime').textContent=roadTime('current');
 }
 function showProject(key){
   const p=D.projects[key]||D.projects.current;
