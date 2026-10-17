@@ -9,18 +9,18 @@ const groupRoutes={
   balao:['balaoWater','balaoRoad']
 };
 const routeStyle={
-  // line-offset separa visualmente corredores que comparten la misma carretera.
-  // Cada escenario conserva su propia geometría/layer: apagar uno no borra ni tapa
-  // los tramos que pertenecen a otro escenario todavía activo.
-  current:{color:'#596a76',dash:null,width:5.5,opacity:.88,offset:-14},
-  quinto:{color:'#d98216',dash:[2.2,1.4],width:6.5,opacity:.9,offset:-8},
-  quintoRoad:{color:'#1f5f99',dash:null,width:5.5,opacity:.80,offset:-8},
-  barge:{color:'#7357a6',dash:null,width:6.5,opacity:.92,offset:0},
-  duranRoad:{color:'#2c879b',dash:null,width:5.5,opacity:.80,offset:0},
-  railHistoric:{color:'#8a6544',dash:[4,2],width:5.5,opacity:.82,offset:8},
-  railRoad:{color:'#438f88',dash:null,width:5.2,opacity:.78,offset:8},
-  balaoWater:{color:'#7357a6',dash:[1,2],width:5,opacity:.62,offset:14},
-  balaoRoad:{color:'#2c879b',dash:null,width:5,opacity:.72,offset:14}
+  // Todas las rutas siguen la geometría vial exacta: los desplazamientos laterales
+  // de 8–14 px producían lazos y nudos en las curvas cerradas de Molleturo.
+  // Las capas permanecen independientes y se distinguen por color al seleccionarlas.
+  current:{color:'#596a76',dash:null,width:4.5,opacity:.80,offset:0},
+  quinto:{color:'#d98216',dash:[2.2,1.4],width:5.5,opacity:.9,offset:0},
+  quintoRoad:{color:'#1f5f99',dash:null,width:4.5,opacity:.78,offset:0},
+  barge:{color:'#7357a6',dash:[3,1.5],width:5.5,opacity:.9,offset:0},
+  duranRoad:{color:'#2c879b',dash:null,width:4.5,opacity:.78,offset:0},
+  railHistoric:{color:'#8a6544',dash:[4,2],width:5,opacity:.82,offset:0},
+  railRoad:{color:'#438f88',dash:null,width:4.5,opacity:.78,offset:0},
+  balaoWater:{color:'#7357a6',dash:[1,2],width:5,opacity:.65,offset:0},
+  balaoRoad:{color:'#2c879b',dash:null,width:4.5,opacity:.72,offset:0}
 };
 const roadMetrics={};
 const loadState={roads:false,roadsLoaded:0,roadsFailed:[],hydro:false,hydroFeatures:0};
@@ -42,7 +42,7 @@ function pointFC(){return {type:'FeatureCollection',features:Object.entries(D.no
 function addRouteSource(id,coords,name){map.addSource(id,{type:'geojson',data:REAL_ROADS.has(id)?emptyFC():lineFC(coords,{id,name})})}
 function addRouteLayers(id){
   const s=routeStyle[id],casing=id+'-casing',label=id+'-label';
-  const offset=Number.isFinite(s.offset)?s.offset:0;
+  const offset=0; // Mantener las líneas exactamente sobre el eje vial.
   map.addLayer({
     id:casing,type:'line',source:id,
     layout:{'line-cap':'round','line-join':'round'},
@@ -81,7 +81,7 @@ function addRouteLayers(id){
 function setRouteVisibility(id,show){[id,id+'-casing',id+'-label'].forEach(x=>{if(map.getLayer(x))map.setLayoutProperty(x,'visibility',show?'visible':'none')})}
 function setRouteEmphasis(id,on){
   const s=routeStyle[id];
-  if(map.getLayer(id)){map.setPaintProperty(id,'line-width',on?s.width+2.3:s.width);map.setPaintProperty(id,'line-opacity',on?1:s.opacity)}
+  if(map.getLayer(id)){map.setPaintProperty(id,'line-width',on?s.width+2.3:s.width);map.setPaintProperty(id,'line-opacity',on?1:Math.min(s.opacity,.48))}
   if(map.getLayer(id+'-casing'))map.setPaintProperty(id+'-casing','line-width',on?s.width+6.2:s.width+3.8);
 }
 function applyGroupVisibility(){Object.entries(groupRoutes).forEach(([g,ids])=>ids.forEach(id=>setRouteVisibility(id,groupState[g])))}
@@ -104,7 +104,7 @@ function updateMapStatus(){
   const parts=[];
   parts.push(loadState.roads?'red vial real cargada':(loadState.roadsFailed.length?`${loadState.roadsLoaded}/5 rutas viales verificadas; ${loadState.roadsFailed.length} no disponibles`:'cargando red vial'));
   parts.push(loadState.hydro?('hidrografía OSM verificada ('+loadState.hydroFeatures+' segmentos de referencia)'):'verificando hidrografía OSM');
-  document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los corredores compartidos se muestran en paralelo para que cada escenario permanezca visible e independiente.';
+  document.getElementById('mapStatus').textContent=parts.join(' · ')+'. Los corredores compartidos se superponen sobre el eje real; selecciona un escenario para resaltarlo sin generar nudos en las curvas.';
 }
 
 async function loadRoad(id,points){
