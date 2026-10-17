@@ -88,9 +88,9 @@ function applyGroupVisibility(){Object.entries(groupRoutes).forEach(([g,ids])=>i
 
 function osrm(points){
   const coords=points.map(p=>p[1]+','+p[0]).join(';');
-  return fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson&steps=false&alternatives=false&continue_straight=true')
+  return fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson&steps=false&alternatives=false&continue_straight=false')
     .then(r=>{if(!r.ok)throw Error(r.status);return r.json()})
-    .then(j=>{if(j.code!=='Ok'||!j.routes?.length)throw Error('sin ruta');return j.routes[0]});
+    .then(j=>{if(j.code!=='Ok'||!j.routes?.length)throw Error('sin ruta');return {...j.routes[0],waypoints:j.waypoints};});
 }
 function durationText(sec){
   if(!Number.isFinite(sec))return '—';
