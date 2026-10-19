@@ -119,7 +119,7 @@ if(page==='dispatch'){let f=document.getElementById('practiceDispatch');if(f)f.o
 
 const workflowCatalog=[['Arroz','kg'],['Leche UHT','L'],['Pasta','kg'],['Aceite vegetal','L'],['Fréjol','kg'],['Avena','kg'],['Atún enlatado','unid'],['Agua embotellada','L'],['Harina','kg'],['Lenteja','kg']];
 function wfState(){return data.workflow&&typeof data.workflow==='object'?data.workflow:null}
-function wfStage(){let w=wfState();if(!w)return 0;return w.done?5:w.dispatched?4:w.placed?3:w.received?2:1}
+function wfStage(){let w=wfState();if(!w)return 0;return w.done?6:w.dispatched?5:w.placed?4:w.inventoryChecked?3:w.received?2:1}
 function wfInit(){let picks=shuffled(workflowCatalog).slice(0,3),id=String(Math.floor(100000+Math.random()*899999));const donations=picks.map(([product,unit],i)=>({id:'ED-'+id+'-'+(i+1),product,unit,qty:24+Math.floor(Math.random()*64),expires:addDays(i===2?-3:14+Math.floor(Math.random()*90)),damaged:i===1,done:false}));data=seed();data.scenarioGenerated=true;data.lots=[];data.workflow={id,donations,order:{product:picks[0][0],unit:picks[0][1],qty:Math.max(5,donations[0].qty-7)},received:false,placed:false,dispatched:false,done:false,errors:0,notes:[],started:new Date().toISOString()};newInventoryRoundSafe();current='center';feedback='Nueva misión creada. Comienza inspeccionando cada lote.';render()}
 function newInventoryRoundSafe(){try{newInventoryRound()}catch(e){inventoryTasks=[]}}
 function wfStepLink(name){return '<button type="button" class="button secondary" data-goto="'+name+'">Ir a '+({receive:'Recepción',inventory:'Inventario',warehouse:'Bodega visual',dispatch:'Despacho FEFO',reports:'Indicadores'}[name]||name)+' →</button>'}
