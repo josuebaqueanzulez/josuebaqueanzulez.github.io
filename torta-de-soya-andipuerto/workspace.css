@@ -803,3 +803,69 @@ body.workspace-enhanced .capacity-flow i{
   body.workspace-enhanced .technical-brief strong{color:#111!important}
   body.workspace-enhanced .capacity-flow span{border-color:#aaa}
 }
+
+
+/* Guía general de buques graneleros — el ejemplo no sustituye al panorama sectorial */
+body.workspace-enhanced .ship-guide{
+  margin:0 0 24px;padding:26px;
+  border:1px solid #d6e5e9;border-radius:15px;
+  background:linear-gradient(140deg,#f4f9fa,#fcfefe);
+}
+body.workspace-enhanced .ship-guide-intro{max-width:830px;margin-bottom:20px}
+body.workspace-enhanced .ship-guide-intro>span{
+  font:600 10px 'IBM Plex Mono',monospace;color:#a16f55;letter-spacing:.08em;
+}
+body.workspace-enhanced .ship-guide-intro h3{
+  margin:10px 0;font:700 clamp(19px,2vw,25px)/1.25 'Space Grotesk',sans-serif;
+  color:#244857;letter-spacing:-.03em;
+}
+body.workspace-enhanced .ship-guide-intro p{
+  margin:0;font-size:13px;color:#607c89;line-height:1.82;
+}
+body.workspace-enhanced .ship-categories{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;
+}
+body.workspace-enhanced .ship-categories article{
+  border:1px solid #dae6eb;background:#fff;
+  border-radius:12px;padding:20px;min-width:0;
+}
+body.workspace-enhanced .ship-categories small{
+  font:600 9px/1.5 'IBM Plex Mono',monospace;color:#af785b;
+  display:block;min-height:28px;margin-bottom:11px;
+}
+body.workspace-enhanced .ship-categories h4{
+  font:700 19px/1.2 'Space Grotesk',sans-serif;letter-spacing:-.025em;
+  margin:0 0 13px;color:#254656;
+}
+body.workspace-enhanced .ship-categories p{
+  font-size:12px;line-height:1.85;color:#637e8a;margin:0;
+}
+body.workspace-enhanced .ship-guide-foot{
+  margin:19px 0 0;
+  padding:13px 16px;
+  border-left:3px solid #63a5ac;
+  background:#e7f2f3;
+  color:#536f7d;font-size:12px;line-height:1.85;
+}
+body.workspace-enhanced .ship-guide-foot strong{color:#254a5c}
+@media(max-width:1100px){
+  body.workspace-enhanced .ship-categories{grid-template-columns:1fr}
+  body.workspace-enhanced .ship-categories small{min-height:0}
+}
+@media(max-width:650px){
+  body.workspace-enhanced .ship-guide{padding:18px;margin-bottom:22px}
+  body.workspace-enhanced .ship-guide-intro h3{font-size:20px}
+  body.workspace-enhanced .ship-guide-intro p{font-size:12px}
+  body.workspace-enhanced .ship-categories article{padding:16px}
+  body.workspace-enhanced .ship-categories h4{font-size:18px}
+}
+@media print{
+  body.workspace-enhanced .ship-guide,
+  body.workspace-enhanced .ship-categories article,
+  body.workspace-enhanced .ship-guide-foot{
+    background:#fff!important;color:#111!important;border-color:#bbb!important;
+  }
+  body.workspace-enhanced .ship-guide h3,
+  body.workspace-enhanced .ship-guide h4,
+  body.workspace-enhanced .ship-guide p{color:#111!important}
+}
