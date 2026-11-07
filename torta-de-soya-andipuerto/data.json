@@ -12,7 +12,7 @@
     ],
     [
       "Instrumento OMI aplicable a su transporte marítimo",
-      "SOLAS VI y Código IMSBC. «SEED CAKE (non-hazardous)» (Grupo C) si cumple las especificaciones y los certificados aplicables; de otro modo, revisar las fichas pertinentes de Grupo B. No se presume automáticamente clase 4.2.",
+      "SOLAS VI y Código IMSBC. Fichas IMSBC 2025 «SEED CAKES AND OTHER RESIDUES OF PROCESSED OILY VEGETABLES» (Grupo C o Grupo B, según clasificación y certificados) y, cuando proceda, UN 1386 o UN 2217. No se asigna clase 4.2 automáticamente.",
       "[5], [12], [21]"
     ],
     [
@@ -27,22 +27,22 @@
     ],
     [
       "Tipo y tamaño de buque (clase, TPM, eslora, calado)",
-      "Registro de una importación 11/07/2025 menciona FU XING HAI; ficha de nave homónima IMO 9751298: Handysize, 38.801 TPM, 179,95 m LOA, calado de verano 9,5 m. Vinculación IMO-registro aduanero no ratificada.",
+      "El transporte mundial de granel seco emplea categorías como Handysize, Supramax/Ultramax y Panamax, pero eso no significa que todas sean compatibles con Andipuerto. Allí se anuncia un máximo de 220 m de eslora y también debe verificarse el calado. Como ejemplo documentado, una ficha de FU XING HAI (IMO 9751298) describe un Handysize de 38.801 TPM, 179,95 m de eslora y 9,5 m de calado de verano; no está confirmada la correspondencia del IMO ni su atraque en esta terminal.",
       "[7], [9], [10]"
     ],
     [
       "Buque con grúas propias (geared) o sin ellas (gearless)",
-      "El granelero FU XING HAI, IMO 9751298, dispone de cuatro grúas propias de 30 t; geared. Se mantiene reserva documental sobre identidad IMO del embarque 2025.",
+      "Ambas configuraciones son posibles en el transporte de graneles: el buque geared cuenta con grúas propias y el gearless depende de los equipos del terminal. La elección responde a la disponibilidad de equipos y la operación prevista. El FU XING HAI de la ficha consultada tiene cuatro grúas de 30 t; es un ejemplo de buque geared, no una regla para toda la soya importada.",
       "[9], [10]"
     ],
     [
       "Tamaño típico del embarque (t por escala)",
-      "Registro AFABA/Bunge 2024 de 11.882,67 t y partidas Aquacargill de 2025 por 6.000 y 4.996,79 t. Son expedientes individuales, NO tonelaje completo ni media de escala Andipuerto.",
+      "El volumen por escala cambia según el pedido, la capacidad del buque y las restricciones del puerto; no existe un promedio exclusivo de torta de soya publicado para Andipuerto. Como referencias de partidas comerciales se encontraron 11.882,67 t en un registro de 2024 y 6.000 t y 4.996,79 t en registros de 2025. Esas partidas no representan necesariamente la carga completa de un buque.",
       "[7], [17]"
     ],
     [
       "Tiempo aproximado de tránsito marítimo",
-      "No se encontraron fechas de zarpe y arribo del MISMO viaje Rosario–Guayaquil; dato no verificable para la nave identificada. La programación depende de velocidad, ruta y escala intermedia.",
+      "Depende del puerto de salida, la velocidad del granelero, su ruta, las condiciones de navegación y posibles escalas. No hay fechas comprobadas de salida y llegada del mismo viaje que permitan calcular el tiempo Rosario–Guayaquil para el ejemplo disponible. Por eso se presenta como variable de planificación y no como un número verificado.",
       "[7]"
     ]
   ],
