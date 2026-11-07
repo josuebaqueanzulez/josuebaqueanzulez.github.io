@@ -1,0 +1,341 @@
+{
+  "ficha": [
+    [
+      "Producto y país / puerto de origen típico",
+      "Torta de soya a granel, HS 230400. Origen verificado de una importación en 2025: Rosario (Argentina). Argentina es también la principal procedencia nacional de 2025.",
+      "[2], [4], [7]"
+    ],
+    [
+      "Propiedades de la carga que condicionan su manipulación y almacenamiento",
+      "Granel proteico en harina o pellets; expuesto a polvo, contaminación, absorción de humedad y posible autocalentamiento según aceite/humedad. Conservar seco, muestrear y controlar condiciones de estiba.",
+      "[2], [5], [12]"
+    ],
+    [
+      "Instrumento OMI aplicable a su transporte marítimo",
+      "SOLAS VI y Código IMSBC. «SEED CAKE (non-hazardous)» (Grupo C) si cumple las especificaciones y los certificados aplicables; de otro modo, revisar las fichas pertinentes de Grupo B. No se presume automáticamente clase 4.2.",
+      "[5], [12], [21]"
+    ],
+    [
+      "Incoterm habitual y quién contrata el transporte marítimo",
+      "Condición individual del caso 2025: no publicada. En FOB contrata normalmente el comprador; en CFR/CIF lo contrata el vendedor. Existe referencia gubernamental de precio CIF Guayaquil, no prueba de Incoterm contractual.",
+      "[11], [16]"
+    ],
+    [
+      "Tipo de fletamento (por viaje, por tiempo, contrato de tonelaje u otro)",
+      "No existe charter party público de la importación citada. En graneles puede contratarse fletamento por viaje o COA; no se asigna ninguna modalidad como hecho del caso.",
+      "[11]"
+    ],
+    [
+      "Tipo y tamaño de buque (clase, TPM, eslora, calado)",
+      "Registro de una importación 11/07/2025 menciona FU XING HAI; ficha de nave homónima IMO 9751298: Handysize, 38.801 TPM, 179,95 m LOA, calado de verano 9,5 m. Vinculación IMO-registro aduanero no ratificada.",
+      "[7], [9], [10]"
+    ],
+    [
+      "Buque con grúas propias (geared) o sin ellas (gearless)",
+      "El granelero FU XING HAI, IMO 9751298, dispone de cuatro grúas propias de 30 t; geared. Se mantiene reserva documental sobre identidad IMO del embarque 2025.",
+      "[9], [10]"
+    ],
+    [
+      "Tamaño típico del embarque (t por escala)",
+      "Registro AFABA/Bunge 2024 de 11.882,67 t y partidas Aquacargill de 2025 por 6.000 y 4.996,79 t. Son expedientes individuales, NO tonelaje completo ni media de escala Andipuerto.",
+      "[7], [17]"
+    ],
+    [
+      "Tiempo aproximado de tránsito marítimo",
+      "No se encontraron fechas de zarpe y arribo del MISMO viaje Rosario–Guayaquil; dato no verificable para la nave identificada. La programación depende de velocidad, ruta y escala intermedia.",
+      "[7]"
+    ]
+  ],
+  "servicios": [
+    [
+      "Practicaje",
+      "A la nave",
+      "Práctico autorizado; hay proveedores de Guayaquil identificados, no el contratado en el viaje citado",
+      "Lancha de práctico, acceso del Puerto de Guayaquil y puente de gobierno"
+    ],
+    [
+      "Remolque de maniobra",
+      "A la nave",
+      "Empresa de remolque habilitada; prestador específico no publicado",
+      "Remolcadores y área de maniobra"
+    ],
+    [
+      "Amarre/desamarre",
+      "A la nave",
+      "Personal/servicio autorizado por la terminal y agentes correspondientes",
+      "Bitas, defensas, cabos y muelle"
+    ],
+    [
+      "Uso del muelle",
+      "A la nave",
+      "Andipuerto Guayaquil S.A., concesionaria APG",
+      "Muelle multipropósito; buques hasta 220 m LOA"
+    ],
+    [
+      "Descarga del granel",
+      "A la carga",
+      "Andipuerto; Andigrain documentado como operador vinculado históricamente",
+      "Cucharas graneleras, tolvas, cargadores y equipo de manipulación"
+    ],
+    [
+      "Tarja y control de cantidad",
+      "A la carga",
+      "Andipuerto, según su tarifario público",
+      "Básculas, registros de tarja y sistemas de inventario"
+    ],
+    [
+      "Muestreo y calidad",
+      "A la carga",
+      "Andipuerto publica servicio de laboratorio; TECNIVAL facturó inspección de torta de soya en una bodega de Andipuerto (2023). Inspector de la escala de 2025: N/D [19].",
+      "Muestreo, laboratorio y certificado de calidad (humedad, proteína y aceite); muelle/bodega en registro histórico [19]."
+    ],
+    [
+      "Transferencia/almacenamiento",
+      "A la carga",
+      "Andipuerto y operadores de movilización",
+      "Bodegas y silos; equipos de transferencia; control temperatura/humedad"
+    ],
+    [
+      "Inspección aduanera/levante",
+      "A la carga",
+      "SENAE; agentes aduaneros habilitados actúan por sus clientes",
+      "Ecuapass/DAI, aforo documental/físico según canal de control"
+    ],
+    [
+      "Control fitosanitario si corresponde",
+      "A la carga",
+      "Agrocalidad, conforme requisitos aplicables al producto/origen",
+      "Documentos, inspección/muestreo según corresponda"
+    ],
+    [
+      "Pesaje, despacho y transporte",
+      "A la carga",
+      "Andipuerto (pesaje/retiro); Convector presta transporte especializado de graneles como oferta del grupo",
+      "Básculas, muelle-bodega, camiones graneleros y autorizaciones"
+    ],
+    [
+      "Protección del recinto",
+      "A la nave / a la carga",
+      "Andipuerto, oficial de protección, control policial/aduanero competente",
+      "Plan PBIP, control de accesos, CCTV y supervisión"
+    ]
+  ],
+  "indicadores": [
+    [
+      "Carga importada Andipuerto, toda clase",
+      "SPTMF 2025, tabla 79, p. 66",
+      "2.952.629,88 t"
+    ],
+    [
+      "Buques de Andipuerto, todas las cargas",
+      "SPTMF 2025, tabla 71, p. 60",
+      "119 buques"
+    ],
+    [
+      "Horas operativas terminal total",
+      "SPTMF 2025, tabla 71, p. 60",
+      "5.201,01 h"
+    ],
+    [
+      "Rendimiento agregado terminal total",
+      "SPTMF 2025, tabla 71, p. 60",
+      "567,70 t/h"
+    ],
+    [
+      "Carga de granel sólido Andipuerto",
+      "SPTMF 2025, tabla 85, p. 67",
+      "2.587.215,34 t"
+    ],
+    [
+      "Horas operativas por tipo granel sólido APG",
+      "SPTMF 2025, tabla 72, p. 62",
+      "5.636,26 h"
+    ],
+    [
+      "Rendimiento por tipo granel sólido APG",
+      "SPTMF 2025, tabla 72, p. 62",
+      "459,03 t/h"
+    ]
+  ],
+  "empresas": [
+    [
+      "Andipuerto / Andinave",
+      "Concesionario APG; muelle hasta 220 m, bodegas y silos, tarifario de peso, despacho y laboratorio [8].",
+      "No publica tonelaje exclusivo de torta de soya 2025."
+    ],
+    [
+      "Andigrain",
+      "Operador de cargas graneleras y siderúrgicas, maquinaria documentada [13, 14].",
+      "No prueba qué cuadrilla atendió un buque determinado."
+    ],
+    [
+      "Andinave",
+      "Agenciamiento y logística; registro de importación marítima de soya con el agente registrado [7, 17].",
+      "Agente no equivale al armador o fletador."
+    ],
+    [
+      "Cargill / Aquacargill",
+      "Shipper e importador en registro comercial del 11/07/2025; SENAE ratifica uso de soya a granel por Aquacargill [2, 7].",
+      "El registro no informa el muelle de descarga."
+    ],
+    [
+      "AFABA / Bunge Argentina",
+      "Registro 2024 de torta de soya a granel de 11.882,67 t; empresa compradora y exportador identificados [17].",
+      "No representa un promedio de 2025."
+    ],
+    [
+      "FU XING HAI",
+      "Nombre en el expediente de importación; ficha marítima de IMO 9751298 [7, 9, 10].",
+      "IMO no figura en el expediente público; correspondencia a ratificar."
+    ],
+    [
+      "SENAE y Agrocalidad",
+      "Aduana y control oficial según exigibilidad para cada importación [2, 6].",
+      "No son concesionarios ni clientes de Andipuerto."
+    ],
+    [
+      "TECNIVAL (inspección en Andipuerto)",
+      "Factura de 25/07/2023 por inspección de torta de soya importada; identifica bodega Golf, puerta 3, Andipuerto [19].",
+      "Prueba del servicio y vínculo carga-terminal en 2023; no identifica buque, tonelaje anual ni contratista de 2025."
+    ]
+  ],
+  "discrepancias": [
+    [
+      "Volumen total Andipuerto 2025",
+      "2.952.629,88 t; tabla 79, p. 66",
+      "2.966.150 t: gerencia de Andipuerto, noticia feb. 2026 [15]. Diferencia 13.520,12 t, no conciliada."
+    ],
+    [
+      "Volumen de soya por Andipuerto",
+      "N/D; 2.587.215,34 t son TODOS los sólidos, tabla 85",
+      "El registro nacional WITS: 2.127.010 t de soya, todos los puertos/regímenes [4]. No imputar a Andipuerto."
+    ],
+    [
+      "Horas operativas 2025",
+      "5.201,01 h para Andipuerto total; tabla 71",
+      "5.636,26 h para clase sólidos APG; tabla 72. Diferencia de alcance/método sin explicación oficial."
+    ],
+    [
+      "Capacidad de almacenaje",
+      "Ficha corporativa Andipuerto registra 278.000 t [8]",
+      "Operador informó 413.000 t incluyendo instalaciones externas en 2025 [15]. Medidas de alcance diferente."
+    ],
+    [
+      "Número buques granel sólido",
+      "119 arribos total Andipuerto, tabla 71",
+      "No hay desagregación por mercancía sólida; no equiparar 119 a soya."
+    ],
+    [
+      "Importaciones nacionales HS 230400",
+      "SPTMF no publica en su cuadro APG el total nacional de la partida; por Andipuerto N/D.",
+      "WITS/UN Comtrade: 2024 1.760.360 t y 2025 2.127.010 t (+20,8 %). Todos los medios/puertos, no atribuible a Andipuerto [4, 20]."
+    ]
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "text": "SPTMF/MIT (2025). Boletín Estadístico Portuario 2025. Tablas 71 (p.60), 72 (p.62), 79 (p.66), 81/85/89 (pp.66–68). Documento adjunto al curso (PDF).",
+      "url": null
+    },
+    {
+      "id": 2,
+      "text": "SENAE (2025). Resolución SENAE-SGN-2025-0004-RE, clasificación arancelaria de torta de soya a granel; solicitante Aquacargill.",
+      "url": "https://www.aduana.gob.ec/resolucion/senae-sgn-2025-0004-re/"
+    },
+    {
+      "id": 3,
+      "text": "CAMAE. Ficha de Autoridad Portuaria de Guayaquil / Andipuerto; identifica harina de soya.",
+      "url": "https://www.camae.org/puerto/autoridad-portuaria-de-guayaquil-apg/"
+    },
+    {
+      "id": 4,
+      "text": "WITS / UN Comtrade. Ecuador, importaciones 2025, HS 230400, por países proveedores.",
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/ECU/year/2025/tradeflow/Imports/partner/ALL/product/230400"
+    },
+    {
+      "id": 5,
+      "text": "OMI. Código IMSBC, fichas SEED CAKE y requisitos sobre humedad/aceite.",
+      "url": "https://www.imorules.com/GUID-9D7F897E-6B3B-47F8-BA8D-6DCC8E4930BB.html"
+    },
+    {
+      "id": 6,
+      "text": "SENAE. Procedimiento para importar y documentación DAI/levante.",
+      "url": "https://www.aduana.gob.ec/servicio-al-ciudadano/para-importar/"
+    },
+    {
+      "id": 7,
+      "text": "ImportGenius. Cargill Sociedad Anónima Comercial e Industrial, registro de torta de soya ingresada 11/07/2025, buque FU XING HAI.",
+      "url": "https://www.importgenius.com/ecuador/suppliers/cargill-sociedad-anonima-comercial-e-idunstrial"
+    },
+    {
+      "id": 8,
+      "text": "Empresas Andinave. Andipuerto, descripción de terminal, límites de eslora, almacenes y tarifario.",
+      "url": "https://www.andinave.com/es/andipuerto-2/"
+    },
+    {
+      "id": 9,
+      "text": "VesselFinder / Maritime Optima. FU XING HAI, IMO 9751298: 179,95 m, 38.801 TPM.",
+      "url": "https://www.vesselfinder.com/vessels/details/9751298"
+    },
+    {
+      "id": 10,
+      "text": "Marine-Marchande (2026). Ficha del FU XING HAI, cuatro grúas propias de 30 t, IMO 9751298.",
+      "url": "https://www.marine-marchande.net/Jourlejour4/AujourleJour-558.html"
+    },
+    {
+      "id": 11,
+      "text": "Cámara de Comercio Internacional (ICC). Incoterms 2020: distribución de costos, riesgos y obligaciones.",
+      "url": "https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/"
+    },
+    {
+      "id": 12,
+      "text": "OMI/IMSBC. SEED CAKE UN 1386 y SEED CAKE (non-hazardous), grupos B/C.",
+      "url": "https://www.imorules.com/GUID-9BCEA0C2-9577-4108-9F8C-999EED827983.html"
+    },
+    {
+      "id": 13,
+      "text": "Andipuerto. Auditoría Ambiental Inicial, operación de Andigrain y equipos.",
+      "url": "https://www.andinave.com/wp-content/uploads/2021/09/AAI-AUDITORIA-AMBIENTAL-INICIAL-ANDIPUERTO.pdf"
+    },
+    {
+      "id": 14,
+      "text": "Revista Maíz & Soya (julio 2024). Andigrain como operador de graneles y equipamiento especializado.",
+      "url": "https://maizysoya.com/lector.php?id=20201348&tabla=articulos"
+    },
+    {
+      "id": 15,
+      "text": "PortalPortuario (04/02/2026). Balance de Andipuerto 2025 y declaraciones de Gabriela Baquerizo.",
+      "url": "https://portalportuario.cl/andipuerto-cierra-2025-con-crecimiento-de-1198/"
+    },
+    {
+      "id": 16,
+      "text": "Ministerio de Agricultura (2025). Precios internacionales de torta de soya; referencia CIF Guayaquil.",
+      "url": "https://sipa.agricultura.gob.ec/"
+    },
+    {
+      "id": 17,
+      "text": "Veritrade. Importaciones AFABA 2024 de torta de soya a granel, Bunge Argentina y Andinave.",
+      "url": "https://www.veritradecorp.com/es/ecuador/importaciones-y-exportaciones-asociacion-ecuatoriana-de-fabricantes-de-alimentos-balanceados-para-animales-afaba/ruc-1790601501001"
+    },
+    {
+      "id": 18,
+      "text": "Primicias (19/08/2026). Situación concesional y restricciones de infraestructura del terminal granelero de Guayaquil.",
+      "url": "https://www.primicias.ec/economia/concesion-terminal-granelero-guayaquil-andipuerto-riesgo-logistico-nueva-licitacion-fenomeno-elnino-130532/"
+    },
+    {
+      "id": 19,
+      "text": "TECNIVAL (25/07/2023). Factura pública de inspección de torta de soya importada; referencia al lugar de servicio en Andipuerto.",
+      "url": "https://tecnival.sitioweb1.com/libreriaf9/pdf/2507202301099239044100120010010000080070000800714.pdf"
+    },
+    {
+      "id": 20,
+      "text": "WITS / UN Comtrade. Ecuador, importaciones 2024 de la partida HS 230400.",
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/ECU/year/2024/tradeflow/Imports/partner/ALL/product/230400"
+    },
+    {
+      "id": 21,
+      "text": "OMI, Resolución MSC.539(107), enmiendas 2023 al Código IMSBC; disposiciones de SEED CAKE y exenciones por humedad/aceite.",
+      "url": "https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.539%28107%29.pdf"
+    }
+  ]
+}
