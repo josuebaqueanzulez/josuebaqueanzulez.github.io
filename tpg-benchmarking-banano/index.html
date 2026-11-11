@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091c30">
+  <meta name="description" content="Benchmarking portuario ECOTEC: propuesta de servicio de TPG para el banano ecuatoriano refrigerado. Grupo 2, 2025.">
+  <title>TPG · Benchmarking del banano refrigerado | ECOTEC</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a href="#contenido" class="skip">Saltar al contenido</a>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="identity">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="brand-name"><strong>TPG</strong><small>Terminal Portuario de Guayaquil</small></div>
+        <span class="brand-divider"></span>
+        <div class="school-mark"><strong>ECOTEC</strong><small>Maestría en Logística, Transporte y Puertos</small></div>
+      </div>
+      <div class="top-actions">
+        <span class="top-meta">GRUPO 02 <i></i> ANÁLISIS 2025</span>
+        <button type="button" class="btn btn-ghost" id="openEvidence" aria-haspopup="dialog"><svg class="ic"><use href="#icon-book"/></svg> Evidencias</button>
+        <button type="button" class="btn btn-ghost full-toggle" id="fullToggle" title="Pantalla completa (F)"><svg class="ic"><use href="#icon-expand"/></svg><span>Pantalla completa</span></button>
+      </div>
+    </header>
+    <div class="content-shell">
+      <nav class="sidebar" aria-label="Navegación de la exposición">
+        <div class="sidebar-label">PRESENTACIÓN <strong>05 VISTAS</strong></div>
+        <button type="button" class="step is-active" data-go="0" aria-current="step"><span class="step-num">01</span><span class="step-body"><b>Propuesta</b><small>TPG y el exportador</small></span></button>
+        <button type="button" class="step" data-go="1"><span class="step-num">02</span><span class="step-body"><b>Mercado</b><small>2025 y decisiones</small></span></button>
+        <button type="button" class="step" data-go="2"><span class="step-num">03</span><span class="step-body"><b>Capacidad</b><small>Desempeño comparativo</small></span></button>
+        <button type="button" class="step" data-go="3"><span class="step-num">04</span><span class="step-body"><b>Evaluación</b><small>Matriz ponderada</small></span></button>
+        <button type="button" class="step" data-go="4"><span class="step-num">05</span><span class="step-body"><b>Innovación</b><small>Control Tower</small></span></button>
+        <div class="sidebar-bottom"><span class="small-kicker">CRITERIO CENTRAL</span><p>No competir por precio: competir por <strong>servicio verificable</strong>.</p><div class="side-lines"><i></i><i></i><i></i></div></div>
+      </nav>
+      <main id="contenido" tabindex="-1">
+        <!-- 01 HERO -->
+        <section class="scene is-active" id="scene-0" data-title="Propuesta">
+          <div class="hero-shell">
+            <div class="hero-copy">
+              <span class="eyebrow"><span class="eyebrow-line"></span> BENCHMARKING PORTUARIO · GRUPO 2</span>
+              <h1>El banano exige más que un muelle.<em> Exige control de su cadena logística.</em></h1>
+              <p class="hero-lead">Una propuesta de TPG para el exportador que prioriza la cadena de frío, la protección de la carga y la coordinación del embarque.</p>
+              <div class="hero-kpis">
+                <div><strong>2.000</strong><span>conexiones reefer</span></div>
+                <div><strong>682.275</strong><span>TEU movilizados · 2025</span></div>
+                <div><strong>25,51 %</strong><span>de la exportación contenerizada¹</span></div>
+              </div>
+              <p class="source-inline">¹ Participación por toneladas entre las cuatro terminales del ejercicio, no cuota del banano nacional.</p>
+              <div class="hero-cta"><button class="btn btn-primary" type="button" data-go="1">Explorar el mercado <svg class="ic"><use href="#icon-arrow"/></svg></button><button class="link-action" type="button" data-open="method">Metodología <svg class="ic"><use href="#icon-external"/></svg></button></div>
+            </div>
+            <div class="harbor-visual" role="img" aria-label="Ilustración técnica de un terminal de contenedores con grúas, buque y contenedores refrigerados">
+              <div class="harbor-header"><span>ECGYE · GOLFO DE GUAYAQUIL</span><span>ENFOQUE REEFER</span></div>
+              <svg viewBox="0 0 760 690" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs><linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#133a58"/><stop offset=".72" stop-color="#0a2038"/><stop offset="1" stop-color="#07172b"/></linearGradient><linearGradient id="sea" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#195269"/><stop offset="1" stop-color="#051324"/></linearGradient><linearGradient id="hull" x1="0" x2="1"><stop stop-color="#0a1623"/><stop offset=".6" stop-color="#123650"/><stop offset="1" stop-color="#0c1d2e"/></linearGradient></defs>
+                <rect width="760" height="690" fill="url(#sky)"/>
+                <circle cx="570" cy="150" r="167" fill="#79b2bd" opacity=".09"/><circle cx="570" cy="150" r="105" fill="#9bc8c4" opacity=".08"/>
+                <path d="M0 400H760" stroke="#9dbfca" stroke-opacity=".32"/><path d="M0 467H760V690H0Z" fill="url(#sea)"/>
+                <g stroke="#517e93" opacity=".45"><path d="M0 493H760M0 531H760M0 576H760M0 636H760"/><path d="M70 472L180 690M230 472L330 690M390 472L480 690M550 472L655 690"/></g>
+                <g opacity=".82" stroke="#76aec0" stroke-width="5" fill="none"><path d="M126 80V457M126 108H492L522 121M183 108L130 182L74 108M126 108L226 237H410M352 108V454M352 108L448 231M75 108H522"/><path d="M475 26V470M475 78H720M475 78L612 225H702M475 78L390 197M650 78V460M650 78L720 190"/></g>
+                <g stroke="#c6dfdf" stroke-opacity=".35" stroke-width="2"><path d="M135 108V367M370 108V367M527 78V355M665 78V355"/></g>
+                <g><rect x="0" y="405" width="760" height="68" fill="#193d54"/><rect x="0" y="421" width="760" height="10" fill="#3b6478"/></g>
+                <g><rect x="93" y="308" width="90" height="66" fill="#dfb74a"/><rect x="186" y="308" width="90" height="66" fill="#d1dedc"/><rect x="279" y="308" width="90" height="66" fill="#237f85"/><rect x="142" y="240" width="90" height="64" fill="#cfd9d5"/><rect x="235" y="240" width="90" height="64" fill="#769da9"/><rect x="330" y="240" width="90" height="64" fill="#e6be5c"/><rect x="280" y="172" width="90" height="64" fill="#cddbd8"/><rect x="373" y="172" width="90" height="64" fill="#447e8d"/></g>
+                <g stroke="#06243a" stroke-opacity=".45" stroke-width="2"><path d="M104 309V374M116 309V374M128 309V374M140 309V374M197 309V374M209 309V374M221 309V374M233 309V374M290 309V374M302 309V374M314 309V374M326 309V374M152 241V304M164 241V304M176 241V304M245 241V304M257 241V304M269 241V304M340 241V304M352 241V304M364 241V304"/></g>
+                <path d="M80 465H695L653 554L188 571L111 542Z" fill="url(#hull)" stroke="#79a7b6" stroke-width="3"/>
+                <path d="M148 473H670" stroke="#e9c15b" stroke-width="6" stroke-dasharray="26 12"/>
+                <path d="M50 596C215 572 340 603 500 583C640 567 690 575 770 557" stroke="#9bc2bf" stroke-opacity=".42" stroke-width="4" fill="none"/>
+                <text x="175" y="531" fill="#f3f8f3" font-family="Arial,sans-serif" font-size="45" font-weight="800" letter-spacing="3">TPG</text>
+                <g transform="translate(520,260)"><rect width="165" height="124" rx="5" fill="#e1e9e8" stroke="#b6cacc" stroke-width="3"/><g stroke="#a0b4b9" stroke-width="2"><path d="M13 0V124M32 0V124M51 0V124M70 0V124M89 0V124M108 0V124M127 0V124M146 0V124"/></g><rect x="117" y="52" width="44" height="63" fill="#0a3247"/><g stroke="#f0f6f1" stroke-width="3"><path d="M139 58V109M117 83H161M124 66L154 102M154 66L124 102"/></g></g>
+                <g stroke="#eec65a" stroke-width="4"><path d="M420 104L420 303"/><rect x="403" y="291" width="34" height="20" fill="#eec65a" stroke="none"/></g>
+                <g fill="#a9d8d4"><circle cx="80" cy="116" r="5"/><circle cx="478" cy="80" r="5"/><circle cx="630" cy="78" r="5"/></g>
+              </svg>
+              <div class="harbor-overlay"><span class="harbor-dot"></span><div><small>PROPUESTA COMERCIAL</small><b>Cadena de frío · Control · Visibilidad</b></div></div>
+              <div class="image-note">Visualización ilustrativa, no fotografía documental del terminal.</div>
+            </div>
+          </div>
+          <div class="hero-bottom">
+            <div><svg class="ic"><use href="#icon-snow"/></svg><b>Cadena de frío</b><span>Conexión y monitoreo reefer</span></div>
+            <div><svg class="ic"><use href="#icon-shield"/></svg><b>Protección de la carga</b><span>Inspecciones y control</span></div>
+            <div><svg class="ic"><use href="#icon-route"/></svg><b>Coordinación</b><span>Terminal, naviera y exportador</span></div>
+          </div>
+        </section>
+        <!-- 02 MERCADO -->
+        <section class="scene" id="scene-1" data-title="Mercado" hidden>
+          <div class="scene-heading"><div><span class="eyebrow">02 / EL MERCADO</span><h2>Una terminal relevante dentro de un mercado competitivo.</h2><p>Participaciones calculadas exclusivamente entre las cuatro terminales de la consigna; no equivalen a la totalidad del sistema portuario ecuatoriano.</p></div><div class="heading-token"><b>2025</b><span>Año base oficial</span></div></div>
+          <div class="market-grid">
+            <div class="panel market-panel">
+              <div class="panel-top"><div><span class="small-kicker">COMPARATIVA DE TERMINALES</span><h3>Participación del grupo analizado</h3></div><div class="seg-control" role="group" aria-label="Indicador de participación"><button class="is-selected" type="button" data-market="teu" aria-pressed="true">TEU</button><button type="button" data-market="calls" aria-pressed="false">Escalas</button></div></div>
+              <div class="market-big"><strong id="marketTotal">2.581.944</strong><span id="marketUnit">TEU totales</span></div><div class="bar-list" id="marketBars" aria-live="polite"></div>
+              <p class="panel-caption">Fuente: consigna ECOTEC, anexo común 2025 (p. 4). Los porcentajes no identifican por sí solos carga bananera.</p>
+            </div>
+            <div class="panel decision-panel">
+              <span class="small-kicker">LA DECISIÓN NO ES AISLADA</span><h3>¿Quién determina la terminal?</h3>
+              <div class="decision-steps">
+                <div class="decision-item"><span class="order">01</span><div><b>Contrato comercial</b><small>Incoterm y condiciones de compraventa determinan quién contrata el transporte principal.</small></div></div>
+                <div class="decision-item"><span class="order">02</span><div><b>Naviera y servicio</b><small>El comprador o vendedor contrata una ruta conforme al acuerdo y a la oferta disponible.</small></div></div>
+                <div class="decision-item selected"><span class="order">03</span><div><b>Terminal de escala</b><small>Depende de la rotación de la naviera: no siempre puede seleccionarse por separado.</small></div></div>
+                <div class="decision-item"><span class="order">04</span><div><b>Servicios a la carga</b><small>Recepción, conexión reefer, pesaje y coordinación de inspecciones, según contrato.</small></div></div>
+              </div>
+              <div class="decision-note"><svg class="ic"><use href="#icon-check"/></svg><p><strong>Oportunidad para TPG:</strong> diferenciar la calidad del proceso portuario cuando el servicio marítimo incluye a nuestra terminal.</p></div>
+            </div>
+          </div>
+        </section>
+        <!-- 03 CAPACIDAD -->
+        <section class="scene" id="scene-2" data-title="Capacidad" hidden>
+          <div class="scene-heading"><div><span class="eyebrow">03 / CAPACIDAD Y RESULTADOS</span><h2>Infraestructura especializada, con indicadores que deben interpretarse.</h2><p>La operación reefer se respalda con equipamiento real; el volumen o la permanencia, aislados, no prueban mejor servicio.</p></div><div class="heading-token"><b>TPG</b><span>Fertigran · SPTMF</span></div></div>
+          <div class="capacity-top">
+            <div class="fact-card emphasis"><span>CONEXIONES REEFER</span><strong>2.000</strong><small>1.140 fijas + 860 power packs</small><svg class="ic"><use href="#icon-snow"/></svg></div>
+            <div class="fact-card"><span>MUELLE OPERATIVO</span><strong>660 <small>m</small></strong><small>Dos puestos de atraque</small><svg class="ic"><use href="#icon-ship"/></svg></div>
+            <div class="fact-card"><span>ESLORA PERMITIDA</span><strong>370 <small>m</small></strong><small>Calado 13 m con marea</small><svg class="ic"><use href="#icon-anchor"/></svg></div>
+            <div class="fact-card"><span>CAPACIDAD DECLARADA</span><strong>1,3 <small>M</small></strong><small>TEU/año · no equivale a disponibilidad garantizada</small><svg class="ic"><use href="#icon-box"/></svg></div>
+          </div>
+          <div class="capacity-grid">
+            <div class="panel indicators-panel">
+              <div class="panel-top"><div><span class="small-kicker">4 INDICADORES · MISMA METODOLOGÍA</span><h3>Comparación 2025</h3></div></div>
+              <div class="metric-table-wrap"><table class="metric-table"><thead><tr><th>Indicador</th><th>Contecon</th><th>DP World</th><th class="active-th">TPG</th><th>Bananapuerto</th></tr></thead><tbody><tr><th>Permanencia <small>h/escala</small></th><td>31,00</td><td>18,88</td><td class="tpg-col">39,07</td><td>26,56</td></tr><tr><th>Ocupación estimada <small>%</small></th><td>39,87</td><td>81,04</td><td class="tpg-col">67,12</td><td>76,10</td></tr><tr><th>Orientación exportadora <small>%</small></th><td>48,59</td><td>74,66</td><td class="tpg-col">50,41</td><td>86,37</td></tr><tr><th>Participación en exportación contenerizada <small>%</small></th><td>19,20</td><td>31,57</td><td class="tpg-col">25,51</td><td>23,72</td></tr></tbody></table></div>
+              <p class="panel-caption">Los indicadores de carga se calculan en toneladas. Contecon incluye escalas y horas multipropósito. Puestos para la ocupación: 6 / 1 / 2 / 1.</p>
+            </div>
+            <div class="panel insights-panel">
+              <span class="small-kicker">LECTURA COMERCIAL</span><div class="intensity"><strong>2.267</strong><span>TEU / escala (cociente anual)</span></div>
+              <div class="line-separator"></div><div class="insight-list"><div><svg class="ic"><use href="#icon-check"/></svg><p><b>Experiencia en tráfico de contenedores</b>682.275 TEU y 301 escalas en 2025.</p></div><div><svg class="ic"><use href="#icon-check"/></svg><p><b>Equipamiento de operación</b>5 grúas STS, 11 RTG y monitoreo de contenedores refrigerados.</p></div><div><svg class="ic"><use href="#icon-info"/></svg><p><b>Interpretación responsable</b>Los 2.267 TEU/escala no representan productividad de grúas ni movimientos por buque.</p></div></div>
+              <button class="link-action" type="button" data-open="method">Ver fórmulas y limitaciones <svg class="ic"><use href="#icon-arrow"/></svg></button>
+            </div>
+          </div>
+        </section>
+        <!-- 04 MATRIZ -->
+        <section class="scene" id="scene-3" data-title="Evaluación" hidden>
+          <div class="scene-heading"><div><span class="eyebrow">04 / EVALUACIÓN DEL SERVICIO</span><h2>Una propuesta comercial defendida con evidencia.</h2><p>Seis criterios ponderados exactamente como establece la consigna de ECOTEC; las notas reflejan una evaluación relativa, no una certificación oficial.</p></div><div class="heading-token score-token"><b>3,65 <small>/ 5</small></b><span>Puntaje TPG</span></div></div>
+          <div class="matrix-grid">
+            <div class="panel matrix-panel">
+              <div class="panel-top"><div><span class="small-kicker">MATRIZ PONDERADA</span><h3>Seleccione un criterio para ver su evidencia</h3></div></div>
+              <div class="matrix-header"><span>CRITERIO</span><span>PESO</span><span>NOTA</span><span>APORTE</span></div>
+              <div id="matrixRows" class="matrix-rows"></div>
+              <div class="matrix-total"><b>Resultado global</b><div><span>Σ (peso × nota)</span><strong>3,65 / 5,00</strong></div></div>
+            </div>
+            <div class="panel evidence-panel">
+              <div class="evidence-hd"><span class="small-kicker">SUSTENTO DE LA NOTA</span><span id="selectedWeight" class="evidence-tag">25 % del total</span></div>
+              <h3 id="selectedCriterion">Infraestructura reefer</h3><div class="selected-grade"><b id="selectedGrade">4/5</b><span id="selectedContribution">Aporte: 1,00</span></div>
+              <p id="selectedEvidence">2.000 tomas, monitoreo y alarmas; comparación con capacidades publicadas de las otras terminales.</p>
+              <div class="two-insights"><div><span class="small-kicker">FORTALEZA</span><p><b>Cadena de frío</b>Conexión y alarmas reefer dentro del terminal.</p></div><div><span class="small-kicker">FORTALEZA</span><p><b>Inspección y protección</b>Infraestructura y facilidades para entidades de control.</p></div></div>
+              <details class="challenge-details"><summary>Dos debilidades que reconocemos <svg class="ic"><use href="#icon-chevron"/></svg></summary><div class="challenge-content"><p><b>Fluidez:</b> permanencia de 39,07 h/escala, la más alta entre las cuatro terminales del ejercicio; no equivale por sí sola a ineficiencia.</p><p><b>Acceso náutico:</b> calado de 13 m con beneficio de marea, frente a un acceso de mayor profundidad en Posorja.</p></div></details>
+            </div>
+          </div>
+          <p class="bottom-disclaimer">*La nota de accesibilidad terrestre (4/5) es provisional: faltan distancias y tiempos reales comparables por carretera desde las zonas bananeras.</p>
+        </section>
+        <!-- 05 INNOVACIÓN -->
+        <section class="scene" id="scene-4" data-title="Innovación" hidden>
+          <div class="scene-heading"><div><span class="eyebrow">05 / PROPUESTA DE VALOR</span><h2>Más visibilidad para la carga. Más coordinación para el embarque.</h2><p>TPG Reefer Control Tower es una <strong>propuesta académica</strong> para integrar información autorizada; no se presenta como plataforma implementada ni se prometen mejoras porcentuales.</p></div><div class="heading-token"><b>12 <small>sem.</small></b><span>Piloto propuesto</span></div></div>
+          <div class="innovation-grid">
+            <div class="panel tower-panel">
+              <div class="tower-title"><div><span class="small-kicker">SERVICIO INNOVADOR PROPUESTO</span><h3>TPG Reefer <span>Control Tower</span></h3></div><span class="demo-pill"><i></i> DEMOSTRACIÓN SIMULADA</span></div>
+              <div class="dashboard-demo">
+                <div class="dash-head"><div><b>REEFER / DEMO-01</b><small>Reserva ficticia para ilustrar el concepto</small></div><span id="demoStatus" class="status-label">Ingreso validado</span></div>
+                <div class="dash-graph"><div class="graph-head"><small>Temperatura · visualización ilustrativa</small><b id="demoTemp">4,0 °C</b></div><svg viewBox="0 0 540 128" preserveAspectRatio="none"><g stroke="#506c80" stroke-opacity=".4"><path d="M0 30H540M0 64H540M0 98H540"/></g><polyline id="temperatureLine" points="0,78 40,76 80,81 120,72 160,80 200,76 240,73 280,79 320,73 360,75 400,69 440,76 480,71 540,74" fill="none" stroke="#70e0bc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle id="temperatureDot" cx="540" cy="74" r="6" fill="#e9c15c"/></svg></div>
+                <div class="demo-timeline" id="demoTimeline"><div class="is-done"><span>01</span><small>Gate</small></div><div><span>02</span><small>Conexión</small></div><div><span>03</span><small>Inspección</small></div><div><span>04</span><small>Embarque</small></div></div>
+                <div class="demo-actions"><button type="button" id="advanceDemo" class="btn btn-primary">Simular siguiente hito <svg class="ic"><use href="#icon-arrow"/></svg></button><button class="btn btn-lite" type="button" id="resetDemo">Reiniciar</button></div>
+              </div>
+              <p class="panel-caption">La pantalla ilustra cómo podría visualizarse el proceso. No utiliza datos ni sistemas operativos reales de TPG.</p>
+            </div>
+            <div class="panel implementation-panel"><span class="small-kicker">MEJORA OPERATIVA CONCRETA</span><h3>Preparación anticipada de embarques reefer</h3><p>Coordinar antes de cada escala documentación, citas, inspecciones, ubicación en patio y secuencia de embarque para identificar incidencias antes del cut-off.</p>
+              <div class="pilot-track"><div><b>Semanas 1–4</b><small>Levantar línea base, identificar incidencias y acordar variables de medición.</small></div><div><b>Semanas 5–12</b><small>Ejecutar un piloto controlado y comparar resultados de operaciones equivalentes.</small></div></div>
+              <div class="kpi-stack"><span class="small-kicker">INDICADORES DE SEGUIMIENTO · SIN METAS SUPUESTAS</span><div><svg class="ic"><use href="#icon-clock"/></svg> Preparación antes del cut-off</div><div><svg class="ic"><use href="#icon-snow"/></svg> Tiempo gate–conexión y atención de alarmas</div><div><svg class="ic"><use href="#icon-chart"/></svg> Incidencias y tiempos de resolución</div></div>
+              <div class="value-close"><svg class="ic"><use href="#icon-shield"/></svg><p><strong>La propuesta para la exportadora:</strong> usar TPG cuando la rotación marítima lo permita y se prioricen control de carga refrigerada, inspecciones y coordinación documentada.</p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer class="bottom-nav">
+      <div class="progress-wrap"><span id="progressLabel">01 / 05</span><div class="progress-track"><div id="progressFill"></div></div><small id="stageLabel">Propuesta</small></div>
+      <div class="presentation-hint">Flechas ← → para navegar · F pantalla completa · E evidencias</div>
+      <div class="nav-buttons"><button class="btn btn-ghost" id="prev" type="button" disabled><svg class="ic"><use href="#icon-left"/></svg> Anterior</button><button class="btn btn-primary" id="next" type="button">Siguiente <svg class="ic"><use href="#icon-arrow"/></svg></button></div>
+    </footer>
+  </div>
+  <div class="modal-backdrop" id="evidenceBackdrop" hidden></div>
+  <aside class="evidence-drawer" id="evidenceDrawer" role="dialog" aria-modal="true" aria-label="Panel de evidencias y defensa" hidden>
+    <div class="drawer-head"><div><span class="small-kicker">RECURSOS PARA DEFENSA</span><h2>Base técnica</h2></div><button class="icon-button" id="closeEvidence" type="button" aria-label="Cerrar"><svg class="ic"><use href="#icon-x"/></svg></button></div>
+    <div class="drawer-tabs" role="tablist"><button type="button" class="is-selected" data-tab="sources" role="tab" aria-selected="true">Fuentes</button><button type="button" data-tab="method" role="tab" aria-selected="false">Método</button><button type="button" data-tab="defense" role="tab" aria-selected="false">Defensa</button><button type="button" data-tab="script" role="tab" aria-selected="false">Guion</button></div>
+    <div class="drawer-body" id="drawer-sources" data-drawer="sources">
+      <h3>Fuentes y referencias</h3><p>Las cifras oficiales de 2025 se mantienen como base común del ejercicio.</p>
+      <ol class="source-list"><li><b>Consigna ECOTEC.</b> «Benchmarking portuario: ¿qué terminal ofrece el mejor servicio a la carga de banano?», pp. 1–4; anexo de datos comunes 2025, p. 4.</li><li><b>Boletín Estadístico Portuario SPTMF 2025.</b> Ficha TPG, p. 81; movimiento, escalas, horas y tonelajes, tablas 71, 78, 80–82, 89–90, 113, 115–117 y 135.</li><li><b>Fichas técnicas de Actividad 1.</b> TPG (Grupo 2), Contecon, DP World Posorja y Bananapuerto.</li><li><b>ICTSI, documentación 2025.</b> Capacidad de conexiones reefer Contecon (3.700).</li><li><b>Registro BASC de INARPI.</b> Evidencia de monitoreo reefer con vigencia 2026–2027; posterior al año base.</li><li><b>Hanseatic Global Terminals / fuentes operativas.</b> Descripción de servicios y conectividad; frecuencias completas no confirmadas.</li></ol>
+      <div class="reference-rule"><b>Regla de lectura</b><p>No se infiere cantidad de banano reefer a partir del total de carga contenerizada; tampoco se confunden escalas, productividad y permanencia del contenedor.</p></div>
+    </div>
+    <div class="drawer-body" id="drawer-method" data-drawer="method" hidden>
+      <h3>Fórmulas oficiales</h3><div class="formula"><span>Cuota TEU</span><code>TEU terminal / Σ TEU 4 terminales × 100</code></div><div class="formula"><span>Cuota escalas</span><code>Escalas terminal / Σ escalas × 100</code></div><div class="formula"><span>Permanencia promedio</span><code>Horas acumuladas en muelle / escalas</code></div><div class="formula"><span>Ocupación estimada</span><code>Horas en muelle / (puestos × 8.760) × 100</code></div><div class="formula"><span>Orientación exportadora</span><code>t exportación / (t importación + t exportación) × 100</code></div><div class="formula"><span>Participación exportación</span><code>t exportación de terminal / Σ t exportación 4 terminales × 100</code></div><div class="formula"><span>Matriz ponderada</span><code>Σ (peso decimal × nota 1–5)</code></div>
+      <div class="reference-rule"><b>Convenciones del ejercicio</b><p>Puestos: Contecon 6, DP World 1, TPG 2, Bananapuerto 1. Las horas de Contecon incluyen operaciones multipropósito. Se excluye precio/tarifas. La accesibilidad terrestre mantiene una calificación provisional.</p></div>
+    </div>
+    <div class="drawer-body" id="drawer-defense" data-drawer="defense" hidden>
+      <h3>Preguntas probables</h3><details open><summary>¿Por qué defender TPG si su permanencia es la mayor?</summary><p>39,07 h/escala es un promedio oficial; sin movimientos por buque y causas de demora no es sinónimo de baja productividad. Proponemos coordinar hitos que afectan el cut-off y evaluar el resultado con una línea base.</p></details><details><summary>¿TPG tiene la mayor infraestructura reefer?</summary><p>No. La comparación publicada registra 3.700 conexiones en Contecon y 2.180 en DP World, frente a 2.000 en TPG. Defendemos el servicio de conexión, monitoreo, alarmas y controles disponibles, no una superioridad inventada.</p></details><details><summary>¿Por qué la accesibilidad terrestre recibe 4/5?</summary><p>Es provisional. La ubicación y conexión a Vía Perimetral son conocidas, pero faltan mediciones homogéneas por carretera y tiempos reales desde las zonas bananeras. El grupo no debe presentar esa nota como definitiva.</p></details><details><summary>Si TPG no existiera, ¿qué recomendarían?</summary><p>Entre las alternativas evaluadas, Contecon sería una opción razonable por su capacidad reefer y servicios de inspección, condicionada al itinerario naviero y a las necesidades específicas del exportador.</p></details><details><summary>¿La Control Tower ya opera en TPG?</summary><p>No. La plataforma integrada es una propuesta académica; TPG ya declara monitoreo reefer, alarmas y procesos digitales. Su implementación e impacto deben demostrarse en un piloto.</p></details>
+    </div>
+    <div class="drawer-body" id="drawer-script" data-drawer="script" hidden><h3>Distribución sugerida · 10 minutos</h3><div class="speakers"><div><b>Anthony Cabrera</b><span>Vista 1 · Apertura y propuesta</span></div><div><b>Adriana Valverde</b><span>Vista 2 · Mercado y decisión</span></div><div><b>Josué Baque</b><span>Vista 3 · Indicadores</span></div><div><b>Luisana Bajaña</b><span>Vista 4 · Matriz y nota</span></div><div><b>Gonzalo Chaquinga</b><span>Vista 4 · Evidencias y limitaciones</span></div><div><b>Brenda Villavicencio</b><span>Vista 5 · Innovación y cierre</span></div></div><div class="reference-rule"><b>Tiempo sugerido</b><p>Apertura 1:15 · Mercado 1:30 · Capacidad 1:35 · Matriz 2:50 · Propuesta 2:05 · 0:45 de transiciones y margen. Todos los integrantes participan.</p></div></div>
+  </aside>
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-defs" aria-hidden="true"><symbol id="icon-book" viewBox="0 0 24 24"><path d="M4 5.5C6.5 4.1 9.2 4.3 12 6c2.8-1.7 5.5-1.9 8-.5V19c-2.5-1.2-5.2-.9-8 .5-2.8-1.4-5.5-1.7-8-.5V5.5ZM12 6v13.5"/></symbol><symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol><symbol id="icon-left" viewBox="0 0 24 24"><path d="M20 12H5m6-6-6 6 6 6"/></symbol><symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="icon-snow" viewBox="0 0 24 24"><path d="M12 2v20M4 7l16 10M4 17 20 7M9 4l3 3 3-3m-6 16 3-3 3 3M3 12l4-1-2-4m16 5-4 1 2 4"/></symbol><symbol id="icon-shield" viewBox="0 0 24 24"><path d="m12 2 8 4v6c0 5-3.6 8-8 10-4.4-2-8-5-8-10V6l8-4Zm-4 10 3 3 5-6"/></symbol><symbol id="icon-route" viewBox="0 0 24 24"><circle cx="4" cy="17" r="2"/><circle cx="20" cy="5" r="2"/><path d="M6 17h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h9"/></symbol><symbol id="icon-ship" viewBox="0 0 24 24"><path d="m3 14 9-4 9 4-4 7H7l-4-7Zm5-4V5h8v5M2 21c2-1 4-1 6 0 2-1 4-1 6 0 2-1 4-1 8 0"/></symbol><symbol id="icon-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 8v13M6 12H3a9 9 0 0 0 18 0h-3"/></symbol><symbol id="icon-box" viewBox="0 0 24 24"><path d="m3 6 9-4 9 4v12l-9 4-9-4V6Zm0 0 9 4 9-4m-9 4v12"/></symbol><symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 3"/></symbol><symbol id="icon-chart" viewBox="0 0 24 24"><path d="M3 21h18M5 17v-5h4v5m3 0V7h4v10m3 0V3h3v14"/></symbol><symbol id="icon-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol><symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-9h.01"/></symbol><symbol id="icon-external" viewBox="0 0 24 24"><path d="M13 4h7v7M20 4l-9 9M20 14v5H5V4h5"/></symbol><symbol id="icon-expand" viewBox="0 0 24 24"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></symbol><symbol id="icon-x" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol></svg>
+</body></html>
