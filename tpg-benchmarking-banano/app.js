@@ -142,6 +142,12 @@
     if(/^[1-5]$/.test(ev.key)){ev.preventDefault();showScene(Number(ev.key)-1);}
   });
   window.addEventListener("hashchange",()=>{const match=location.hash.match(/^#([1-5])$/);if(match)showScene(Number(match[1])-1);});
+  // Si la foto editorial no carga, conservar la ilustración SVG original.
+  try {
+    const portPhoto=new Image();
+    portPhoto.onload=()=>{$(".harbor-visual")?.classList.add("photo-ready");};
+    portPhoto.src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/REMOYQHG4BAGFL4OZLR73UVCVY.jpg";
+  } catch(_) {}
   marketRender();scoreRender();renderDemo();
   const initHash=location.hash.match(/^#([1-5])$/);
   showScene(initHash?Number(initHash[1])-1:0);
