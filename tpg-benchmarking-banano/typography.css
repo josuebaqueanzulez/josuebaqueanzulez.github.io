@@ -1,0 +1,119 @@
+/* TPG — Fluida: tipografía editorial profesional */
+/* Los estilos de respaldo funcionan cuando no hay conexión a Google Fonts. */
+:root{
+  --type-display:"Plus Jakarta Sans","Aptos Display","Segoe UI",sans-serif;
+  --type-body:"DM Sans","Aptos","Segoe UI",Arial,sans-serif;
+}
+html,body,button,input,select,textarea{
+  font-family:var(--type-body);
+}
+body{
+  font-size:14px;
+  font-weight:400;
+  letter-spacing:.005em;
+  line-height:1.55;
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4,h5,h6,
+.brand-name strong,.school-mark strong,
+.hero-kpis strong,.market-big strong,.market-donut b,
+.fact-card>strong,.intensity strong,
+.heading-token b,.score-token b,
+.selected-grade b,.matrix-total strong,
+.drawer-head h2,.tower-title h3,.progress-wrap>span,
+.selected-grade span{
+  font-family:var(--type-display);
+}
+.hero-copy h1{
+  font-weight:800;
+  letter-spacing:-.043em;
+  line-height:1.1;
+  text-wrap:balance;
+}
+.scene-heading h2{
+  font-weight:800;
+  letter-spacing:-.034em;
+  line-height:1.16;
+  text-wrap:balance;
+}
+.panel h3,
+.implementation-panel>h3,
+.tower-title h3,
+.evidence-panel h3{
+  font-weight:750;
+  letter-spacing:-.025em;
+  line-height:1.26;
+}
+.brand-name strong{
+  font-weight:800;
+  letter-spacing:-.035em;
+}
+.school-mark strong{
+  font-weight:750;
+  letter-spacing:-.012em;
+}
+.hero-lead,.scene-heading p,
+.implementation-panel>p{
+  letter-spacing:.006em;
+  line-height:1.72;
+}
+.hero-kpis strong,.fact-card>strong,.market-big strong,
+.market-donut b,.intensity strong,.selected-grade b,
+.matrix-total strong,.heading-token b{
+  letter-spacing:-.038em;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+.step-body b,
+.bar-label,
+.metric-table tbody th,
+.matrix-row b,
+.fact-card>span,
+.decision-item b,
+.hero-bottom b,
+.insight-list b{
+  font-family:var(--type-body);
+  font-weight:750;
+  letter-spacing:0;
+}
+.small-kicker,.eyebrow,.top-meta,.sidebar-label,
+.market-donut small,.fact-card>span,
+.sidebar-bottom .small-kicker{
+  font-family:var(--type-body);
+  font-weight:800;
+  letter-spacing:.095em;
+}
+.btn,.step,.drawer-tabs button{
+  font-family:var(--type-body);
+  font-weight:750;
+  letter-spacing:0;
+}
+.panel-caption,.source-inline,.decision-item small,
+.pilot-track small,.insight-list p,.challenge-content p,
+.drawer-body,.reference-rule p{
+  line-height:1.65;
+}
+.metric-table,.matrix-row,.bar-value,
+.graph-head,.market-big,.fact-card{
+  font-variant-numeric:tabular-nums;
+}
+/* Evitar que la nueva tipografía compacte demasiado la lectura. */
+.hero-copy{min-width:0}
+.hero-copy h1{max-width:750px}
+.hero-lead{max-width:650px}
+.bar-label{line-height:1.25}
+.decision-item small{line-height:1.55}
+.panel-caption{font-size:10.5px}
+.drawer-body{font-size:12.5px}
+.drawer-body h3{font-weight:750}
+@media(max-width:1230px){
+  .hero-copy h1{letter-spacing:-.038em}
+  .scene-heading h2{letter-spacing:-.026em}
+}
+@media(max-width:630px){
+  body{font-size:13px}
+  .hero-copy h1{letter-spacing:-.035em;line-height:1.13}
+  .scene-heading h2{letter-spacing:-.018em;line-height:1.2}
+  .panel h3{line-height:1.3}
+}
