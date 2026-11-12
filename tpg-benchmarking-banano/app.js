@@ -41,6 +41,13 @@
     const maxShare=Math.max(...terminals.map(item=>item[marketMode]/totalValue));
     $("#marketTotal").textContent=fmtInt.format(totalValue);
     $("#marketUnit").textContent=marketMode==="teu"?"TEU totales":"escalas totales";
+    const colors=["#173e59","#3f8c98","#e9bc54","#a2b9c4"];
+    let start=0;
+    const slices=terminals.map((item,i)=>{const stop=start+item[marketMode]/totalValue*100;const slice=colors[i]+" "+start.toFixed(5)+"% "+stop.toFixed(5)+"%";start=stop;return slice;});
+    $("#donutGraphic").style.background="conic-gradient("+slices.join(",")+")";
+    const tpgPct=terminals[2][marketMode]/totalValue*100;
+    $("#donutShare").textContent=fmtDec.format(tpgPct)+" %";
+    $("#donutGraphic").setAttribute("aria-label","Participación de TPG: "+fmtDec.format(tpgPct)+" por ciento de "+(marketMode==="teu"?"TEU":"escalas")+" de las cuatro terminales");
     $("#marketBars").innerHTML="";
     terminals.forEach(item=>{
       const ratio=item[marketMode]/totalValue, percent=ratio*100;
