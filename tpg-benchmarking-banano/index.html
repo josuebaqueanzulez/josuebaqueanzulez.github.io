@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./visual.css">
   <link rel="stylesheet" href="./typography.css">
+  <link rel="stylesheet" href="./organic.css">
   <script defer src="./app.js"></script>
 </head>
 <body>
@@ -150,26 +151,77 @@
           </div>
           <p class="bottom-disclaimer">*La nota de accesibilidad terrestre (4/5) es provisional: faltan distancias y tiempos reales comparables por carretera desde las zonas bananeras.</p>
         </section>
-        <!-- 05 INNOVACIÓN -->
-        <section class="scene" id="scene-4" data-title="Innovación" hidden>
-          <div class="scene-heading"><div><span class="eyebrow">05 / PROPUESTA DE VALOR</span><h2>Más visibilidad para la carga. Más coordinación para el embarque.</h2><p>TPG Reefer Control Tower es una <strong>propuesta académica</strong> para integrar información autorizada; no se presenta como plataforma implementada ni se prometen mejoras porcentuales.</p></div><div class="heading-token"><b>12 <small>sem.</small></b><span>Piloto propuesto</span></div></div>
-          <div class="innovation-grid">
-            <div class="panel tower-panel">
-              <div class="tower-title"><div><span class="small-kicker">SERVICIO INNOVADOR PROPUESTO</span><h3>TPG Reefer <span>Control Tower</span></h3></div><span class="demo-pill"><i></i> DEMOSTRACIÓN SIMULADA</span></div>
-              <div class="dashboard-demo">
-                <div class="dash-head"><div><b>REEFER / DEMO-01</b><small>Reserva ficticia para ilustrar el concepto</small></div><span id="demoStatus" class="status-label">Ingreso validado</span></div>
-                <div class="dash-graph"><div class="graph-head"><small>Temperatura · visualización ilustrativa</small><b id="demoTemp">4,0 °C</b></div><svg viewBox="0 0 540 128" preserveAspectRatio="none"><g stroke="#506c80" stroke-opacity=".4"><path d="M0 30H540M0 64H540M0 98H540"/></g><polyline id="temperatureLine" points="0,78 40,76 80,81 120,72 160,80 200,76 240,73 280,79 320,73 360,75 400,69 440,76 480,71 540,74" fill="none" stroke="#70e0bc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle id="temperatureDot" cx="540" cy="74" r="6" fill="#e9c15c"/></svg></div>
-                <div class="demo-timeline" id="demoTimeline"><div class="is-done"><span>01</span><small>Gate</small></div><div><span>02</span><small>Conexión</small></div><div><span>03</span><small>Inspección</small></div><div><span>04</span><small>Embarque</small></div></div>
-                <div class="demo-actions"><button type="button" id="advanceDemo" class="btn btn-primary">Simular siguiente hito <svg class="ic"><use href="#icon-arrow"/></svg></button><button class="btn btn-lite" type="button" id="resetDemo">Reiniciar</button></div>
-              </div>
-              <p class="panel-caption">La pantalla ilustra cómo podría visualizarse el proceso. No utiliza datos ni sistemas operativos reales de TPG.</p>
+        <!-- 05 PROPUESTA DE VALOR -->
+        <section class="scene proposal-scene" id="scene-4" data-title="Innovación" hidden>
+          <div class="scene-heading">
+            <div><span class="eyebrow">05 / PROPUESTA COMERCIAL</span>
+              <h2>No proponemos más pantallas. Proponemos decisiones mejor coordinadas.</h2>
+              <p>Un servicio para que el exportador conozca el estado de su contenedor reefer, identifique incidencias y coordine los hitos previos al embarque.</p>
             </div>
-            <div class="panel implementation-panel"><span class="small-kicker">MEJORA OPERATIVA CONCRETA</span><h3>Preparación anticipada de embarques reefer</h3><p>Coordinar antes de cada escala documentación, citas, inspecciones, ubicación en patio y secuencia de embarque para identificar incidencias antes del cut-off.</p>
-              <div class="pilot-track"><div><b>Semanas 1–4</b><small>Levantar línea base, identificar incidencias y acordar variables de medición.</small></div><div><b>Semanas 5–12</b><small>Ejecutar un piloto controlado y comparar resultados de operaciones equivalentes.</small></div></div>
-              <div class="kpi-stack"><span class="small-kicker">INDICADORES DE SEGUIMIENTO · SIN METAS SUPUESTAS</span><div><svg class="ic"><use href="#icon-clock"/></svg> Preparación antes del cut-off</div><div><svg class="ic"><use href="#icon-snow"/></svg> Tiempo gate–conexión y atención de alarmas</div><div><svg class="ic"><use href="#icon-chart"/></svg> Incidencias y tiempos de resolución</div></div>
-              <div class="value-close"><svg class="ic"><use href="#icon-shield"/></svg><p><strong>La propuesta para la exportadora:</strong> usar TPG cuando la rotación marítima lo permita y se prioricen control de carga refrigerada, inspecciones y coordinación documentada.</p></div>
+            <div class="heading-token"><b>12 <small>sem.</small></b><span>Piloto propuesto</span></div>
+          </div>
+
+          <div class="proposal-stage">
+            <div class="proposal-main">
+              <div class="proposal-heading-line">
+                <span class="small-kicker">SERVICIO INNOVADOR PROPUESTO</span>
+                <span class="concept-label">CONCEPTO ACADÉMICO · NO IMPLEMENTADO</span>
+              </div>
+              <h3>TPG Reefer <em>Control Tower</em></h3>
+              <p class="proposal-lead">Una vista integrada y autorizada de la operación, desde el ingreso del contenedor hasta la confirmación de embarque; conectaría información de áreas que hoy se gestionan por separado.</p>
+              <div class="integration-message">
+                <svg class="ic"><use href="#icon-info"/></svg>
+                <span><strong>El valor no es volver a monitorear la temperatura.</strong> TPG ya dispone de infraestructura y monitoreo reefer. La oportunidad es traducir los hitos disponibles en información útil y coordinada para la exportadora.</span>
+              </div>
+            </div>
+            <div class="proposal-journey" aria-label="Cuatro hitos que integraría el servicio propuesto">
+              <div class="journey-intro"><span>VISIÓN UNIFICADA</span><b>De la terminal al exportador</b></div>
+              <div class="journey-path" aria-hidden="true">
+                <svg viewBox="0 0 610 170" preserveAspectRatio="none"><path d="M0 108 C96 108 89 29 183 49 S323 160 397 100 S506 39 610 70" fill="none" stroke="#6fc3bc" stroke-opacity=".65" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 13"/><path d="M0 109 C100 104 86 29 183 49 S323 160 397 100 S510 42 610 70" fill="none" stroke="#eec86b" stroke-opacity=".24" stroke-width="1.5"/></svg>
+              </div>
+              <div class="journey-nodes">
+                <div><span>01</span><b>Ingreso</b><small>Recepción y registro</small></div>
+                <div><span>02</span><b>Conexión</b><small>Estado reefer y alertas</small></div>
+                <div><span>03</span><b>Inspección</b><small>Estado de controles</small></div>
+                <div><span>04</span><b>Embarque</b><small>Confirmación del hito</small></div>
+              </div>
+              <div class="journey-foot"><svg class="ic"><use href="#icon-route"/></svg> Información disponible según acuerdos, autorizaciones y viabilidad técnica.</div>
             </div>
           </div>
+
+          <div class="proposal-details">
+            <article class="proposal-existing">
+              <div class="proposal-section-title"><span class="section-counter">01</span><div><span class="small-kicker">BASE OPERATIVA</span><h3>¿Sobre qué capacidades se construiría?</h3></div></div>
+              <p class="proposal-description">La propuesta aprovecha infraestructura y procesos documentados de TPG, sin presentarlos como servicios nuevos.</p>
+              <div class="existing-points">
+                <div><svg class="ic"><use href="#icon-snow"/></svg><span><b>Cadena de frío</b><small>2.000 conexiones y seguimiento de alarmas reefer.</small></span></div>
+                <div><svg class="ic"><use href="#icon-shield"/></svg><span><b>Inspección y seguridad</b><small>Escáneres y facilidades para controles de exportación.</small></span></div>
+                <div><svg class="ic"><use href="#icon-chart"/></svg><span><b>Procesos digitales</b><small>Información de operaciones y consulta de ciertos trámites.</small></span></div>
+              </div>
+              <div class="proposal-difference"><span class="proposal-difference-icon">→</span><div><b>¿Qué incorporaríamos?</b><p>Un portal para exportadores autorizados con hitos, alertas relevantes, responsables de incidencias y seguimiento previo al cut-off.</p></div></div>
+            </article>
+
+            <article class="proposal-coordination">
+              <div class="proposal-section-title"><span class="section-counter">02</span><div><span class="small-kicker">MEJORA OPERATIVA</span><h3>Preparar el embarque antes de la escala</h3></div></div>
+              <p class="proposal-description">Coordinar documentación, citas, inspecciones y ubicación en patio para anticipar obstáculos que podrían afectar el embarque de contenedores refrigerados.</p>
+              <div class="coordination-stages">
+                <div><span class="stage-orbit">A</span><b>Antes de recibir</b><small>Revisar reservas, cut-off y requisitos documentales aplicables.</small></div>
+                <div><span class="stage-orbit">B</span><b>Durante la permanencia</b><small>Consolidar conexión, controles e incidencias con responsables definidos.</small></div>
+                <div><span class="stage-orbit">C</span><b>Antes del embarque</b><small>Confirmar disponibilidad operativa e informar bloqueos pendientes.</small></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="proposal-outcomes">
+            <div class="outcomes-main"><span class="small-kicker">¿CÓMO PROBARÍAMOS EL VALOR?</span><h3>Piloto de 12 semanas. Resultados por medir, no por prometer.</h3><p>Primero se establece una línea base; luego se contrasta el desempeño de operaciones equivalentes.</p></div>
+            <div class="outcomes-measures">
+              <div><svg class="ic"><use href="#icon-clock"/></svg><span><b>Cut-off</b><small>Preparación y cumplimiento</small></span></div>
+              <div><svg class="ic"><use href="#icon-snow"/></svg><span><b>Conexión reefer</b><small>Tiempo gate–conexión</small></span></div>
+              <div><svg class="ic"><use href="#icon-shield"/></svg><span><b>Incidencias</b><small>Detección y resolución</small></span></div>
+            </div>
+          </div>
+
+          <p class="proposal-legal-note">Propuesta académica de valor comercial. No es una plataforma actualmente atribuible a TPG; su alcance, implementación y beneficios requieren validación con la terminal y los exportadores.</p>
         </section>
       </main>
     </div>
