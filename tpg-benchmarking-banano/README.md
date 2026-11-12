@@ -24,8 +24,8 @@ La interfaz permite navegar con botones, con las teclas 1–5 o con las flechas 
 - Calificaciones relativas de 1 a 5 con ponderaciones: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %.
 - Puntaje TPG: **3,65/5,00**; accesibilidad terrestre provisional por falta de mediciones carreteras comparables.
 - No se usa el precio como criterio ni se infieren TEU de banano a partir de tonelajes contenerizados.
-- Las fotografías/ilustraciones de terminales y las pantallas del servicio innovador no son evidencia operacional.
-- La **Control Tower es una propuesta académica**, presentada con una simulación didáctica sin conexión a TPG ni datos operativos reales; sus beneficios deberán medirse antes de atribuir resultados.
+- Las fotografías e ilustraciones son recursos de presentación, no evidencia operacional.
+- La **Control Tower es una propuesta académica**, explicada como un servicio de integración de hitos, alertas y coordinación con información autorizada. No se presenta como una plataforma implementada en TPG; los beneficios deberán medirse mediante un piloto.
 - No se prometen ahorros, reducciones o resultados porcentuales sin línea base.
 
 ## Fuentes esenciales
@@ -39,7 +39,7 @@ La interfaz permite navegar con botones, con las teclas 1–5 o con las flechas 
 
 ## Tecnología
 
-Sitio estático sin frameworks ni servicios externos: HTML, CSS y JavaScript, apto para GitHub Pages. Funciona sin acceso a bases de datos, con gráficos y demostración client-side.
+Sitio estático en HTML, CSS y JavaScript, apto para GitHub Pages. Incluye gráficos comparativos y consulta de evidencia; la propuesta de servicio se presenta mediante un recorrido visual explicativo, sin simulador ni conexión a datos operativos.
 
 **Docente:** Ing. Sandra Asanza Valencia, Mgtr.  
 **Entrega y exposición:** 16 de noviembre de 2026.
