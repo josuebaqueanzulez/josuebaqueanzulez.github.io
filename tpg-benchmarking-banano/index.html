@@ -7,6 +7,7 @@
   <meta name="description" content="Benchmarking portuario ECOTEC: propuesta de servicio de TPG para el banano ecuatoriano refrigerado. Grupo 2, 2025.">
   <title>TPG · Benchmarking del banano refrigerado | ECOTEC</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./visual.css">
   <script defer src="./app.js"></script>
 </head>
 <body>
@@ -73,7 +74,7 @@
                 <g fill="#a9d8d4"><circle cx="80" cy="116" r="5"/><circle cx="478" cy="80" r="5"/><circle cx="630" cy="78" r="5"/></g>
               </svg>
               <div class="harbor-overlay"><span class="harbor-dot"></span><div><small>PROPUESTA COMERCIAL</small><b>Cadena de frío · Control · Visibilidad</b></div></div>
-              <div class="image-note">Visualización ilustrativa, no fotografía documental del terminal.</div>
+              <div class="image-note">Foto de TPG: El Universo (2023); composición con gráficos ilustrativos.</div>
             </div>
           </div>
           <div class="hero-bottom">
@@ -88,7 +89,7 @@
           <div class="market-grid">
             <div class="panel market-panel">
               <div class="panel-top"><div><span class="small-kicker">COMPARATIVA DE TERMINALES</span><h3>Participación del grupo analizado</h3></div><div class="seg-control" role="group" aria-label="Indicador de participación"><button class="is-selected" type="button" data-market="teu" aria-pressed="true">TEU</button><button type="button" data-market="calls" aria-pressed="false">Escalas</button></div></div>
-              <div class="market-big"><strong id="marketTotal">2.581.944</strong><span id="marketUnit">TEU totales</span></div><div class="bar-list" id="marketBars" aria-live="polite"></div>
+              <div class="market-viz-wrap"><div class="market-donut" id="donutGraphic" role="img" aria-label="Gráfico circular de participación de las cuatro terminales"><div><b id="donutShare">26,42 %</b><small>Participación TPG</small></div></div><div class="market-viz-right"><div class="market-big"><strong id="marketTotal">2.581.944</strong><span id="marketUnit">TEU totales</span></div><div class="bar-list" id="marketBars" aria-live="polite"></div></div></div>
               <p class="panel-caption">Fuente: consigna ECOTEC, anexo común 2025 (p. 4). Los porcentajes no identifican por sí solos carga bananera.</p>
             </div>
             <div class="panel decision-panel">
@@ -180,7 +181,7 @@
     <div class="drawer-tabs" role="tablist"><button type="button" class="is-selected" data-tab="sources" role="tab" aria-selected="true">Fuentes</button><button type="button" data-tab="method" role="tab" aria-selected="false">Método</button><button type="button" data-tab="defense" role="tab" aria-selected="false">Defensa</button><button type="button" data-tab="script" role="tab" aria-selected="false">Guion</button></div>
     <div class="drawer-body" id="drawer-sources" data-drawer="sources">
       <h3>Fuentes y referencias</h3><p>Las cifras oficiales de 2025 se mantienen como base común del ejercicio.</p>
-      <ol class="source-list"><li><b>Consigna ECOTEC.</b> «Benchmarking portuario: ¿qué terminal ofrece el mejor servicio a la carga de banano?», pp. 1–4; anexo de datos comunes 2025, p. 4.</li><li><b>Boletín Estadístico Portuario SPTMF 2025.</b> Ficha TPG, p. 81; movimiento, escalas, horas y tonelajes, tablas 71, 78, 80–82, 89–90, 113, 115–117 y 135.</li><li><b>Fichas técnicas de Actividad 1.</b> TPG (Grupo 2), Contecon, DP World Posorja y Bananapuerto.</li><li><b>ICTSI, documentación 2025.</b> Capacidad de conexiones reefer Contecon (3.700).</li><li><b>Registro BASC de INARPI.</b> Evidencia de monitoreo reefer con vigencia 2026–2027; posterior al año base.</li><li><b>Hanseatic Global Terminals / fuentes operativas.</b> Descripción de servicios y conectividad; frecuencias completas no confirmadas.</li></ol>
+      <ol class="source-list"><li><b>Consigna ECOTEC.</b> «Benchmarking portuario: ¿qué terminal ofrece el mejor servicio a la carga de banano?», pp. 1–4; anexo de datos comunes 2025, p. 4.</li><li><b>Boletín Estadístico Portuario SPTMF 2025.</b> Ficha TPG, p. 81; movimiento, escalas, horas y tonelajes, tablas 71, 78, 80–82, 89–90, 113, 115–117 y 135.</li><li><b>Fichas técnicas de Actividad 1.</b> TPG (Grupo 2), Contecon, DP World Posorja y Bananapuerto.</li><li><b>ICTSI, documentación 2025.</b> Capacidad de conexiones reefer Contecon (3.700).</li><li><b>Registro BASC de INARPI.</b> Evidencia de monitoreo reefer con vigencia 2026–2027; posterior al año base.</li><li><b>Créditos fotográficos:</b> El Universo (TPG, 2023) y Vistazo (TPG, 2022); imágenes utilizadas como referencias editoriales del terminal.</li><li><b>Hanseatic Global Terminals / fuentes operativas.</b> Descripción de servicios y conectividad; frecuencias completas no confirmadas.</li></ol>
       <div class="reference-rule"><b>Regla de lectura</b><p>No se infiere cantidad de banano reefer a partir del total de carga contenerizada; tampoco se confunden escalas, productividad y permanencia del contenedor.</p></div>
     </div>
     <div class="drawer-body" id="drawer-method" data-drawer="method" hidden>
