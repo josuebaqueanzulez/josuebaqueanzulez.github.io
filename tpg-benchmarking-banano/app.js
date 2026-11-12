@@ -4,7 +4,7 @@
   const $$=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
   const scenes=$$(".scene"), navSteps=$$(".step"), main=$("main");
   const total=scenes.length;
-  let active=0, marketMode="teu", demoStage=0, priorFocus=null;
+  let active=0, marketMode="teu", priorFocus=null;
   const fmtInt=new Intl.NumberFormat("es-EC",{maximumFractionDigits:0});
   const fmtDec=new Intl.NumberFormat("es-EC",{minimumFractionDigits:2,maximumFractionDigits:2});
   const terminals=[
@@ -80,20 +80,6 @@
     $("#selectedContribution").textContent="Aporte: "+fmtDec.format(item.grade*item.weight);
     $("#selectedEvidence").textContent=item.evidence;
   }
-  function renderDemo(){
-    const states=[
-      {text:"Ingreso validado",label:"Ingreso registrado"},
-      {text:"Conexión registrada",label:"Conexión reefer"},
-      {text:"Inspección simulada",label:"Inspección registrada"},
-      {text:"Embarque simulado",label:"Confirmación de embarque"}
-    ];
-    $("#demoStatus").textContent=states[demoStage].text;
-    $("#demoTemp").textContent="Dentro de rango";
-    $$("#demoTimeline > div").forEach((el,i)=>{el.classList.toggle("is-done",i<=demoStage);el.classList.toggle("is-current",i===demoStage);});
-    $("#advanceDemo").innerHTML=demoStage===states.length-1?'Reiniciar simulación <svg class="ic"><use href="#icon-arrow"/></svg>':'Simular siguiente hito <svg class="ic"><use href="#icon-arrow"/></svg>';
-    const wave=$("#temperatureLine");
-    if(wave)wave.style.stroke=demoStage===2?"#e8c367":"#70e0bc";
-  }
   function openDrawer(tab="sources"){
     priorFocus=document.activeElement;
     $("#evidenceBackdrop").hidden=false;
@@ -117,8 +103,6 @@
   $("#next").addEventListener("click",()=>showScene(active===total-1?0:active+1,{focus:true}));
   $("#prev").addEventListener("click",()=>showScene(active-1,{focus:true}));
   $$("[data-market]").forEach(btn=>btn.addEventListener("click",()=>{marketMode=btn.dataset.market;marketRender();}));
-  $("#advanceDemo").addEventListener("click",()=>{demoStage=(demoStage+1)%4;renderDemo();});
-  $("#resetDemo").addEventListener("click",()=>{demoStage=0;renderDemo();});
   $("#openEvidence").addEventListener("click",()=>openDrawer());
   $("#closeEvidence").addEventListener("click",closeDrawer);
   $("#evidenceBackdrop").addEventListener("click",closeDrawer);
@@ -148,7 +132,7 @@
     portPhoto.onload=()=>{$(".harbor-visual")?.classList.add("photo-ready");};
     portPhoto.src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/REMOYQHG4BAGFL4OZLR73UVCVY.jpg";
   } catch(_) {}
-  marketRender();scoreRender();renderDemo();
+  marketRender();scoreRender();
   const initHash=location.hash.match(/^#([1-5])$/);
   showScene(initHash?Number(initHash[1])-1:0);
 })();
