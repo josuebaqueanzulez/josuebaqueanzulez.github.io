@@ -21,8 +21,8 @@
  };
  const matrix=[
   {title:"Infraestructura reefer",weight:.25,grade:4,evidence:"TPG declara 2.000 conexiones en 2025 con monitoreo y alarmas. En las fichas entregadas: DP World 2.180, Bananapuerto 1.400 (2021) y Contecon N/D (2025). No se infiere que N/D equivalga a ausencia de tomas."},
-  {title:"Conectividad con mercados",weight:.20,grade:3,evidence:"Escala documentada ONE Sparkle / AX3 en 2025. En septiembre de 2026 la gerencia comunicó siete líneas con vínculos hacia varias regiones. Faltan listas homogéneas de frecuencias y servicios directos."},
-  {title:"Servicios y protección",weight:.20,grade:4,evidence:"Boletín 2025: 3 escáneres Rapiscan, 16 básculas de gate, dos internas, áreas de SENAE, Agrocalidad y Antinarcóticos, monitoreo reefer y herramientas de gestión."},
+  {title:"Conectividad con mercados",weight:.20,grade:4,evidence:"Escala documentada ONE Sparkle / AX3 en 2025. En septiembre de 2026 la gerencia comunicó siete líneas con vínculos hacia varias regiones. Faltan listas homogéneas de frecuencias y servicios directos."},
+  {title:"Servicios y protección",weight:.20,grade:5,evidence:"Boletín 2025: 3 escáneres Rapiscan, 16 básculas de gate, dos internas, áreas de SENAE, Agrocalidad y Antinarcóticos, monitoreo reefer y herramientas de gestión."},
   {title:"Fluidez de la escala",weight:.15,grade:3,evidence:"2025: 11.760 horas en muelle / 301 escalas = 39,07 h por escala; 11.760/(2 × 8.760) = 67,12 % de ocupación estimada. Los promedios no bastan para medir productividad ni tiempos de gate."},
   {title:"Accesibilidad terrestre",weight:.15,grade:4,evidence:"TPG se encuentra en Isla Trinitaria y enlaza con el corredor de Vía Perimetral. La nota es provisional porque no hay distancias y tiempos comparables por carretera desde las zonas bananeras."},
   {title:"Acceso náutico",weight:.05,grade:4,evidence:"TPG: eslora máxima hasta 370 m y calado actual de 13 m con beneficio de marea según la ficha SPTMF 2025. Existe una restricción relativa frente al mayor calado de acceso de Posorja."}
@@ -56,7 +56,7 @@
   $("#sensitivityScore").textContent=two.format(total);
   $("#sensitivityScenario").textContent=scenario.label;
   $("#sensitivityWeightTotal").textContent=int.format(sumWeights*100)+" %";
-  const delta=Math.round((total-3.65)*100)/100;
+  const delta=Math.round((total-4.05)*100)/100;
   $("#sensitivityDelta").textContent=key==="base"?
     "Misma nota de la matriz académica":
     (delta>0?"+":"") + two.format(delta) + " puntos frente a la matriz oficial";
