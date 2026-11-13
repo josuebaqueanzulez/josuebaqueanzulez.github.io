@@ -72,11 +72,13 @@
       article.append(head,quality,desc,source);
       cards.appendChild(article);
    });
-   $$("[data-comp-row]",root).forEach(b=>{const active=Number(b.dataset.compRow)===index;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));b.closest("tr")?.classList.toggle("comp-row-active",active)});
+   $("[data-comp-row]",root).forEach(b=>{const active=Number(b.dataset.compRow)===index;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));b.closest("tr")?.classList.toggle("comp-row-active",active)});
+   $("[data-comp-nav]",root).forEach(b=>{const active=Number(b.dataset.compNav)===index;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});
  }
- $$("[data-comp-row]",root).forEach(button=>button.addEventListener("click",()=>{
+ $("[data-comp-row]",root).forEach(button=>button.addEventListener("click",()=>{
    render(Number(button.dataset.compRow));
-   if(window.innerWidth<=820)$("#compEvidence").scrollIntoView({behavior:"smooth",block:"nearest"});
+   $("#compEvidence").scrollIntoView({behavior:"smooth",block:"start"});
  }));
+ $("[data-comp-nav]",root).forEach(button=>button.addEventListener("click",()=>render(Number(button.dataset.compNav))));
  render(0);
 })();
