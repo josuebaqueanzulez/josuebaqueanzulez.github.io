@@ -84,7 +84,7 @@ Asimismo:
 
 ## Parte 3 · Comparar primero, puntuar TPG después
 
-La consigna solicita evaluar **la propia terminal** en seis criterios y compararla con las otras tres. Para justificar el «5 corresponde al mejor desempeño entre las cuatro», incluimos dos niveles:
+La consigna solicita evaluar **la propia terminal** en seis criterios y compararla con las otras tres. La **calificación** permanece en escala de 1 a 5, pero **el puntaje ponderado** se normaliza entre 0 y 1. Para justificar el «5 corresponde al mejor desempeño entre las cuatro», incluimos dos niveles:
 
 1. **Matriz comparativa exploratoria** de las cuatro terminales: misma escala, mismos seis pesos, 24 juicios argumentados, fuentes por celda y nota de incertidumbre. Es una **propuesta del Grupo 2**, no una calificación atribuida a los grupos competidores.
 2. **Matriz de TPG en el formato docente**: únicamente sus seis notas, aportes ponderados, evidencia y fuentes. El resultado se revisó después del ejercicio comparativo.
@@ -99,27 +99,29 @@ La consigna solicita evaluar **la propia terminal** en seis criterios y comparar
 | Fluidez de escala | 15 % | 5 | 5 | 3 | 4 |
 | Accesibilidad terrestre | 15 % | 5* | 3* | 4* | 5* |
 | Acceso náutico | 5 % | 3* | 5 | 4 | 3 |
-| **Total ponderado** | **100 %** | **4,25** | **4,70** | **4,05** | **3,85** |
+| **Total normalizado** | **1,00** | **0,85** | **0,94** | **0,81** | **0,77** |
 
 \* Especialmente provisional por falta de datos homogéneos. Un empate en 5 puede reflejar dos perfiles sólidos distintos de servicio: **no equivale a superioridad exclusiva**.
 
-**Clasificación bajo esas hipótesis:** DP World 1.º; Contecon 2.º; TPG 3.º; Bananapuerto 4.º. Se presenta como **orden de la matriz propuesta**, no como veredicto estadístico u oficial.
+**Clasificación bajo esas hipótesis:** DP World 0,94 (1.º); Contecon 0,85 (2.º); TPG 0,81 (3.º); Bananapuerto 0,77 (4.º). Se presenta como **orden de la matriz propuesta**, no como veredicto estadístico u oficial.
 
 **Precaución crítica:** no es posible declarar un ganador objetivo definitivo con la información disponible. En la ficha de Contecon faltan las tomas reefer, el calado y la eslora máxima; no equivalen a cero. La infraestructura de Bananapuerto utiliza 2021 en diversos apartados, mientras otras fuentes mezclan 2025 y consultas de 2026. Los orígenes agrícolas y tiempos terrestres comparables tampoco están calculados. Por tanto, el orden puede cambiar al completar estos campos. Se separan las **cifras originales de las fichas** de los **juicios y calificaciones de nuestra matriz**.
 
 ### Matriz TPG adaptada al formato de la profesora
 
-| Criterio | Peso | Calificación TPG | Aporte |
-|---|---:|---:|---:|
-| Reefer | 25 % | 4 | 1,00 |
-| Conectividad | 20 % | 4 | 0,80 |
-| Servicios y protección | 20 % | 5 | 1,00 |
-| Fluidez | 15 % | 3 | 0,45 |
-| Accesibilidad terrestre | 15 % | 4 | 0,60 |
-| Acceso náutico | 5 % | 4 | 0,20 |
-| **Total** | **100 %** | — | **4,05** |
+Cada aporte se calcula como **peso × (calificación / 5)**. Una calificación máxima de 5 recibe el peso completo, y el total máximo posible es **1,00**.
 
-La nota anterior de 3,65/5,00 queda sustituida **en la exposición web** por 4,05/5,00 tras justificar comparativamente conectividad (3→4) y servicios (4→5). **No se modifica el informe Word ni el Excel original** de la actividad: sus notas deben reconciliarse antes de presentar archivos entregables como una única versión final. La web explicita que este ejercicio compara según fichas y no implica que la profesora haya asignado las notas.
+| Criterio | Peso | Calificación TPG | Aporte normalizado |
+|---|---:|---:|---:|
+| Reefer | 0,25 | 4 | 0,20 |
+| Conectividad | 0,20 | 4 | 0,16 |
+| Servicios y protección | 0,20 | 5 | 0,20 |
+| Fluidez | 0,15 | 3 | 0,09 |
+| Accesibilidad terrestre | 0,15 | 4 | 0,12 |
+| Acceso náutico | 0,05 | 4 | 0,04 |
+| **Total** | **1,00** | — | **0,81** |
+
+Las calificaciones revisadas 4–4–5–3–4–4 producen **4,05/5 en escala no normalizada**, equivalente a **0,81/1,00 en la escala ponderada solicitada**. La antigua versión de la web mostraba erróneamente los aportes sin dividir entre cinco. **No se modifica el informe Word ni el Excel original** de la actividad: sus notas deben reconciliarse antes de presentar archivos entregables como una única versión final. La web explicita que este ejercicio compara según fichas y no implica que la profesora haya asignado las notas.
 
 ### Presentación actual de la sección 4
 
@@ -127,7 +129,7 @@ La **matriz comparativa de las cuatro terminales** permanece disponible en un pa
 
 **Criterio | Peso | Calificación (1–5) | Puntaje ponderado | Evidencia (dato y fuente)**.
 
-Los pesos se presentan en decimales (0,25, 0,20, 0,20, 0,15, 0,15 y 0,05), suman **1,00**, y el resultado propuesto sigue siendo **4,05/5,00**.
+Los pesos se presentan en decimales (0,25, 0,20, 0,20, 0,15, 0,15 y 0,05), suman **1,00**, y el resultado propuesto normalizado es **0,81/1,00**.
 
 Debajo de la tabla se incorpora un apartado **separado**, con dos fortalezas (cadena de frío instalada, servicios de inspección y protección) y dos debilidades (39,07 h/escala y condicionante de marea/canal de acceso). En consecuencia, estos juicios **no se agregan en el interior de la columna de evidencia**. La tabla original de infraestructura de los otros grupos es consultable en otro desplegable. Se eliminaron de la sección 4 el análisis de sensibilidad, el gráfico radial y los indicadores duplicados: los cuatro KPI de 2025 se muestran una sola vez en la sección 3.
 
