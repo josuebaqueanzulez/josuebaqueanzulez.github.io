@@ -13,9 +13,10 @@
 <link rel="stylesheet" href="./tour.css">
 <link rel="stylesheet" href="./matrix-plus.css">
 <link rel="stylesheet" href="./comparison.css">
+<link rel="stylesheet" href="./concise.css">
 <script defer src="./app.js?v=navegacion-corregida-20261113"></script>
 <script defer src="./tour.js"></script>
-<script defer src="./comparison.js"></script>
+<script defer src="./comparison.js?v=20261113c"></script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar a la exposición</a>
@@ -126,13 +127,13 @@
 <section class="scene" id="scene-3" data-short="Benchmarking" hidden>
  <div class="section-heading">
    <div class="kicker">03 · COMPARACIÓN RELATIVA + MATRIZ OFICIAL DE TPG</div>
-   <h2>Primero evaluamos a todos.<br><em>Después defendemos nuestra nota.</em></h2>
-   <p>Seis criterios con los pesos exactos de ECOTEC. Las cuatro calificaciones son propuestas académicas y pueden revisarse cuando existan datos faltantes; las cifras de las fichas originales no se modifican.</p>
+   <h2>TPG compite con evidencia.<br><em>La decisión va más allá del tamaño.</em></h2>
+   <p>Seis criterios y pesos oficiales. Evaluación comparativa propuesta por el Grupo 2, con notas y fuentes sujetas a revisión.</p>
  </div>
 
  <div class="compare-panel" id="comparePanel">
   <div class="compare-heading">
-   <div><span class="micro">MATRIZ 01 / COMPARATIVA · CUATRO TERMINALES</span><h3>¿Quién ofrece la mejor combinación para el banano reefer?</h3><p>Esta clasificación es <strong>una hipótesis evaluativa del Grupo 2</strong>, no una calificación atribuida a los otros grupos o a la profesora. Usa las fichas recibidas y el anexo común 2025.</p></div>
+   <div><span class="micro">MATRIZ 01 / COMPARATIVA · CUATRO TERMINALES</span><h3>4 terminales. 6 criterios. 1 decisión.</h3><p>Notas relativas propuestas por el Grupo 2, basadas en fichas y datos comunes de 2025; no constituyen un veredicto oficial.</p></div>
    <div class="compare-legend"><span><i class="compare-legend-dot five"></i> 5 = líder / desempeño mejor sustentado</span><span><i class="compare-legend-dot four"></i> 4 = sólido</span><span><i class="compare-legend-dot three"></i> 3 = atiende con limitaciones</span></div>
   </div>
   <div class="compare-table-scroll">
@@ -149,7 +150,14 @@
     <tfoot><tr><th>PUNTAJE PONDERADO</th><td>100 %</td><td>4,25</td><td>4,70</td><td class="focus-tpg">4,05</td><td>3,85</td></tr><tr class="comp-positions"><th>Orden bajo esta propuesta</th><td>—</td><td>2.º</td><td>1.º</td><td class="focus-tpg">3.º</td><td>4.º</td></tr></tfoot>
    </table>
   </div>
-  <div class="comp-note">* Calificación provisional o especialmente sensible a información faltante. Los empates de 5 expresan fortalezas comparables en dimensiones distintas. <strong>N/D nunca equivale a cero.</strong> No es un ranking definitivo ni un contraste homogéneo de infraestructura 2025.</div>
+  <div class="comp-note">* Notas provisionales por datos incompletos o años distintos. <strong>N/D no equivale a cero.</strong> El orden puede cambiar con evidencia homogénea.</div>
+  <div class="comp-executive">
+    <div class="comp-executive-score"><span>RESULTADO PROPUESTO · TPG</span><strong>3.º <small>de 4</small></strong><b>4,05 / 5,00</b></div>
+    <div class="comp-executive-argument"><span>FORTALEZA CLAVE</span><strong>Servicios y protección · 5/5</strong><p>3 escáneres, espacios para controles y apoyo a inspección refrigerada, según SPTMF 2025.</p></div>
+    <div class="comp-executive-argument risk"><span>PUNTO A MEJORAR</span><strong>Fluidez de escala · 3/5</strong><p>39,07 h/escala. Dato desfavorable que no equivale, por sí solo, a baja productividad.</p></div>
+  </div>
+  <details class="comp-detail" id="compDetail">
+   <summary><span><b>¿Por qué asignamos cada nota?</b><small>24 justificaciones, cifras, fuentes y limitaciones para la defensa</small></span><i>Consultar evidencia ↗</i></summary>
   <div class="comp-evidence" id="compEvidence" aria-live="polite">
     <div class="comp-evidence-head"><div><span class="micro">PRUEBA DEL CRITERIO SELECCIONADO</span><h4 id="compEvidenceTitle">01 · Infraestructura reefer</h4><p id="compEvidenceIntro">La comparación pondera capacidad declarada, servicios de conexión y monitoreo. El número de tomas por sí solo no prueba disponibilidad real.</p></div><div class="comp-evidence-weight"><span>PESO</span><b id="compEvidenceWeight">25 %</b></div></div>
     <div class="comp-quick-nav" role="group" aria-label="Cambiar criterio sin volver a la tabla">
@@ -163,13 +171,10 @@
     <div class="comp-evidence-grid" id="compEvidenceCards"></div>
     <div class="comp-caveat" id="compEvidenceCaveat">Contecon: cantidad de tomas no reportada en su ficha (N/D); su nota es provisional y debe comprobarse antes del cierre de la matriz consolidada.</div>
   </div>
-  <div class="compare-ranking">
-   <div class="compare-ranking-head"><span class="micro">RESULTADO PONDERADO · VISUALIZACIÓN SOBRE 5</span><b>Clasificación preliminar, no veredicto</b></div>
-   <div class="compare-ranking-rows"><div><span class="rank-num">01</span><b>DP World Posorja</b><div class="compare-rank-track"><i style="width:94%"></i></div><strong>4,70</strong></div><div><span class="rank-num">02</span><b>Contecon</b><div class="compare-rank-track"><i style="width:85%"></i></div><strong>4,25</strong></div><div class="rank-tpg"><span class="rank-num">03</span><b>TPG</b><div class="compare-rank-track"><i style="width:81%"></i></div><strong>4,05</strong></div><div><span class="rank-num">04</span><b>Bananapuerto</b><div class="compare-rank-track"><i style="width:77%"></i></div><strong>3,85</strong></div></div>
-   <p>La posición puede cambiar si se verifican las tomas reefer de Contecon, los itinerarios contemporáneos o las distancias reales desde cada zona productora.</p>
-  </div>
+  </details>
  </div>
- <div class="official-divider"><span>MATRIZ 02 · SOLO TPG, SEGÚN EL FORMATO DE LA CONSIGNA</span><p>Después de asignar las notas relativas, reproducimos exclusivamente los seis criterios y el puntaje de nuestra terminal.</p></div> <div class="matrix-layout">
+ <details class="comp-detail official-comp-detail" id="officialCompDetail">
+  <summary><span><b>Matriz oficial de TPG · 4,05 / 5,00</b><small>Seis criterios, aportes, fuentes y defensa técnica</small></span><i>Ver detalle ↗</i></summary> <div class="official-divider"><span>MATRIZ 02 · SOLO TPG, SEGÚN EL FORMATO DE LA CONSIGNA</span><p>Después de asignar las notas relativas, reproducimos exclusivamente los seis criterios y el puntaje de nuestra terminal.</p></div> <div class="matrix-layout">
    <div class="matrix-left">
     <div class="matrix-main-result"><div><span>EVALUACIÓN ACADÉMICA · PESOS DE LA DOCENTE</span><strong>4,05 <small>/ 5,00</small></strong></div><div class="ring-progress" aria-label="4,05 sobre 5,00"><span>81 %</span></div></div>
     <div class="matrix-column-head" aria-hidden="true"><span>CRITERIO</span><span>PESO</span><span>NOTA</span><span>APORTE</span></div>
@@ -191,7 +196,10 @@
     <div class="limitations"><h4>Dos consideraciones que sí reconocemos</h4><p><b>Fluidez:</b> 39,07 h/escala en 2025, sin equipararlo automáticamente a una falla de productividad.</p><p><b>Acceso náutico:</b> calado de 13 m con beneficio de marea, sujeto a restricciones frente a Posorja.</p></div>
    </div>
  </div>
- <div class="sensitivity" id="sensitivity" aria-label="Análisis de sensibilidad de la evaluación TPG">
+
+ </details>
+ <details class="comp-detail sensitivity-comp-detail" id="sensitivityCompDetail">
+  <summary><span><b>Escenarios de sensibilidad</b><small>¿Qué ocurre si cambian las prioridades del exportador? · Análisis complementario</small></span><i>Explorar ↗</i></summary> <div class="sensitivity" id="sensitivity" aria-label="Análisis de sensibilidad de la evaluación TPG">
   <div class="sensitivity-header">
     <div><span class="micro">ANÁLISIS DE SENSIBILIDAD · DEMOSTRACIÓN ACADÉMICA</span>
       <h3>¿Cambiaría nuestra nota si el exportador tuviera <em>otras prioridades?</em></h3>
@@ -225,10 +233,12 @@
         <polygon id="radarPolygon" fill="rgba(47,166,151,.22)" stroke="#138782" stroke-width="2.5" stroke-linejoin="round" points=""></polygon>
         <g id="radarPoints"></g>
       </svg>
-      <p>El radar representa las notas de cada criterio (4–3–4–3–4–4); por eso permanece idéntico entre escenarios.</p>
+      <p>El radar representa las notas de cada criterio (4–4–5–3–4–4); por eso permanece idéntico entre escenarios.</p>
     </div>
   </div>
  </div>
+
+ </details>
  <details class="indicators-accordion" id="indicators2025">
    <summary><span><b>Indicadores 2025 exigidos por la profesora</b><small>Comparación de escala y carga entre las cuatro terminales, calculada con el anexo común</small></span><i>Ver tabla y método ↓</i></summary>
    <div class="indicators-table-wrap"><table>
