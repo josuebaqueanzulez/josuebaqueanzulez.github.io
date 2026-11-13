@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="./comparison.css">
 <link rel="stylesheet" href="./concise.css">
 <link rel="stylesheet" href="./indicators-2025.css">
-<script defer src="./app.js?v=navegacion-corregida-20261113"></script>
+<link rel="stylesheet" href="./formal-matrix.css">
+<script defer src="./app.js?v=matriz-formato-docente-20261113"></script>
 <script defer src="./tour.js"></script>
 <script defer src="./comparison.js?v=20261113c"></script>
 </head>
@@ -204,10 +205,9 @@
    </table>
   </div>
   <div class="comp-note">* Notas provisionales por datos incompletos o años distintos. <strong>N/D no equivale a cero.</strong> El orden puede cambiar con evidencia homogénea.</div>
-  <div class="comp-executive">
-    <div class="comp-executive-score"><span>RESULTADO PROPUESTO · TPG</span><strong>3.º <small>de 4</small></strong><b>4,05 / 5,00</b></div>
-    <div class="comp-executive-argument"><span>FORTALEZA CLAVE</span><strong>Servicios y protección · 5/5</strong><p>3 escáneres, espacios para controles y apoyo a inspección refrigerada, según SPTMF 2025.</p></div>
-    <div class="comp-executive-argument risk"><span>PUNTO A MEJORAR</span><strong>Fluidez de escala · 3/5</strong><p>39,07 h/escala. Dato desfavorable que no equivale, por sí solo, a baja productividad.</p></div>
+  <div class="comp-brief">
+   <strong>Resultado de nuestra comparación: TPG 3.º · 4,05/5</strong>
+   <span>La clasificación es provisional: existen datos faltantes, fechas diferentes y criterios que requieren verificación homogénea.</span>
   </div>
   <details class="comp-detail" id="compDetail">
    <summary><span><b>¿Por qué asignamos cada nota?</b><small>24 justificaciones, cifras, fuentes y limitaciones para la defensa</small></span><i>Consultar evidencia ↗</i></summary>
@@ -226,85 +226,66 @@
   </div>
   </details>
  </div>
- <details class="comp-detail official-comp-detail" id="officialCompDetail">
-  <summary><span><b>Matriz TPG · 4,05 / 5,00</b><small>Seis criterios, aportes, fuentes y defensa técnica</small></span><i>Ver detalle ↗</i></summary> <div class="official-divider"><span>MATRIZ 02 · SOLO TPG, SEGÚN EL FORMATO DE LA CONSIGNA</span><p>Después de asignar las notas relativas, reproducimos exclusivamente los seis criterios y el puntaje de nuestra terminal.</p></div> <div class="matrix-layout">
-   <div class="matrix-left">
-    <div class="matrix-main-result"><div><span>CALIFICACIÓN PROPUESTA · PESOS DE LA DOCENTE</span><strong>4,05 <small>/ 5,00</small></strong></div><div class="ring-progress" aria-label="4,05 sobre 5,00"><span>81 %</span></div></div>
-    <div class="matrix-column-head" aria-hidden="true"><span>CRITERIO</span><span>PESO</span><span>NOTA</span><span>APORTE</span></div>
-    <div class="matrix-rows" id="matrixRows"></div>
-    <div class="matrix-math"><span>REGLA DE CÁLCULO</span><strong>Σ (peso × nota) = 4,05</strong><small>Escala 1 a 5 · Los pesos suman 100 %</small></div>
-    <div class="matrix-fine">Pesos exactos de la consigna: 25 / 20 / 20 / 15 / 15 / 5 %. Nota relativa propuesta; conectividad y accesibilidad terrestre siguen siendo comparaciones provisionales.</div>
-   </div>
-   <div class="matrix-right">
-    <div class="proof-eyebrow">¿POR QUÉ ESA NOTA?</div><h3 id="matrixTitle">Infraestructura reefer</h3>
-    <div class="matrix-selected"><span id="matrixGrade">4 / 5</span><small id="matrixWeight">Peso 25 % · aporte 1,00</small></div>
-    <p id="matrixEvidence">Tomas, monitoreo y alarmas reefer declaradas por TPG; comparación basada en las fichas de los cuatro grupos.</p>
-    <div class="matrix-trace">
-      <div><span>TRAZABILIDAD DE LA NOTA</span><strong id="matrixSource">Boletín SPTMF 2025 y fichas técnicas</strong></div>
-      <div><span>CALIDAD COMPARATIVA</span><strong id="matrixConfidence">Parcial: fichas con datos faltantes</strong></div>
+ <div class="tpg-formal-matrix" id="matrizTPG">
+  <div class="tpg-formal-heading">
+    <div><span class="micro">MATRIZ 02 · TPG / FORMATO DE LA PROFESORA</span>
+     <h3>Evaluación ponderada <em>de nuestra terminal.</em></h3>
+     <p>Las calificaciones se sustentan en la comparación anterior. Se respetan los seis criterios y pesos de la consigna.</p>
     </div>
-    <div class="matrix-risk"><span>RESERVA METODOLÓGICA</span><p id="matrixCaveat">La capacidad nominal no representa disponibilidad instantánea ni desempeño térmico medido.</p></div>
-    <a id="matrixSourceLink" class="matrix-link" href="https://www.mit.gob.ec/boletines-estadisticos-portuarios/" target="_blank" rel="noopener noreferrer">Consultar soporte de este criterio ↗</a>
-    <button type="button" id="openPeer" class="outline-btn">Consultar cifras originales de las fichas <span>↗</span></button>
-    <div class="limitations"><h4>Dos consideraciones que sí reconocemos</h4><p><b>Fluidez:</b> 39,07 h/escala en 2025, sin equipararlo automáticamente a una falla de productividad.</p><p><b>Acceso náutico:</b> calado de 13 m con beneficio de marea, sujeto a restricciones frente a Posorja.</p></div>
-   </div>
+    <div class="tpg-formal-total"><span>RESULTADO PROPUESTO</span><strong>4,05 <small>/ 5,00</small></strong></div>
+  </div>
+  <div class="tpg-formal-table-wrap">
+   <table class="tpg-formal-table">
+    <thead>
+     <tr><th scope="col">Criterio</th><th scope="col">Peso</th><th scope="col">Calificación<br>(1–5)</th><th scope="col">Puntaje<br>ponderado</th><th scope="col">Evidencia (dato y fuente)</th></tr>
+    </thead>
+    <tbody>
+     <tr><th scope="row">1. Infraestructura reefer</th><td>0,25</td><td>4</td><td>1,00</td><td>2.000 conexiones (1.140 fijas y 860 power packs), con monitoreo y alarmas. <span class="tpg-source">SPTMF, Boletín 2025, ficha TPG, p. 81.</span></td></tr>
+     <tr><th scope="row">2. Conectividad con los mercados del banano</th><td>0,20</td><td>4</td><td>0,80</td><td>Escala del ONE Sparkle / servicio AX3 en 2025; TPG informó siete líneas navieras en 2026. <span class="tpg-source">PortalPortuario (06/05/2025); Primicias (03/09/2026).</span></td></tr>
+     <tr><th scope="row">3. Servicios a la carga y protección</th><td>0,20</td><td>5</td><td>1,00</td><td>3 escáneres Rapiscan, 16 básculas de gate y 384 m² de cámaras de frío para inspecciones; presencia de autoridades de control. <span class="tpg-source">SPTMF 2025, ficha TPG, p. 81.</span></td></tr>
+     <tr><th scope="row">4. Fluidez de la escala</th><td>0,15</td><td>3</td><td>0,45</td><td>11.760 horas de muelle / 301 escalas = 39,07 h por escala (el promedio más alto del grupo). <span class="tpg-source">Anexo docente ECOTEC, 2025.</span></td></tr>
+     <tr><th scope="row">5. Accesibilidad terrestre</th><td>0,15</td><td>4*</td><td>0,60</td><td>Terminal en Isla Trinitaria, enlazado con Vía Perimetral. La ventaja es provisional: faltan tiempos desde zonas productoras. <span class="tpg-source">Ficha TPG; CAMAE.</span></td></tr>
+     <tr><th scope="row">6. Acceso náutico</th><td>0,05</td><td>4</td><td>0,20</td><td>Hasta 13 m de calado autorizado con beneficio de marea y 370 m de eslora admitida. <span class="tpg-source">SPTMF 2025, ficha TPG, p. 81.</span></td></tr>
+    </tbody>
+    <tfoot>
+     <tr><th scope="row">Total</th><td>1,00</td><td>—</td><td>4,05</td><td>Σ (peso × calificación). Evaluación propuesta por el Grupo 2.</td></tr>
+    </tfoot>
+   </table>
+  </div>
+  <p class="tpg-formal-note">* Nota terrestre provisional. Las cifras de carga de 2025 provienen del anexo docente; el dato sobre siete líneas corresponde a 2026. Las horas por escala no equivalen a productividad.</p>
  </div>
-
+ <div class="tpg-swot" id="fortalezasDebilidades">
+  <div class="tpg-swot-heading"><span class="micro">LECTURA COMERCIAL · FORTALEZAS Y DEBILIDADES</span><h3>¿Qué podemos defender y qué debemos mejorar?</h3></div>
+  <div class="tpg-swot-cols">
+   <section class="tpg-swot-good" aria-label="Fortalezas de TPG">
+    <h4><span>+</span> Fortalezas</h4>
+    <div class="tpg-swot-point"><b>Cadena de frío instalada</b><p>2.000 conexiones reefer y procedimientos de seguimiento de alarmas: capacidad para atender exportación refrigerada.</p></div>
+    <div class="tpg-swot-point"><b>Control y protección de la carga</b><p>Escáneres, básculas y áreas de inspección que respaldan la gestión de seguridad y controles de exportación.</p></div>
+   </section>
+   <section class="tpg-swot-bad" aria-label="Debilidades de TPG">
+    <h4><span>−</span> Debilidades</h4>
+    <div class="tpg-swot-point"><b>Mayor permanencia promedio de buques</b><p>39,07 horas por escala en 2025, aunque ese promedio no permite determinar por sí solo la productividad real.</p></div>
+    <div class="tpg-swot-point"><b>Restricción de acceso náutico</b><p>Calado autorizado de hasta 13 m con beneficio de marea, frente a condiciones declaradas más amplias en Posorja.</p></div>
+   </section>
+  </div>
+  <p class="tpg-swot-message"><strong>Conclusión comercial:</strong> TPG ofrece infraestructura reefer y controles sólidos; nuestra propuesta busca fortalecer la coordinación de hitos para abordar sus oportunidades de mejora.</p>
+ </div>
+ <details class="tpg-original-fiches">
+  <summary><strong>Consultar cifras originales de las fichas de los grupos</strong><span>Documentación complementaria ↗</span></summary>
+  <div class="tpg-original-scroll">
+   <table>
+    <thead><tr><th>Variable</th><th>TPG</th><th>Contecon</th><th>DP World</th><th>Bananapuerto</th></tr></thead>
+    <tbody>
+     <tr><th>Conexiones reefer</th><td>2.000 (2025)</td><td>N/D</td><td>2.180</td><td>1.400 (2021)</td></tr>
+     <tr><th>Muelle</th><td>660 m</td><td>1.625 m</td><td>467,5 m</td><td>360 m (2021)</td></tr>
+     <tr><th>Eslora admisible</th><td>370 m</td><td>N/D</td><td>397 m</td><td>306 m (2021)</td></tr>
+     <tr><th>Grúas STS</th><td>5</td><td>5</td><td>4</td><td>2 (2021)</td></tr>
+     <tr><th>Grúas RTG</th><td>11</td><td>23</td><td>15</td><td>5 (2021)</td></tr>
+    </tbody>
+   </table>
+  </div>
+  <p>N/D indica que la ficha no reporta el dato, no que la terminal carezca de infraestructura. Las fechas de referencia no son homogéneas.</p>
  </details>
- <details class="comp-detail sensitivity-comp-detail" id="sensitivityCompDetail">
-  <summary><span><b>Escenarios de sensibilidad</b><small>¿Qué ocurre si cambian las prioridades del exportador? · Análisis complementario</small></span><i>Explorar ↗</i></summary> <div class="sensitivity" id="sensitivity" aria-label="Análisis de sensibilidad de la evaluación TPG">
-  <div class="sensitivity-header">
-    <div><span class="micro">ANÁLISIS DE SENSIBILIDAD · DEMOSTRACIÓN ACADÉMICA</span>
-      <h3>¿Cambiaría nuestra nota si el exportador tuviera <em>otras prioridades?</em></h3>
-      <p>Las notas 1–5 permanecen iguales. Únicamente cambiamos el peso de los seis criterios para explorar perfiles comerciales. El puntaje oficial no se modifica.</p>
-    </div>
-    <span class="sensitivity-mark">PESOS = 100 %</span>
-  </div>
-  <div class="sensitivity-presets" role="group" aria-label="Escenario de ponderaciones">
-    <button type="button" class="active" data-scenario="base" aria-pressed="true"><b>Base ECOTEC</b><small>Ponderación oficial</small></button>
-    <button type="button" data-scenario="cold" aria-pressed="false"><b>Frío prioritario</b><small>Más peso reefer</small></button>
-    <button type="button" data-scenario="routes" aria-pressed="false"><b>Servicio y fluidez</b><small>Más peso conectividad / escala</small></button>
-  </div>
-  <div class="sensitivity-body">
-    <div class="sensitivity-number">
-      <div class="sensitivity-score-label" id="sensitivityScenario">BASE DOCENTE</div>
-      <div class="sensitivity-score"><strong id="sensitivityScore">4,05</strong><span>/ 5,00</span></div>
-      <div id="sensitivityDelta" class="sensitivity-delta">Misma nota de la matriz académica</div>
-      <div class="sensitivity-official"><span>NOTA BASE DE ESTA WEB</span><strong>4,05/5,00</strong></div>
-      <p>Esto no demuestra una mejora operativa ni determina el mejor terminal; solo cambia la ponderación de TPG bajo supuestos explícitos.</p>
-    </div>
-    <div class="sensitivity-contributions">
-      <div class="sensitivity-columns"><span>CRITERIO</span><span>PESO</span><span>APORTE</span></div>
-      <div id="sensitivityRows" aria-live="polite"></div>
-      <div class="sensitivity-contributions-foot"><span>Total ponderaciones</span><strong id="sensitivityWeightTotal">100 %</strong></div>
-    </div>
-    <div class="sensitivity-radar">
-      <div><span class="micro">PERFIL DE CALIFICACIONES</span><h4>Fortalezas y espacios de mejora</h4></div>
-      <svg viewBox="0 0 300 305" role="img" aria-label="Gráfico radial de las seis calificaciones TPG de 1 a 5" id="matrixRadar">
-        <g id="radarGrid"></g>
-        <g id="radarAxes"></g>
-        <polygon id="radarPolygon" fill="rgba(47,166,151,.22)" stroke="#138782" stroke-width="2.5" stroke-linejoin="round" points=""></polygon>
-        <g id="radarPoints"></g>
-      </svg>
-      <p>El radar representa las notas de cada criterio (4–4–5–3–4–4); por eso permanece idéntico entre escenarios.</p>
-    </div>
-  </div>
- </div>
-
- </details>
- <div class="peer-panel" id="peerPanel" hidden>
-   <div class="peer-head"><div><div class="micro">DATOS DE INFRAESTRUCTURA</div><h3>Valores de las fichas de Actividad 1, sin modificarlos</h3></div><button type="button" class="round-close" id="closePeer" aria-label="Cerrar tabla">×</button></div>
-   <div class="peer-overflow">
-    <table><thead><tr><th>Variable</th><th>TPG · Grupo 2</th><th>Contecon · ficha</th><th>DP World · ficha</th><th>Bananapuerto · ficha</th></tr></thead><tbody>
-      <tr><th>Conexiones reefer</th><td><strong>2.000</strong><small>2025</small></td><td>N/D<small>2025</small></td><td>2.180<small>Ficha técnica entregada</small></td><td>1.400<small>2021</small></td></tr>
-      <tr><th>Longitud de muelle</th><td>660 m<small>2025</small></td><td>1.625 m<small>2025</small></td><td>467,5 m<small>Ficha técnica entregada</small></td><td>360 m<small>2021</small></td></tr>
-      <tr><th>Eslora admisible</th><td>370 m<small>2025</small></td><td>N/D<small>2025</small></td><td>397 m<small>Ficha técnica entregada</small></td><td>306 m<small>2021</small></td></tr>
-      <tr><th>Grúas STS</th><td>5<small>2025</small></td><td>5<small>2025</small></td><td>4<small>Ficha técnica entregada</small></td><td>2<small>2021</small></td></tr>
-      <tr><th>Grúas RTG</th><td>11<small>2025</small></td><td>23<small>2025</small></td><td>15<small>Ficha técnica entregada</small></td><td>5<small>2021</small></td></tr>
-    </tbody></table>
-   </div>
-   <p>Una cifra no reportada (N/D) <strong>no significa cero</strong>. Las fichas tienen años y alcances diferentes; esta tabla describe lo entregado, pero no establece un ranking actualizado de infraestructura.</p>
- </div>
 </section>
 
 <section class="scene" id="scene-4" data-short="Propuesta de valor" hidden>
