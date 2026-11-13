@@ -1,0 +1,73 @@
+/* TPG · Visita comercial aérea, recorrido reefer y trazabilidad terrestre */
+.experience{margin:21px 0 20px;box-shadow:0 15px 44px rgba(12,51,63,.075);background:#fff;border:1px solid #e2ece8;border-radius:48px 17px 52px 17px;padding:clamp(17px,2.4vw,32px);position:relative;overflow:hidden}
+.experience:before{position:absolute;content:"";height:340px;width:340px;border-radius:50%;border:45px solid rgba(26,139,133,.04);top:-260px;right:-160px;pointer-events:none}
+.experience-head{display:flex;align-items:end;justify-content:space-between;gap:20px;position:relative;z-index:2;margin-bottom:23px}
+.experience-head h3{font-family:"Outfit",Arial,sans-serif;color:#12374b;font-size:clamp(26px,2.55vw,40px);margin:6px 0 6px;letter-spacing:-.041em;line-height:1.12}
+.experience-head h3 em,.reef-intro h4 em,.gate-main h4 em{font-style:normal;color:#188a87}
+.experience-head p{color:#718b91;font-size:11.5px;line-height:1.5;margin:0;max-width:570px}
+.experience-tabs{display:flex;gap:5px;flex-wrap:wrap;padding:5px;background:#edf4f0;border:1px solid #e1ece7;border-radius:40px}
+.experience-tabs button{border:0;background:transparent;border-radius:30px;padding:11px 15px;color:#4c747c;font-weight:800;font-size:10.5px;white-space:nowrap;transition:background .18s,color .18s}
+.experience-tabs button.active{background:#0a6170;color:#f8fff9;box-shadow:0 5px 15px rgba(17,105,109,.15)}
+.experience-tabs button:hover:not(.active){background:#dbece6}
+.experience-view{position:relative;animation:tourFade .28s ease both}
+@keyframes tourFade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+.aerial-grid{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(310px,.87fr);gap:16px}
+.aerial-map{min-width:0;border-radius:17px 42px 17px 45px;overflow:hidden;background:#0b2e41;display:flex;flex-direction:column;min-height:497px}
+.aerial-toolbar{height:47px;flex:none;background:#08293b;color:#b4d4d5;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 18px;font-size:9px;font-weight:850;letter-spacing:.1em}
+.aerial-toolbar span:first-child{color:#f1d180;display:flex;align-items:center;gap:8px}.aerial-toolbar i{height:7px;width:7px;border-radius:50%;background:#90ddbc;display:inline-block;box-shadow:0 0 0 5px rgba(139,219,189,.13)}
+.aerial-iframe{position:relative;min-height:390px;flex:1;background:#123f50}
+.aerial-photo-fallback{position:absolute;inset:0;background:linear-gradient(100deg,rgba(13,44,56,.5),rgba(13,44,56,.06)),url("https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/UF55UQOBVRAY7GTNB6DMCVN6KM.jpg") center/cover no-repeat}
+.aerial-iframe iframe{position:absolute;inset:0;border:0;width:100%;height:100%;background:transparent}
+.aerial-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:60px;padding:11px 16px;background:#0b3547;color:#a1c5c5;font-size:10px;line-height:1.35}
+.aerial-foot a{color:#f3d17c;text-decoration:none;font-weight:850;white-space:nowrap}.aerial-foot a:hover{text-decoration:underline}
+.tour-side{border:1px solid #e2ece6;background:linear-gradient(155deg,#f7faf7,#eef6f1);border-radius:44px 15px 47px 15px;padding:clamp(15px,1.85vw,24px);min-width:0;display:flex;flex-direction:column}
+.tour-side .micro{color:#247c7b;font-size:9px}
+.tour-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:14px 0}
+.tour-buttons button{min-width:0;display:flex;align-items:center;text-align:left;gap:8px;background:#fff;border:1px solid #d7e8e1;border-radius:18px 7px 19px 7px;color:#38616d;padding:12px 10px;font-size:10.5px;font-weight:800;transition:.17s}
+.tour-buttons button:nth-child(even){border-radius:7px 20px 8px 21px}
+.tour-buttons button span{display:grid;place-items:center;border-radius:50%;width:27px;height:27px;flex-shrink:0;background:#edf5ef;color:#14817d;font-family:"Outfit";font-size:11px}
+.tour-buttons button.active{color:#fff;border-color:#0e6872;background:linear-gradient(105deg,#0b5f6a,#147980);box-shadow:0 7px 14px rgba(14,104,109,.13)}
+.tour-buttons button.active span{background:#eac16b;color:#113b49}
+.tour-buttons button:hover{transform:translateY(-1px);border-color:#85bdb3}
+.tour-explainer{background:#fff;padding:18px;border-radius:26px 10px 26px 10px;box-shadow:0 6px 20px rgba(16,76,79,.045);min-height:232px}
+.tour-explainer>span{color:#b38a39;font-size:10px;letter-spacing:.08em;font-weight:900}
+.tour-explainer h4{font-size:clamp(19px,1.75vw,26px);line-height:1.15;color:#173e4f;margin:7px 0 8px;font-weight:800;letter-spacing:-.027em}
+.tour-explainer>p{font-size:11px;line-height:1.56;color:#627d85;margin:0 0 12px}
+.tour-value{border-left:3px solid #dcba64;background:#fff6e4;border-radius:3px 17px 9px 18px;padding:9px 12px}.tour-value b{color:#a08037;font-size:9px;letter-spacing:.09em}.tour-value p{margin:4px 0 0;color:#446875;font-size:11px;line-height:1.5}
+.tour-explainer small{display:block;color:#91a3a7;font-size:9px;line-height:1.4;margin-top:9px}
+.tour-caveat{margin:auto 0 0;padding:12px 2px 0;color:#769198;font-size:9.5px;line-height:1.47}
+.tour-caveat strong{color:#3a5f69}
+.reef-experience{border-radius:17px 46px 17px 42px;background:linear-gradient(115deg,#eaf5ef,#f8faf5);padding:clamp(22px,2.65vw,38px);min-height:464px;border:1px solid #dcece5}
+.reef-intro h4,.gate-main h4{font-size:clamp(28px,3vw,42px);letter-spacing:-.041em;line-height:1.1;color:#143f52;margin:10px 0}
+.reef-intro p{font-size:12px;color:#6e8990;line-height:1.6;max-width:750px;margin:0}
+.reef-track{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin:27px 0 20px;position:relative}
+.reef-track:before{content:"";position:absolute;left:14px;right:14px;top:23px;border-top:2px dotted #9fcbc1;z-index:0}
+.reef-track button{position:relative;z-index:1;border:1px solid #e0ece7;background:#fff;color:#416c75;border-radius:20px 8px 21px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:9px 4px;font-size:10px;font-weight:800;min-height:88px}
+.reef-track button i{height:32px;width:32px;border-radius:50%;display:grid;place-items:center;background:#f0f6f2;color:#17837e;border:1px solid #bdd6ca;font-style:normal;font-size:11px}
+.reef-track button.active{background:#0d6570;border-color:#0d6570;color:#fff}.reef-track button.active i{background:#e8c268;color:#153d50;border:0}
+.reef-focus{display:grid;grid-template-columns:100px minmax(0,1fr) 150px;gap:20px;align-items:center;background:linear-gradient(110deg,#0a3044,#125e69);color:#ecf8f4;border-radius:32px 9px 34px 10px;min-height:196px;padding:26px}
+.reef-number{font-size:46px;color:#f3d07d;font-family:"Outfit",Arial,sans-serif;font-weight:850;line-height:.95;letter-spacing:-.04em}
+.reef-number small{font-size:13px;color:#90bfc1}
+.reef-focus h4{color:#f8faf4;font-size:clamp(20px,2.2vw,29px);line-height:1.16;margin:0 0 8px}.reef-focus>div:nth-child(2)>p{font-size:12px;color:#bedbd9;line-height:1.5;margin:0 0 12px}
+.reef-value{border-left:3px solid #e8c879;padding-left:12px}.reef-value b{font-size:9px;color:#e8c97a;letter-spacing:.08em}.reef-value p{margin:4px 0 0;color:#d8ece6;font-size:11px;line-height:1.4}
+.reef-illustration{height:115px;display:grid;place-items:center;position:relative}.reef-illustration:after{content:"";position:absolute;bottom:11px;left:0;right:0;height:3px;background:#6ca6a8}
+.reef-cube{z-index:1;display:flex;align-items:center;justify-content:space-around;width:130px;height:82px;background:repeating-linear-gradient(90deg,#cadfdd 0,#cadfdd 9px,#d9e9e7 10px,#d9e9e7 18px);border-radius:5px;border:2px solid #8fb6b4;color:#154b60;font-weight:900;font-size:11px;box-shadow:0 9px 20px #052b40}.reef-cube i{font-size:27px;font-style:normal}
+.reef-caveat{font-size:10px;color:#78949b;margin:15px 0 0}
+.gate-experience{display:grid;grid-template-columns:1.1fr .9fr;gap:17px;min-height:450px}
+.gate-main{padding:clamp(22px,3vw,40px);border-radius:42px 14px 46px 15px;background:#f3f8f2;display:flex;flex-direction:column}.gate-main p{font-size:12px;color:#597b85;line-height:1.62;max-width:720px;margin:4px 0}
+.gate-process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0}
+.gate-process>div{padding:18px 7px;text-align:center;background:#fff;border-radius:24px 7px 22px 7px;color:#275c68;font-size:11px;font-weight:800;border:1px solid #d8e8df}
+.gate-process span{display:block;color:#0c8985;font-family:"Outfit";font-size:22px;margin-bottom:5px}
+.gate-conclusion{padding:15px 17px;border-left:4px solid #dfb64d;background:#fff3d8;border-radius:5px 28px 14px 28px}.gate-conclusion b{font-size:9px;color:#947027;letter-spacing:.1em}.gate-conclusion p{font-size:12px;color:#53717a;line-height:1.5}
+.gate-action{margin-top:auto;align-self:flex-start;display:inline-flex;background:#0e6570;color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:24px 7px 23px 7px;padding:15px 19px}
+.gate-action:hover{background:#0c7b82}
+.gate-aside{background:linear-gradient(145deg,#082d40,#0b5560);border-radius:15px 45px 14px 50px;padding:clamp(21px,2.6vw,37px);color:#d4eeea}
+.gate-aside .micro{color:#ecca80}.gate-aside h4{font-size:clamp(26px,2.3vw,34px);color:#f2f7f1;line-height:1.13;margin:13px 0 19px}
+.gate-aside>div{border-top:1px solid #316b74;padding:12px 0}.gate-aside b{color:#f0d187;font-size:12px}.gate-aside p{color:#b8d7d8;font-size:11px;line-height:1.5;margin:4px 0}.gate-aside .gate-limitation{border-left:3px solid #e8c779;padding-left:12px;margin-top:19px;color:#cfdfdb}
+.visit-proof-fold{margin:15px 0 18px;padding:15px 22px;background:#e9f2ee;border:1px solid #d4e6dd;border-radius:25px 8px 28px 9px}
+.visit-proof-fold>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.visit-proof-fold>summary::-webkit-details-marker{display:none}.visit-proof-fold strong{color:#124656;font-size:14px}
+.visit-proof-fold>summary small{color:#62868c;font-size:10px}.visit-proof-fold[open]{background:#fff}.visit-proof-fold>.proof-layout{margin-top:18px}
+@media(max-width:1200px){.experience-head{align-items:flex-start;flex-direction:column}.aerial-grid{grid-template-columns:1.04fr .96fr}.aerial-map{min-height:510px}.tour-side{padding:15px}.tour-buttons button{font-size:9px;padding:9px 7px}.aerial-toolbar{font-size:8px}}
+@media(max-width:900px){.aerial-grid,.gate-experience{grid-template-columns:1fr}.experience{padding:19px}.aerial-map{min-height:500px}.tour-side{padding:22px}.tour-buttons{grid-template-columns:repeat(3,minmax(0,1fr))}.tour-explainer{min-height:0}.reef-track{grid-template-columns:repeat(4,minmax(0,1fr))}.reef-track:before{display:none}.reef-focus{grid-template-columns:65px minmax(0,1fr)}.reef-illustration{display:none}.gate-main,.gate-aside{min-height:0}}
+@media(max-width:600px){.experience{padding:14px;border-radius:25px 10px 29px 10px}.experience-head h3{font-size:26px}.experience-head p{font-size:11px}.experience-tabs{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:3px}.experience-tabs button{padding:10px 5px;font-size:9px;white-space:normal}.aerial-map{border-radius:12px 27px 12px 30px;min-height:425px}.aerial-toolbar{font-size:7px;padding:0 10px}.aerial-toolbar span:last-child{display:none}.aerial-iframe{min-height:300px}.aerial-foot{flex-direction:column;align-items:flex-start;gap:8px;font-size:9px}.tour-side{padding:14px;border-radius:27px 11px 30px 10px}.tour-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}.tour-buttons button{font-size:10px}.tour-explainer{padding:14px}.tour-explainer h4{font-size:21px}.reef-experience{padding:17px;border-radius:13px 28px 15px 30px}.reef-intro h4{font-size:25px}.reef-track{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.reef-track button{font-size:9px;min-height:66px;padding:8px 2px}.reef-track button i{width:26px;height:26px;font-size:9px}.reef-focus{grid-template-columns:1fr;gap:12px;padding:21px}.reef-number{font-size:30px}.reef-focus h4{font-size:24px}.gate-main,.gate-aside{padding:19px}.gate-main h4,.gate-aside h4{font-size:26px}.gate-process{grid-template-columns:repeat(2,1fr)}.visit-proof-fold{padding:13px}.visit-proof-fold strong{font-size:12px}}
