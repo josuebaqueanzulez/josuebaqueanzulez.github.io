@@ -74,3 +74,12 @@
 @media(max-width:900px){.compare-heading{flex-direction:column}.compare-legend{width:100%;flex-direction:row;flex-wrap:wrap}.official-divider{display:block}.official-divider p{margin-top:8px}.compare-panel{padding:18px}}
 @media(max-width:650px){.compare-panel{padding:12px;border-radius:27px 9px 30px 10px}.compare-heading h3{font-size:24px}.compare-heading p{font-size:11px}.compare-legend{padding:11px}.compare-legend>span{font-size:9px}.compare-table{min-width:685px}.comp-evidence{padding:13px}.comp-evidence-head{gap:9px}.comp-evidence-head h4{font-size:21px}.comp-evidence-head p{font-size:10.5px}.comp-evidence-weight{padding:10px;min-width:65px}.comp-evidence-weight b{font-size:18px}.comp-evidence-grid{grid-template-columns:1fr}.comp-evidence-card{min-height:0}.compare-ranking{padding:16px}.compare-ranking-head{display:block}.compare-ranking-head b{display:block;margin-top:6px}.compare-ranking-rows>div{grid-template-columns:21px 90px 1fr 35px;gap:5px}.compare-ranking-rows b{font-size:9.5px}.compare-ranking-rows strong{font-size:12px}.official-divider{padding:13px}.official-divider span{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.compare-table button{transition:none}}
+
+/* Navegación rápida entre seis fundamentos de nota */
+.comp-quick-nav{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.comp-quick-nav button{border:1px solid #c8e1d7;background:#fff;color:#386c72;border-radius:22px 7px 22px 7px;padding:9px 13px;font-size:10px;font-weight:850;transition:background .18s,color .18s}
+.comp-quick-nav button:nth-child(2n){border-radius:7px 22px 7px 22px}
+.comp-quick-nav button.active{background:#0e6571;border-color:#0e6571;color:#fff}
+.comp-quick-nav button:hover:not(.active){background:#e4f4ea}
+.comp-evidence{scroll-margin-top:14px}
+@media(max-width:650px){.comp-quick-nav{display:grid;grid-template-columns:repeat(2,1fr)}.comp-quick-nav button{font-size:9.5px;padding:9px 5px}}
