@@ -12,9 +12,13 @@ Defender el servicio de **Terminal Portuario de Guayaquil (TPG / INARPI / Fertig
 
 1. Propuesta de valor: cadena de frío, controles y coordinación del embarque.
 2. Mercado 2025 y cadena de decisión (cuatro terminales; TEU y escalas).
-3. Investigación sobre TPG: conexiones reefer, inspecciones, servicio ONE AX3, navieras informadas en 2026 y hito ambiental.
+3. Investigación sobre TPG: **cuatro indicadores operativos y de carga de 2025** (39,07 h/escala; 67,12 % ocupación estimada; 50,41 % orientación exportadora; 25,51 % participación exportadora), visita satelital, reefer, inspecciones y evidencia adicional.
 4. Comparación relativa de las cuatro terminales más matriz TPG de seis criterios, con evidencias y limitaciones; fichas conservadas **tal como fueron entregadas**.
 5. Mejora operativa y propuesta académica TPG Reefer Control Tower, sin simulación ni promesas porcentuales.
+
+## Indicadores 2025 en la tercera sección
+
+Los cuatro indicadores solicitados aparecen como tarjetas visibles para una exposición de 35–45 segundos y la tabla completa está disponible en un desplegable. Se trasladaron desde la cuarta sección para evitar duplicaciones: permanencia media por escala (h/escala), ocupación estimada de atraques (%), orientación exportadora (% de toneladas contenerizadas propias) y participación en toneladas exportadas de las cuatro terminales (%). Los datos proceden del anexo ECOTEC 2025 y no son exclusivamente de banano. El índice de ocupación es una estimación a partir de horas y número de puestos, no una medición directa de congestión.
 
 ## Visita comercial interactiva
 
