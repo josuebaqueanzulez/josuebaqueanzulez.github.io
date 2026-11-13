@@ -78,6 +78,22 @@ Asimismo:
 - La verificación de carbono neutralidad anunciada en 2025 corresponde al **año 2022**.
 - Dos grúas nuevas anunciadas en 2026 **no se contabilizan como instaladas** durante 2025; se preveía instalarlas en 2027.
 
+## Matriz comercial ampliada
+
+La cuarta sección conserva los **seis criterios**, pesos y notas de ECOTEC. Se añadieron tres capas analíticas:
+
+1. **Desglose oficial:** peso, nota, aporte, barra comparativa por criterio, fórmula y total 3,65/5,00.
+2. **Evidencia rastreable:** la selección de un criterio muestra el dato, su fuente de apoyo, la comparabilidad de la evidencia y la advertencia metodológica correspondiente.
+3. **Sensibilidad comercial (solo hipotética):** al seleccionar otra prioridad de la exportadora se reponderan los **mismos seis criterios con las mismas notas**; los pesos siempre suman 100 %. La nota del informe y la matriz base no se modifican.
+
+| Perfil | Reefer | Conectividad | Servicios | Fluidez | Terrestre | Náutico | Resultado |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| **Base ECOTEC** | 25 % | 20 % | 20 % | 15 % | 15 % | 5 % | **3,65** |
+| Hipótesis: prioridad de frío | 35 % | 15 % | 20 % | 10 % | 15 % | 5 % | **3,75** |
+| Hipótesis: servicio y fluidez | 15 % | 30 % | 15 % | 25 % | 10 % | 5 % | **3,45** |
+
+El gráfico radial muestra solamente las **calificaciones TPG (4, 3, 4, 3, 4, 4)**; no cambia entre escenarios porque los escenarios solo modifican pesos. La sensibilidad no prueba mejoras operativas ni predice el resultado de la competencia, cuya matriz no contiene notas comparables verificadas para todos los criterios. Las evidencias faltantes (por ejemplo accesibilidad terrestre y frecuencias) continúan declaradas.
+
 ## Defensa
 
 La matriz usa los pesos oficiales: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %. El resultado propuesto para TPG es **3,65/5,00**. La calificación de acceso terrestre es **provisional** por falta de rutas comparables verificadas desde Los Ríos, Guayas y El Oro.
