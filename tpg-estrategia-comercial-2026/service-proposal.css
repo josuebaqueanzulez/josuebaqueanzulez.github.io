@@ -57,3 +57,19 @@
 @media(max-width:1120px){.service-proposal-grid{grid-template-columns:1fr}.service-proposal{padding:24px}.services-linkage{align-items:flex-start;flex-direction:column}.service-new{border-radius:38px 12px 40px 13px}}
 @media(max-width:700px){#scene-4 .section-heading-sell{padding:22px 18px}.service-proposal{padding:18px;border-radius:27px 9px 29px 9px}.service-proposal h3{font-size:26px}.service-proposal-top{align-items:flex-start}.service-state{font-size:9px}.service-description{font-size:11px}.service-action{padding:9px}.service-action b{font-size:11px}.service-action small{font-size:10px}.services-linkage{padding:14px}.services-linkage h4{font-size:15px}.services-linkage-steps{gap:4px}.services-linkage-steps span{font-size:9px;padding:7px 8px}.services-scope{grid-template-columns:1fr}.services-scope>div{padding:4px 11px}}
 @media(prefers-reduced-motion:reduce){.service-proposal *{transition:none!important}}
+
+/* Diferenciador ambiental visible: neutralidad organizacional vs huella portuaria por contenedor */
+.service-green .service-description strong{color:#f3d891}
+.green-difference{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:3px 0 16px}
+.green-difference>div{display:flex;flex-direction:column;gap:5px;min-width:0;background:rgba(212,232,226,.11);border:1px solid rgba(184,220,210,.20);border-radius:20px 6px 20px 7px;padding:12px 13px}
+.green-difference>div:nth-child(2){background:rgba(240,206,127,.13);border-color:rgba(240,206,127,.37);border-radius:6px 20px 7px 20px}
+.green-difference span{font-size:9px;font-weight:900;letter-spacing:.055em;color:#a8d4d3;line-height:1.35}
+.green-difference>div:nth-child(2) span{color:#f1d48a}
+.green-difference b{font-size:12px;line-height:1.32;color:#f8fcfa}
+.green-difference small{font-size:10px;line-height:1.47;color:#bad3d5}
+.green-difference>div:nth-child(2) small{color:#e6e1ca}
+.service-green .service-gain{background:rgba(203,240,218,.09);border-left-color:#76cbab}
+.service-green .service-gain>span{color:#a2e0be}
+@media(max-width:1420px){.green-difference{grid-template-columns:1fr}.green-difference>div{padding:10px 12px}}
+@media(max-width:1120px){.green-difference{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.green-difference{grid-template-columns:1fr}.green-difference span{font-size:9px}.green-difference b{font-size:11px}.green-difference small{font-size:10px}.service-green .service-gain p{font-size:10.5px}}
