@@ -14,7 +14,7 @@ Defender el servicio de **Terminal Portuario de Guayaquil (TPG / INARPI / Fertig
 2. Mercado 2025 y cadena de decisión (cuatro terminales; TEU y escalas).
 3. Investigación sobre TPG: **cuatro indicadores operativos y de carga de 2025** (39,07 h/escala; 67,12 % ocupación estimada; 50,41 % orientación exportadora; 25,51 % participación exportadora), visita satelital, reefer, inspecciones y evidencia adicional.
 4. Comparación relativa de las cuatro terminales más matriz TPG de seis criterios, con evidencias y limitaciones; fichas conservadas **tal como fueron entregadas**.
-5. Mejora operativa y propuesta académica TPG Reefer Control Tower, sin simulación ni promesas porcentuales.
+5. Mejora de un servicio existente (programación y atención terrestre mediante turnos/DISV) y propuesta de un servicio adicional (TPG Reefer Desk para acompañamiento al exportador), sin fechas ni resultados prometidos.
 
 ## Indicadores 2025 en la tercera sección
 
@@ -141,7 +141,17 @@ La matriz usa los pesos oficiales: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %. El puntaje
 
 Dos fortalezas: infraestructura reefer y servicios de inspección/protección. Dos debilidades reconocidas: permanencia de escala de 39,07 horas y restricción de calado respecto a Posorja.
 
-El servicio **TPG Reefer Control Tower** se presenta como una **propuesta académica futura** para integrar información autorizada de hitos y alertas; no es una plataforma actual ni un compromiso oficial del operador.
+La mejora de **programación y atención terrestre** parte de funciones ya documentadas por TPG (turnos y DISV) y propone reforzar revisión previa, comunicación de observaciones y seguimiento de atención. El servicio adicional **TPG Reefer Desk** es una propuesta académica de un punto de contacto para el exportador: consulta de hitos de carga reefer, canalización de incidencias y comunicación de pendientes antes del embarque. No sustituye el monitoreo técnico de reefer ni presupone una aplicación nueva. Ambas propuestas dependen del acceso autorizado a datos y de la coordinación del operador; no incluyen calendarios, costos o beneficios cuantificados sin evidencia.
+
+## Última sección: mejora de servicio y servicio adicional
+
+**1. Mejora de un servicio existente — Atención terrestre coordinada.** TPG ya documenta programación de turnos, DISV y consultas para transportistas. Se propone reforzar: verificación anticipada de documentación y reservas; comunicación de observaciones que requieran corrección; y seguimiento sencillo de la atención con datos que el operador ya gestione. No se afirma que TPG carezca actualmente de esas funciones, sino que se propone fortalecer su articulación con los usuarios.
+
+**2. Nuevo servicio — TPG Reefer Desk.** Un punto de acompañamiento comercial-operativo dirigido al exportador de carga refrigerada para consultar hitos disponibles (recepción, conexión, inspección, preparación de embarque), canalizar incidencias al área competente y comunicar pendientes. Se plantea como servicio nuevo para el ejercicio académico, no como plataforma implementada ni sustituto del monitoreo técnico de temperaturas que TPG ya ofrece a líneas navieras.
+
+**Diferencia de objetivos:** el primer servicio mejora la coordinación de camiones y el ingreso; el segundo añade acompañamiento del exportador **después de que la carga entra al terminal**. Las propuestas no tienen cronograma, plazo de piloto, porcentajes prometidos ni inversión asumida. La verificación cualitativa incluiría observaciones de ingreso, consultas atendidas y estado de novedades, utilizando únicamente datos disponibles y autorizados.
+
+**Soporte del servicio existente:** [TPG DISV](https://disv.tpg.com.ec/webtpg/) y [guía oficial de agendamiento de turnos para exportación](https://www.tpg.com.ec/wp-content/uploads/2022/10/DISV_Guia_para_programacion_de_turno_para_exportacion.pdf). **Soporte técnico reefer existente:** [Boletín Estadístico Portuario 2025, ficha TPG p. 81](https://www.mit.gob.ec/wp-content/uploads/downloads/2026/07/SPTMF_Boletin-Estadistico-2025_compressed.pdf).
 
 ## Controles de exposición
 
