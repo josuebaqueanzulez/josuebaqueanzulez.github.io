@@ -121,17 +121,15 @@ La consigna solicita evaluar **la propia terminal** en seis criterios y comparar
 
 La nota anterior de 3,65/5,00 queda sustituida **en la exposición web** por 4,05/5,00 tras justificar comparativamente conectividad (3→4) y servicios (4→5). **No se modifica el informe Word ni el Excel original** de la actividad: sus notas deben reconciliarse antes de presentar archivos entregables como una única versión final. La web explicita que este ejercicio compara según fichas y no implica que la profesora haya asignado las notas.
 
-### Sensibilidad comercial — escenarios hipotéticos
+### Presentación actual de la sección 4
 
-Solo se modifican los pesos, no las calificaciones TPG:
+La **matriz comparativa de las cuatro terminales** permanece disponible en un panel desplegable, incluyendo las 24 justificaciones y los datos originales de las fichas. La **matriz visible de TPG** sigue el modelo de la profesora, con sus cinco columnas exactas:
 
-| Perfil | Reefer | Conectividad | Servicios | Fluidez | Terrestre | Náutico | Resultado |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| **Base ECOTEC** | 25 % | 20 % | 20 % | 15 % | 15 % | 5 % | **4,05** |
-| Frío prioritario | 35 % | 15 % | 20 % | 10 % | 15 % | 5 % | **4,10** |
-| Conectividad/fluidez | 15 % | 30 % | 15 % | 25 % | 10 % | 5 % | **3,90** |
+**Criterio | Peso | Calificación (1–5) | Puntaje ponderado | Evidencia (dato y fuente)**.
 
-El gráfico radial de TPG ahora refleja las calificaciones **4, 4, 5, 3, 4, 4**, sin cambios de escenario.
+Los pesos se presentan en decimales (0,25, 0,20, 0,20, 0,15, 0,15 y 0,05), suman **1,00**, y el resultado propuesto sigue siendo **4,05/5,00**.
+
+Debajo de la tabla se incorpora un apartado **separado**, con dos fortalezas (cadena de frío instalada, servicios de inspección y protección) y dos debilidades (39,07 h/escala y condicionante de marea/canal de acceso). En consecuencia, estos juicios **no se agregan en el interior de la columna de evidencia**. La tabla original de infraestructura de los otros grupos es consultable en otro desplegable. Se eliminaron de la sección 4 el análisis de sensibilidad, el gráfico radial y los indicadores duplicados: los cuatro KPI de 2025 se muestran una sola vez en la sección 3.
 
 **Fuentes base**: Consigna ECOTEC (anexo 2025, pp. 1–4); fichas *ACTIVIDAD 1_GRUPO 2_TPG-FERTIGRAM.pdf*, *Actividad1_Grupo3_Contecon.pdf*, *Actividad1_Grupo3_Terminal DP World Posorja.pdf* y *Actividad1_Grupo4_Bananapuerto(4).pdf*. Se mantienen los años que esas fichas consignan: SPTMF 2025 para las cifras docentes, SPTMF 2021 para distintos equipos de Bananapuerto y referencias o itinerarios de 2026 según la ficha de Posorja.
 
