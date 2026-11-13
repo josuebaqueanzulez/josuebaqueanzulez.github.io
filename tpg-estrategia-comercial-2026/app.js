@@ -61,7 +61,7 @@
     "Misma nota de la matriz académica":
     (delta>0?"+":"") + two.format(delta) + " puntos frente a la matriz oficial";
   $("#sensitivityDelta").className="sensitivity-delta "+(delta>0?"positive":delta<0?"negative":"neutral");
-  $("[data-scenario]").forEach(btn=>{const on=btn.dataset.scenario===key;btn.classList.toggle("active",on);btn.setAttribute("aria-pressed",String(on))});
+  $$("[data-scenario]").forEach(btn=>{const on=btn.dataset.scenario===key;btn.classList.toggle("active",on);btn.setAttribute("aria-pressed",String(on))});
  }
  function buildRadar(){
   const namespace="http://www.w3.org/2000/svg",centerX=150,centerY=144,maxRadius=102;
@@ -156,7 +156,7 @@
    $("#matrixConfidence").textContent=ctx.quality;
    $("#matrixCaveat").textContent=ctx.caveat;
    $("#matrixSourceLink").href=ctx.url;
-   $("[data-criterion]").forEach((b,index)=>b.classList.toggle("active",index===i));
+   $$("[data-criterion]").forEach((b,index)=>b.classList.toggle("active",index===i));
  }
  function openDrawer(tab="fuentes"){
    returnFocus=document.activeElement;
@@ -184,7 +184,7 @@
  $("#closeDrawer").addEventListener("click",closeDrawer);
  $("#overlay").addEventListener("click",closeDrawer);
  $$("[data-tab]").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
- $("[data-scenario]").forEach(btn=>btn.addEventListener("click",()=>renderSensitivity(btn.dataset.scenario)));
+ $$("[data-scenario]").forEach(btn=>btn.addEventListener("click",()=>renderSensitivity(btn.dataset.scenario)));
  $("#openPeer").addEventListener("click",()=>{const el=$("#peerPanel");el.hidden=!el.hidden;$("#openPeer").setAttribute("aria-expanded",String(!el.hidden));if(!el.hidden)el.scrollIntoView({behavior:"smooth",block:"nearest"})});
  $("#closePeer").addEventListener("click",peerClose);
  $("#fullscreen").addEventListener("click",()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen?.().catch(()=>{})});
