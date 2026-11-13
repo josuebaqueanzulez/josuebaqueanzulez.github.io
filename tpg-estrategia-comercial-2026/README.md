@@ -13,7 +13,7 @@ Defender el servicio de **Terminal Portuario de Guayaquil (TPG / INARPI / Fertig
 1. Propuesta de valor: cadena de frío, controles y coordinación del embarque.
 2. Mercado 2025 y cadena de decisión (cuatro terminales; TEU y escalas).
 3. Investigación sobre TPG: conexiones reefer, inspecciones, servicio ONE AX3, navieras informadas en 2026 y hito ambiental.
-4. Matriz ponderada con seis criterios, dos fortalezas y dos debilidades; ficha comparativa **tal como fue entregada** por cada grupo.
+4. Comparación relativa de las cuatro terminales más matriz TPG de seis criterios, con evidencias y limitaciones; fichas conservadas **tal como fueron entregadas**.
 5. Mejora operativa y propuesta académica TPG Reefer Control Tower, sin simulación ni promesas porcentuales.
 
 ## Visita comercial interactiva
@@ -78,25 +78,62 @@ Asimismo:
 - La verificación de carbono neutralidad anunciada en 2025 corresponde al **año 2022**.
 - Dos grúas nuevas anunciadas en 2026 **no se contabilizan como instaladas** durante 2025; se preveía instalarlas en 2027.
 
-## Matriz comercial ampliada
+## Parte 3 · Comparar primero, puntuar TPG después
 
-La cuarta sección conserva los **seis criterios**, pesos y notas de ECOTEC. Se añadieron tres capas analíticas:
+La consigna solicita evaluar **la propia terminal** en seis criterios y compararla con las otras tres. Para justificar el «5 corresponde al mejor desempeño entre las cuatro», incluimos dos niveles:
 
-1. **Desglose oficial:** peso, nota, aporte, barra comparativa por criterio, fórmula y total 3,65/5,00.
-2. **Evidencia rastreable:** la selección de un criterio muestra el dato, su fuente de apoyo, la comparabilidad de la evidencia y la advertencia metodológica correspondiente.
-3. **Sensibilidad comercial (solo hipotética):** al seleccionar otra prioridad de la exportadora se reponderan los **mismos seis criterios con las mismas notas**; los pesos siempre suman 100 %. La nota del informe y la matriz base no se modifican.
+1. **Matriz comparativa exploratoria** de las cuatro terminales: misma escala, mismos seis pesos, 24 juicios argumentados, fuentes por celda y nota de incertidumbre. Es una **propuesta del Grupo 2**, no una calificación atribuida a los grupos competidores.
+2. **Matriz de TPG en el formato docente**: únicamente sus seis notas, aportes ponderados, evidencia y fuentes. El resultado se revisó después del ejercicio comparativo.
+
+### Matriz comparativa propuesta (escala 3 a 5 utilizada en este análisis)
+
+| Criterio | Peso | Contecon | DP World Posorja | TPG | Bananapuerto |
+|---|---:|---:|---:|---:|---:|
+| Infraestructura reefer | 25 % | 4* | 5 | 4 | 3 |
+| Conectividad mercados bananeros | 20 % | 4 | 5 | 4 | 4 |
+| Servicios a carga y protección | 20 % | 4 | 5 | 5 | 4 |
+| Fluidez de escala | 15 % | 5 | 5 | 3 | 4 |
+| Accesibilidad terrestre | 15 % | 5* | 3* | 4* | 5* |
+| Acceso náutico | 5 % | 3* | 5 | 4 | 3 |
+| **Total ponderado** | **100 %** | **4,25** | **4,70** | **4,05** | **3,85** |
+
+\* Especialmente provisional por falta de datos homogéneos. Un empate en 5 puede reflejar dos perfiles sólidos distintos de servicio: **no equivale a superioridad exclusiva**.
+
+**Clasificación bajo esas hipótesis:** DP World 1.º; Contecon 2.º; TPG 3.º; Bananapuerto 4.º. Se presenta como **orden de la matriz propuesta**, no como veredicto estadístico u oficial.
+
+**Precaución crítica:** no es posible declarar un ganador objetivo definitivo con la información disponible. En la ficha de Contecon faltan las tomas reefer, el calado y la eslora máxima; no equivalen a cero. La infraestructura de Bananapuerto utiliza 2021 en diversos apartados, mientras otras fuentes mezclan 2025 y consultas de 2026. Los orígenes agrícolas y tiempos terrestres comparables tampoco están calculados. Por tanto, el orden puede cambiar al completar estos campos. Se separan las **cifras originales de las fichas** de los **juicios y calificaciones de nuestra matriz**.
+
+### Matriz TPG adaptada al formato de la profesora
+
+| Criterio | Peso | Calificación TPG | Aporte |
+|---|---:|---:|---:|
+| Reefer | 25 % | 4 | 1,00 |
+| Conectividad | 20 % | 4 | 0,80 |
+| Servicios y protección | 20 % | 5 | 1,00 |
+| Fluidez | 15 % | 3 | 0,45 |
+| Accesibilidad terrestre | 15 % | 4 | 0,60 |
+| Acceso náutico | 5 % | 4 | 0,20 |
+| **Total** | **100 %** | — | **4,05** |
+
+La nota anterior de 3,65/5,00 queda sustituida **en la exposición web** por 4,05/5,00 tras justificar comparativamente conectividad (3→4) y servicios (4→5). **No se modifica el informe Word ni el Excel original** de la actividad: sus notas deben reconciliarse antes de presentar archivos entregables como una única versión final. La web explicita que este ejercicio compara según fichas y no implica que la profesora haya asignado las notas.
+
+### Sensibilidad comercial — escenarios hipotéticos
+
+Solo se modifican los pesos, no las calificaciones TPG:
 
 | Perfil | Reefer | Conectividad | Servicios | Fluidez | Terrestre | Náutico | Resultado |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| **Base ECOTEC** | 25 % | 20 % | 20 % | 15 % | 15 % | 5 % | **3,65** |
-| Hipótesis: prioridad de frío | 35 % | 15 % | 20 % | 10 % | 15 % | 5 % | **3,75** |
-| Hipótesis: servicio y fluidez | 15 % | 30 % | 15 % | 25 % | 10 % | 5 % | **3,45** |
+| **Base ECOTEC** | 25 % | 20 % | 20 % | 15 % | 15 % | 5 % | **4,05** |
+| Frío prioritario | 35 % | 15 % | 20 % | 10 % | 15 % | 5 % | **4,10** |
+| Conectividad/fluidez | 15 % | 30 % | 15 % | 25 % | 10 % | 5 % | **3,90** |
 
-El gráfico radial muestra solamente las **calificaciones TPG (4, 3, 4, 3, 4, 4)**; no cambia entre escenarios porque los escenarios solo modifican pesos. La sensibilidad no prueba mejoras operativas ni predice el resultado de la competencia, cuya matriz no contiene notas comparables verificadas para todos los criterios. Las evidencias faltantes (por ejemplo accesibilidad terrestre y frecuencias) continúan declaradas.
+El gráfico radial de TPG ahora refleja las calificaciones **4, 4, 5, 3, 4, 4**, sin cambios de escenario.
+
+**Fuentes base**: Consigna ECOTEC (anexo 2025, pp. 1–4); fichas *ACTIVIDAD 1_GRUPO 2_TPG-FERTIGRAM.pdf*, *Actividad1_Grupo3_Contecon.pdf*, *Actividad1_Grupo3_Terminal DP World Posorja.pdf* y *Actividad1_Grupo4_Bananapuerto(4).pdf*. Se mantienen los años que esas fichas consignan: SPTMF 2025 para las cifras docentes, SPTMF 2021 para distintos equipos de Bananapuerto y referencias o itinerarios de 2026 según la ficha de Posorja.
 
 ## Defensa
 
-La matriz usa los pesos oficiales: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %. El resultado propuesto para TPG es **3,65/5,00**. La calificación de acceso terrestre es **provisional** por falta de rutas comparables verificadas desde Los Ríos, Guayas y El Oro.
+La matriz usa los pesos oficiales: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %. El resultado propuesto para TPG en esta versión de la web es **4,05/5,00**. La calificación de acceso terrestre es **provisional** por falta de rutas comparables verificadas desde Los Ríos, Guayas y El Oro.
 
 Dos fortalezas: infraestructura reefer y servicios de inspección/protección. Dos debilidades reconocidas: permanencia de escala de 39,07 horas y restricción de calado respecto a Posorja.
 
