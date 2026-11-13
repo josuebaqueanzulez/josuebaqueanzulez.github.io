@@ -137,7 +137,7 @@ Debajo de la tabla se incorpora un apartado **separado**, con dos fortalezas (ca
 
 ## Defensa
 
-La matriz usa los pesos oficiales: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %. El resultado propuesto para TPG en esta versión de la web es **4,05/5,00**. La calificación de acceso terrestre es **provisional** por falta de rutas comparables verificadas desde Los Ríos, Guayas y El Oro.
+La matriz usa los pesos oficiales: 25 %, 20 %, 20 %, 15 %, 15 %, 5 %. El puntaje ponderado propuesto para TPG en esta versión de la web es **0,81/1,00** (equivalente a una calificación no normalizada de **4,05/5,00**). La calificación de acceso terrestre es **provisional** por falta de rutas comparables verificadas desde Los Ríos, Guayas y El Oro.
 
 Dos fortalezas: infraestructura reefer y servicios de inspección/protección. Dos debilidades reconocidas: permanencia de escala de 39,07 horas y restricción de calado respecto a Posorja.
 
@@ -145,4 +145,4 @@ El servicio **TPG Reefer Control Tower** se presenta como una **propuesta acadé
 
 ## Controles de exposición
 
-Navega con ← →, con los botones inferiores o con las teclas 1–5. «E» abre las fuentes y la defensa, «F» solicita pantalla completa. El botón «Consultar cifras originales de las fichas» expande el comparador y el acordeón de indicadores muestra los cuatro indicadores obligatorios. Todos los componentes son HTML, CSS y JavaScript y pueden publicarse en GitHub Pages sin servidor ni base de datos.
+Navega con ← →, con los botones inferiores o con las teclas 1–5. «E» abre las fuentes y la defensa, «F» solicita pantalla completa. La comparativa de las cuatro terminales, la tabla de infraestructura de las fichas y la tabla completa de indicadores se consultan en desplegables separados. Los cuatro indicadores obligatorios se presentan en la sección 3. Todos los componentes son HTML, CSS y JavaScript y pueden publicarse en GitHub Pages sin servidor ni base de datos.
