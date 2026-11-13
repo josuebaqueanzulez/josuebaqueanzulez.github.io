@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="./tour.css">
 <link rel="stylesheet" href="./matrix-plus.css">
+<link rel="stylesheet" href="./comparison.css">
 <script defer src="./app.js?v=navegacion-corregida-20261113"></script>
 <script defer src="./tour.js"></script>
+<script defer src="./comparison.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar a la exposición</a>
@@ -123,17 +125,49 @@
 
 <section class="scene" id="scene-3" data-short="Benchmarking" hidden>
  <div class="section-heading">
-   <div class="kicker">03 · BENCHMARKING Y MATRIZ</div>
-   <h2>Competimos con una matriz;<br><em>respetamos los datos entregados.</em></h2>
-   <p>Las fichas de los otros grupos se muestran con sus valores y años originales. El ejercicio estadístico de 2025 utiliza exclusivamente el anexo común de la docente.</p>
+   <div class="kicker">03 · COMPARACIÓN RELATIVA + MATRIZ OFICIAL DE TPG</div>
+   <h2>Primero evaluamos a todos.<br><em>Después defendemos nuestra nota.</em></h2>
+   <p>Seis criterios con los pesos exactos de ECOTEC. Las cuatro calificaciones son propuestas académicas y pueden revisarse cuando existan datos faltantes; las cifras de las fichas originales no se modifican.</p>
  </div>
- <div class="matrix-layout">
+
+ <div class="compare-panel" id="comparePanel">
+  <div class="compare-heading">
+   <div><span class="micro">MATRIZ 01 / COMPARATIVA · CUATRO TERMINALES</span><h3>¿Quién ofrece la mejor combinación para el banano reefer?</h3><p>Esta clasificación es <strong>una hipótesis evaluativa del Grupo 2</strong>, no una calificación atribuida a los otros grupos o a la profesora. Usa las fichas recibidas y el anexo común 2025.</p></div>
+   <div class="compare-legend"><span><i class="compare-legend-dot five"></i> 5 = líder / desempeño mejor sustentado</span><span><i class="compare-legend-dot four"></i> 4 = sólido</span><span><i class="compare-legend-dot three"></i> 3 = atiende con limitaciones</span></div>
+  </div>
+  <div class="compare-table-scroll">
+   <table class="compare-table" aria-label="Matriz comparativa ponderada entre cuatro terminales; selección de criterios con evidencia">
+    <thead><tr><th>Criterio / seleccione evidencia</th><th>Peso</th><th>Contecon</th><th>DP World<br>Posorja</th><th class="focus-tpg">TPG<br>Grupo 2</th><th>Bananapuerto</th></tr></thead>
+    <tbody>
+     <tr><th><button type="button" data-comp-row="0" class="active">01 <span>Infraestructura reefer</span><i>↗</i></button></th><td>25 %</td><td><span class="grade grade-four">4*</span></td><td><span class="grade grade-five">5</span></td><td class="focus-tpg"><span class="grade grade-four">4</span></td><td><span class="grade grade-three">3</span></td></tr>
+     <tr><th><button type="button" data-comp-row="1">02 <span>Conectividad de mercados</span><i>↗</i></button></th><td>20 %</td><td><span class="grade grade-four">4</span></td><td><span class="grade grade-five">5</span></td><td class="focus-tpg"><span class="grade grade-four">4</span></td><td><span class="grade grade-four">4</span></td></tr>
+     <tr><th><button type="button" data-comp-row="2">03 <span>Servicios y protección</span><i>↗</i></button></th><td>20 %</td><td><span class="grade grade-four">4</span></td><td><span class="grade grade-five">5</span></td><td class="focus-tpg"><span class="grade grade-five">5</span></td><td><span class="grade grade-four">4</span></td></tr>
+     <tr><th><button type="button" data-comp-row="3">04 <span>Fluidez de la escala</span><i>↗</i></button></th><td>15 %</td><td><span class="grade grade-five">5</span></td><td><span class="grade grade-five">5</span></td><td class="focus-tpg"><span class="grade grade-three">3</span></td><td><span class="grade grade-four">4</span></td></tr>
+     <tr><th><button type="button" data-comp-row="4">05 <span>Accesibilidad terrestre</span><i>↗</i></button></th><td>15 %</td><td><span class="grade grade-five">5*</span></td><td><span class="grade grade-three">3*</span></td><td class="focus-tpg"><span class="grade grade-four">4*</span></td><td><span class="grade grade-five">5*</span></td></tr>
+     <tr><th><button type="button" data-comp-row="5">06 <span>Acceso náutico</span><i>↗</i></button></th><td>5 %</td><td><span class="grade grade-three">3*</span></td><td><span class="grade grade-five">5</span></td><td class="focus-tpg"><span class="grade grade-four">4</span></td><td><span class="grade grade-three">3</span></td></tr>
+    </tbody>
+    <tfoot><tr><th>PUNTAJE PONDERADO</th><td>100 %</td><td>4,25</td><td>4,70</td><td class="focus-tpg">4,05</td><td>3,85</td></tr><tr class="comp-positions"><th>Orden bajo esta propuesta</th><td>—</td><td>2.º</td><td>1.º</td><td class="focus-tpg">3.º</td><td>4.º</td></tr></tfoot>
+   </table>
+  </div>
+  <div class="comp-note">* Calificación provisional o especialmente sensible a información faltante. Los empates de 5 expresan fortalezas comparables en dimensiones distintas. <strong>N/D nunca equivale a cero.</strong> No es un ranking definitivo ni un contraste homogéneo de infraestructura 2025.</div>
+  <div class="comp-evidence" id="compEvidence" aria-live="polite">
+    <div class="comp-evidence-head"><div><span class="micro">PRUEBA DEL CRITERIO SELECCIONADO</span><h4 id="compEvidenceTitle">01 · Infraestructura reefer</h4><p id="compEvidenceIntro">La comparación pondera capacidad declarada, servicios de conexión y monitoreo. El número de tomas por sí solo no prueba disponibilidad real.</p></div><div class="comp-evidence-weight"><span>PESO</span><b id="compEvidenceWeight">25 %</b></div></div>
+    <div class="comp-evidence-grid" id="compEvidenceCards"></div>
+    <div class="comp-caveat" id="compEvidenceCaveat">Contecon: cantidad de tomas no reportada en su ficha (N/D); su nota es provisional y debe comprobarse antes del cierre de la matriz consolidada.</div>
+  </div>
+  <div class="compare-ranking">
+   <div class="compare-ranking-head"><span class="micro">RESULTADO PONDERADO · VISUALIZACIÓN SOBRE 5</span><b>Clasificación preliminar, no veredicto</b></div>
+   <div class="compare-ranking-rows"><div><span class="rank-num">01</span><b>DP World Posorja</b><div class="compare-rank-track"><i style="width:94%"></i></div><strong>4,70</strong></div><div><span class="rank-num">02</span><b>Contecon</b><div class="compare-rank-track"><i style="width:85%"></i></div><strong>4,25</strong></div><div class="rank-tpg"><span class="rank-num">03</span><b>TPG</b><div class="compare-rank-track"><i style="width:81%"></i></div><strong>4,05</strong></div><div><span class="rank-num">04</span><b>Bananapuerto</b><div class="compare-rank-track"><i style="width:77%"></i></div><strong>3,85</strong></div></div>
+   <p>La posición puede cambiar si se verifican las tomas reefer de Contecon, los itinerarios contemporáneos o las distancias reales desde cada zona productora.</p>
+  </div>
+ </div>
+ <div class="official-divider"><span>MATRIZ 02 · SOLO TPG, SEGÚN EL FORMATO DE LA CONSIGNA</span><p>Después de asignar las notas relativas, reproducimos exclusivamente los seis criterios y el puntaje de nuestra terminal.</p></div> <div class="matrix-layout">
    <div class="matrix-left">
-    <div class="matrix-main-result"><div><span>EVALUACIÓN ACADÉMICA · PESOS DE LA DOCENTE</span><strong>3,65 <small>/ 5,00</small></strong></div><div class="ring-progress" aria-label="3,65 sobre 5,00"><span>73 %</span></div></div>
+    <div class="matrix-main-result"><div><span>EVALUACIÓN ACADÉMICA · PESOS DE LA DOCENTE</span><strong>4,05 <small>/ 5,00</small></strong></div><div class="ring-progress" aria-label="4,05 sobre 5,00"><span>81 %</span></div></div>
     <div class="matrix-column-head" aria-hidden="true"><span>CRITERIO</span><span>PESO</span><span>NOTA</span><span>APORTE</span></div>
     <div class="matrix-rows" id="matrixRows"></div>
-    <div class="matrix-math"><span>REGLA DE CÁLCULO</span><strong>Σ (peso × nota) = 3,65</strong><small>Escala 1 a 5 · Los pesos suman 100 %</small></div>
-    <div class="matrix-fine">Pesos exactos de la consigna: 25 / 20 / 20 / 15 / 15 / 5 %. Nota relativa propuesta; la accesibilidad terrestre aún requiere rutas comparables.</div>
+    <div class="matrix-math"><span>REGLA DE CÁLCULO</span><strong>Σ (peso × nota) = 4,05</strong><small>Escala 1 a 5 · Los pesos suman 100 %</small></div>
+    <div class="matrix-fine">Pesos exactos de la consigna: 25 / 20 / 20 / 15 / 15 / 5 %. Nota relativa propuesta; conectividad y accesibilidad terrestre siguen siendo comparaciones provisionales.</div>
    </div>
    <div class="matrix-right">
     <div class="proof-eyebrow">¿POR QUÉ ESA NOTA?</div><h3 id="matrixTitle">Infraestructura reefer</h3>
@@ -165,9 +199,9 @@
   <div class="sensitivity-body">
     <div class="sensitivity-number">
       <div class="sensitivity-score-label" id="sensitivityScenario">BASE DOCENTE</div>
-      <div class="sensitivity-score"><strong id="sensitivityScore">3,65</strong><span>/ 5,00</span></div>
+      <div class="sensitivity-score"><strong id="sensitivityScore">4,05</strong><span>/ 5,00</span></div>
       <div id="sensitivityDelta" class="sensitivity-delta">Misma nota de la matriz académica</div>
-      <div class="sensitivity-official"><span>PUNTAJE FIJO DEL INFORME</span><strong>3,65/5,00</strong></div>
+      <div class="sensitivity-official"><span>PUNTAJE FIJO DEL INFORME</span><strong>4,05/5,00</strong></div>
       <p>Esto no demuestra una mejora operativa ni determina el mejor terminal; solo cambia la ponderación de TPG bajo supuestos explícitos.</p>
     </div>
     <div class="sensitivity-contributions">
