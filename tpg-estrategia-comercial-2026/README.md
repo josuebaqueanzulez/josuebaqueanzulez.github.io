@@ -16,6 +16,16 @@ Defender el servicio de **Terminal Portuario de Guayaquil (TPG / INARPI / Fertig
 4. Matriz ponderada con seis criterios, dos fortalezas y dos debilidades; ficha comparativa **tal como fue entregada** por cada grupo.
 5. Mejora operativa y propuesta académica TPG Reefer Control Tower, sin simulación ni promesas porcentuales.
 
+## Visita comercial interactiva
+
+La sección «Evidencias de TPG» incorpora una visita con tres modos, sin sumar una sexta sección de exposición:
+
+- **Vista aérea:** Google Maps en modo satélite, centrado en la localización aproximada de TPG **-2.246111, -79.929167** (IncoDocs, terminal TPG/INARPI). El mapa se puede mover y ampliar; también hay un enlace a Google Maps. Cinco selectores explican *funciones* (acceso terrestre, gate/pesaje, patios, cadena de frío y muelle) sin ubicar instalaciones internas en coordenadas no verificadas.
+- **Recorrido reefer:** siete hitos conceptuales con descripción de actividad y valor para el exportador. No es un simulador, ni reproduce un procedimiento obligatorio para todas las unidades.
+- **Trazabilidad terrestre:** acceso directo a la [consulta pública de registro de camiones de TPG](https://www.tpg.com.ec/consultatpg/webpages/tpg_cons_desp_camiones.php). Se explica qué datos permiten estudiar y las limitaciones de una muestra de registros.
+
+Fuentes geográficas: [CAMAE, directorio TPG–INARPI](https://www.camae.org/afiliado/terminal-portuario-de-guayaquil-tpg-inarpi-s/) para dirección de acceso e [IncoDocs, listado de terminales en Guayaquil](https://incodocs.com/ports/ec/sea-port/ecgye) para coordenadas aproximadas. Los mapas e imágenes externos pueden requerir conexión a internet; el sitio ofrece enlace de apertura independiente.
+
 ## Política de información y trazabilidad
 
 ### 1. Datos obligatorios del ejercicio
