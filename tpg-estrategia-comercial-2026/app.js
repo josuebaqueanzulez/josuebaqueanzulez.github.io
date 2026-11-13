@@ -27,6 +27,69 @@
   {title:"Accesibilidad terrestre",weight:.15,grade:4,evidence:"TPG se encuentra en Isla Trinitaria y enlaza con el corredor de Vía Perimetral. La nota es provisional porque no hay distancias y tiempos comparables por carretera desde las zonas bananeras."},
   {title:"Acceso náutico",weight:.05,grade:4,evidence:"TPG: eslora máxima hasta 370 m y calado actual de 13 m con beneficio de marea según la ficha SPTMF 2025. Existe una restricción relativa frente al mayor calado de acceso de Posorja."}
  ];
+ const matrixContext=[
+  {source:"SPTMF 2025, ficha TPG; fichas de los grupos.",quality:"Comparabilidad parcial",caveat:"Contecon aparece N/D en su ficha: no significa cero. Las fuentes emplean años distintos; la capacidad no prueba disponibilidad ni calidad del frío.",url:"https://www.mit.gob.ec/boletines-estadisticos-portuarios/"},
+  {source:"ONE Sparkle / AX3 (2025); Primicias, gerencia TPG (2026).",quality:"Frecuencias pendientes",caveat:"Una escala y la declaración de siete líneas no verifican por sí solas rutas directas, regularidad ni tiempos hacia cada mercado bananero.",url:"https://portalportuario.cl/ecuador-one-sparkle-arriba-a-terminal-portuario-de-guayaquil-en-viaje-inaugural/"},
+  {source:"SPTMF 2025, infraestructura y servicios TPG.",quality:"Equipamiento documentado",caveat:"Los escáneres y espacios de control no prueban tiempo de inspección, tiempos de gate ni tasas de incidencias.",url:"https://www.mit.gob.ec/boletines-estadisticos-portuarios/"},
+  {source:"Consigna ECOTEC, anexo estadístico 2025.",quality:"Cálculo reproducible",caveat:"39,07 h/escala refleja mezcla de tamaños y tipos de operación; no mide por sí solo productividad de grúas ni permanencia de cada contenedor.",url:"https://www.mit.gob.ec/boletines-estadisticos-portuarios/"},
+  {source:"Ficha TPG: Isla Trinitaria / Vía Perimetral.",quality:"Provisional",caveat:"Sin rutas homologadas, kilometrajes y tiempos desde Los Ríos, El Oro y Guayas, no se sostiene una ventaja terrestre concluyente.",url:"https://latinamerica.hanseaticglobalterminals.com/es/terminales-portuarios/tpg/"},
+  {source:"SPTMF 2025, ficha TPG y características náuticas.",quality:"Dato técnico con condición",caveat:"El calado autorizado de 13 m requiere beneficio de marea y condiciones náuticas; no debe confundirse con la profundidad del muelle.",url:"https://www.mit.gob.ec/boletines-estadisticos-portuarios/"}
+ ];
+ const scenarioPresets={
+  base:{label:"BASE DOCENTE",weights:[.25,.20,.20,.15,.15,.05]},
+  cold:{label:"FRÍO PRIORITARIO",weights:[.35,.15,.20,.10,.15,.05]},
+  routes:{label:"SERVICIO Y FLUIDEZ",weights:[.15,.30,.15,.25,.10,.05]}
+ };
+ function renderSensitivity(key){
+  const scenario=scenarioPresets[key]||scenarioPresets.base;
+  const weighted=matrix.map((m,i)=>m.grade*scenario.weights[i]);
+  const total=weighted.reduce((a,n)=>a+n,0);
+  const sumWeights=scenario.weights.reduce((a,n)=>a+n,0);
+  const root=$("#sensitivityRows"); root.innerHTML="";
+  const max=Math.max(...weighted);
+  matrix.forEach((m,i)=>{
+    const bar=document.createElement("div");bar.className="sensitivity-row";
+    const value=weighted[i];
+    bar.innerHTML='<div class="sensitivity-row-label"><span>'+m.title+'</span><div class="sensitivity-track" title="Aporte relativo a mayor aporte"><i style="width:'+((value/max)*100).toFixed(1)+'%"></i></div></div><span>'+int.format(scenario.weights[i]*100)+' %</span><strong>'+two.format(value)+'</strong>';
+    root.appendChild(bar);
+  });
+  $("#sensitivityScore").textContent=two.format(total);
+  $("#sensitivityScenario").textContent=scenario.label;
+  $("#sensitivityWeightTotal").textContent=int.format(sumWeights*100)+" %";
+  const delta=Math.round((total-3.65)*100)/100;
+  $("#sensitivityDelta").textContent=key==="base"?
+    "Misma nota de la matriz académica":
+    (delta>0?"+":"") + two.format(delta) + " puntos frente a la matriz oficial";
+  $("#sensitivityDelta").className="sensitivity-delta "+(delta>0?"positive":delta<0?"negative":"neutral");
+  $("[data-scenario]").forEach(btn=>{const on=btn.dataset.scenario===key;btn.classList.toggle("active",on);btn.setAttribute("aria-pressed",String(on))});
+ }
+ function buildRadar(){
+  const namespace="http://www.w3.org/2000/svg",centerX=150,centerY=144,maxRadius=102;
+  const grid=$("#radarGrid"),axes=$("#radarAxes"),dots=$("#radarPoints"),polygon=$("#radarPolygon");
+  if(!grid||!axes||!polygon||!dots)return;
+  const point=(i,r)=>{const theta=-Math.PI/2+i*Math.PI/3;return [centerX+Math.cos(theta)*r,centerY+Math.sin(theta)*r]};
+  const add=(parent,type,props,txt)=>{
+    const node=document.createElementNS(namespace,type);
+    Object.entries(props).forEach(([k,v])=>node.setAttribute(k,String(v)));
+    if(txt!==undefined)node.textContent=txt;
+    parent.appendChild(node);
+    return node;
+  };
+  for(let level=1;level<=5;level++){
+    const positions=Array.from({length:6},(_,i)=>point(i,maxRadius*level/5));
+    add(grid,"polygon",{points:positions.map(p=>p.map(x=>x.toFixed(2)).join(",")).join(" "),fill:"none",stroke:level===5?"#a1c7c0":"#cfe4dc","stroke-width":level===5?1.5:1});
+  }
+  const labels=["Reefer","Conectividad","Protección","Fluidez","Terrestre","Náutico"];
+  for(let i=0;i<6;i++){
+    const [x,y]=point(i,maxRadius);
+    add(axes,"line",{x1:centerX,y1:centerY,x2:x,y2:y,stroke:"#b7d8d0","stroke-width":1});
+    const [lx,ly]=point(i,maxRadius+20);
+    add(axes,"text",{x:lx,y:ly+4,"text-anchor":Math.abs(lx-centerX)<5?"middle":lx<centerX?"end":"start",fill:"#466e73","font-size":10,"font-family":"DM Sans, Arial, sans-serif","font-weight":700},labels[i]);
+  }
+  const points=matrix.map((m,i)=>point(i,maxRadius*m.grade/5));
+  polygon.setAttribute("points",points.map(p=>p.map(x=>x.toFixed(2)).join(",")).join(" "));
+  points.forEach(([x,y])=>add(dots,"circle",{cx:x,cy:y,r:4,fill:"#127f7c",stroke:"#fff","stroke-width":1.6}));
+ }
  function go(index,focus=false){
    active=Math.min(4,Math.max(0,Number(index)));
    scenes.forEach((v,i)=>{v.hidden=(i!==active);v.classList.toggle("is-active",i===active)});
@@ -76,7 +139,7 @@
    matrix.forEach((m,i)=>{
      const btn=document.createElement("button");btn.type="button";btn.dataset.criterion=String(i);
      btn.className="matrix-row";
-     btn.innerHTML='<b>'+m.title+'</b><span>'+int.format(m.weight*100)+' %</span><span>'+m.grade+'</span><span>'+two.format(m.weight*m.grade)+'</span>';
+     btn.innerHTML='<b>'+m.title+'</b><span>'+int.format(m.weight*100)+' %</span><span>'+m.grade+'</span><span>'+two.format(m.weight*m.grade)+'</span><span class="matrix-row-meter"><i style="width:'+(m.grade/5*100)+'%"></i></span>';
      btn.addEventListener("click",()=>selectMatrix(i));
      root.appendChild(btn);
    });
@@ -88,7 +151,12 @@
    $("#matrixGrade").textContent=m.grade+" / 5";
    $("#matrixWeight").textContent="Peso "+int.format(m.weight*100)+" % · aporte "+two.format(m.weight*m.grade);
    $("#matrixEvidence").textContent=m.evidence;
-   $$("[data-criterion]").forEach((b,index)=>b.classList.toggle("active",index===i));
+   const ctx=matrixContext[i];
+   $("#matrixSource").textContent=ctx.source;
+   $("#matrixConfidence").textContent=ctx.quality;
+   $("#matrixCaveat").textContent=ctx.caveat;
+   $("#matrixSourceLink").href=ctx.url;
+   $("[data-criterion]").forEach((b,index)=>b.classList.toggle("active",index===i));
  }
  function openDrawer(tab="fuentes"){
    returnFocus=document.activeElement;
@@ -116,6 +184,7 @@
  $("#closeDrawer").addEventListener("click",closeDrawer);
  $("#overlay").addEventListener("click",closeDrawer);
  $$("[data-tab]").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+ $("[data-scenario]").forEach(btn=>btn.addEventListener("click",()=>renderSensitivity(btn.dataset.scenario)));
  $("#openPeer").addEventListener("click",()=>{const el=$("#peerPanel");el.hidden=!el.hidden;$("#openPeer").setAttribute("aria-expanded",String(!el.hidden));if(!el.hidden)el.scrollIntoView({behavior:"smooth",block:"nearest"})});
  $("#closePeer").addEventListener("click",peerClose);
  $("#fullscreen").addEventListener("click",()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen?.().catch(()=>{})});
@@ -148,7 +217,7 @@
    const v=location.hash.match(/^#([1-5])$/);
    if(v&&Number(v[1])!==active+1)go(Number(v[1])-1);
  });
- market();buildMatrix();selectProof("reefer");
+ market();buildMatrix();buildRadar();renderSensitivity("base");selectProof("reefer");
  const hash=location.hash.match(/^#([1-5])$/);
  go(hash?Number(hash[1])-1:0);
 })();
