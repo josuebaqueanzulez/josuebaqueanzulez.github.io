@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="./tour.css">
+<link rel="stylesheet" href="./matrix-plus.css">
 <script defer src="./app.js"></script>
 <script defer src="./tour.js"></script>
 </head>
@@ -128,17 +129,63 @@
  </div>
  <div class="matrix-layout">
    <div class="matrix-left">
-    <div class="matrix-main-result"><div><span>EVALUACIÓN PROPUESTA · GRUPO 2</span><strong>3,65 <small>/ 5,00</small></strong></div><div class="ring-progress" aria-label="3,65 sobre 5,00"><span>73 %</span></div></div>
+    <div class="matrix-main-result"><div><span>EVALUACIÓN ACADÉMICA · PESOS DE LA DOCENTE</span><strong>3,65 <small>/ 5,00</small></strong></div><div class="ring-progress" aria-label="3,65 sobre 5,00"><span>73 %</span></div></div>
+    <div class="matrix-column-head" aria-hidden="true"><span>CRITERIO</span><span>PESO</span><span>NOTA</span><span>APORTE</span></div>
     <div class="matrix-rows" id="matrixRows"></div>
+    <div class="matrix-math"><span>REGLA DE CÁLCULO</span><strong>Σ (peso × nota) = 3,65</strong><small>Escala 1 a 5 · Los pesos suman 100 %</small></div>
     <div class="matrix-fine">Pesos exactos de la consigna: 25 / 20 / 20 / 15 / 15 / 5 %. Nota relativa propuesta; la accesibilidad terrestre aún requiere rutas comparables.</div>
    </div>
    <div class="matrix-right">
     <div class="proof-eyebrow">¿POR QUÉ ESA NOTA?</div><h3 id="matrixTitle">Infraestructura reefer</h3>
     <div class="matrix-selected"><span id="matrixGrade">4 / 5</span><small id="matrixWeight">Peso 25 % · aporte 1,00</small></div>
     <p id="matrixEvidence">Tomas, monitoreo y alarmas reefer declaradas por TPG; comparación basada en las fichas de los cuatro grupos.</p>
+    <div class="matrix-trace">
+      <div><span>TRAZABILIDAD DE LA NOTA</span><strong id="matrixSource">Boletín SPTMF 2025 y fichas técnicas</strong></div>
+      <div><span>CALIDAD COMPARATIVA</span><strong id="matrixConfidence">Parcial: fichas con datos faltantes</strong></div>
+    </div>
+    <div class="matrix-risk"><span>RESERVA METODOLÓGICA</span><p id="matrixCaveat">La capacidad nominal no representa disponibilidad instantánea ni desempeño térmico medido.</p></div>
+    <a id="matrixSourceLink" class="matrix-link" href="https://www.mit.gob.ec/boletines-estadisticos-portuarios/" target="_blank" rel="noopener noreferrer">Consultar soporte de este criterio ↗</a>
     <button type="button" id="openPeer" class="outline-btn">Consultar cifras originales de las fichas <span>↗</span></button>
     <div class="limitations"><h4>Dos consideraciones que sí reconocemos</h4><p><b>Fluidez:</b> 39,07 h/escala en 2025, sin equipararlo automáticamente a una falla de productividad.</p><p><b>Acceso náutico:</b> calado de 13 m con beneficio de marea, sujeto a restricciones frente a Posorja.</p></div>
    </div>
+ </div>
+ <div class="sensitivity" id="sensitivity" aria-label="Análisis de sensibilidad de la evaluación TPG">
+  <div class="sensitivity-header">
+    <div><span class="micro">ANÁLISIS DE SENSIBILIDAD · DEMOSTRACIÓN ACADÉMICA</span>
+      <h3>¿Cambiaría nuestra nota si el exportador tuviera <em>otras prioridades?</em></h3>
+      <p>Las notas 1–5 permanecen iguales. Únicamente cambiamos el peso de los seis criterios para explorar perfiles comerciales. El puntaje oficial no se modifica.</p>
+    </div>
+    <span class="sensitivity-mark">PESOS = 100 %</span>
+  </div>
+  <div class="sensitivity-presets" role="group" aria-label="Escenario de ponderaciones">
+    <button type="button" class="active" data-scenario="base" aria-pressed="true"><b>Base ECOTEC</b><small>Ponderación oficial</small></button>
+    <button type="button" data-scenario="cold" aria-pressed="false"><b>Frío prioritario</b><small>Más peso reefer</small></button>
+    <button type="button" data-scenario="routes" aria-pressed="false"><b>Servicio y fluidez</b><small>Más peso conectividad / escala</small></button>
+  </div>
+  <div class="sensitivity-body">
+    <div class="sensitivity-number">
+      <div class="sensitivity-score-label" id="sensitivityScenario">BASE DOCENTE</div>
+      <div class="sensitivity-score"><strong id="sensitivityScore">3,65</strong><span>/ 5,00</span></div>
+      <div id="sensitivityDelta" class="sensitivity-delta">Misma nota de la matriz académica</div>
+      <div class="sensitivity-official"><span>PUNTAJE FIJO DEL INFORME</span><strong>3,65/5,00</strong></div>
+      <p>Esto no demuestra una mejora operativa ni determina el mejor terminal; solo cambia la ponderación de TPG bajo supuestos explícitos.</p>
+    </div>
+    <div class="sensitivity-contributions">
+      <div class="sensitivity-columns"><span>CRITERIO</span><span>PESO</span><span>APORTE</span></div>
+      <div id="sensitivityRows" aria-live="polite"></div>
+      <div class="sensitivity-contributions-foot"><span>Total ponderaciones</span><strong id="sensitivityWeightTotal">100 %</strong></div>
+    </div>
+    <div class="sensitivity-radar">
+      <div><span class="micro">PERFIL DE CALIFICACIONES</span><h4>Fortalezas y espacios de mejora</h4></div>
+      <svg viewBox="0 0 300 305" role="img" aria-label="Gráfico radial de las seis calificaciones TPG de 1 a 5" id="matrixRadar">
+        <g id="radarGrid"></g>
+        <g id="radarAxes"></g>
+        <polygon id="radarPolygon" fill="rgba(47,166,151,.22)" stroke="#138782" stroke-width="2.5" stroke-linejoin="round" points=""></polygon>
+        <g id="radarPoints"></g>
+      </svg>
+      <p>El radar representa las notas de cada criterio (4–3–4–3–4–4); por eso permanece idéntico entre escenarios.</p>
+    </div>
+  </div>
  </div>
  <details class="indicators-accordion" id="indicators2025">
    <summary><span><b>Indicadores 2025 exigidos por la profesora</b><small>Comparación de escala y carga entre las cuatro terminales, calculada con el anexo común</small></span><i>Ver tabla y método ↓</i></summary>
